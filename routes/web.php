@@ -109,6 +109,7 @@ use App\Http\Controllers\Admin\StudentOrganizationController;
 use App\Http\Controllers\Admin\StudentAchievementController;
 use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\MenuController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
@@ -149,6 +150,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('/pages',               [PageController::class, 'index'])->name('pages.index');
     Route::get('/pages/{page}/edit',   [PageController::class, 'edit'])->name('pages.edit');
     Route::put('/pages/{page}',        [PageController::class, 'update'])->name('pages.update');
+
+    // Menu Dinamis
+    Route::resource('menus', MenuController::class)->except(['show']);
+    Route::post('/menus/{menu}/toggle',  [MenuController::class, 'toggle'])->name('menus.toggle');
+    Route::post('/menus/reorder',        [MenuController::class, 'reorder'])->name('menus.reorder');
 
     // Pengaturan
     Route::get('/settings',  [SettingController::class, 'index'])->name('settings.index');

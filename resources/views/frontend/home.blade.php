@@ -1,4 +1,4 @@
-﻿@extends('layouts.frontend')
+@extends('layouts.frontend')
 @section('title', 'Beranda | STT Siloam Medan')
 @section('content')
 
@@ -98,9 +98,9 @@
             <p class="text-gray-600 max-w-xl mx-auto">Pilih program studi yang sesuai dengan panggilan dan tujuan pelayanan Anda</p>
             <div class="w-20 h-1 bg-yellow-500 mx-auto mt-4"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="flex flex-wrap justify-center gap-8">
             @foreach($programs as $program)
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1 w-full md:w-80" data-aos="fade-up">
                 @if($program->image)
                 <img src="{{ $program->image_url }}" alt="{{ $program->name }}" class="w-full h-48 object-cover">
                 @else

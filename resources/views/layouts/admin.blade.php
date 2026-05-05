@@ -474,6 +474,11 @@
                 <span class="icon"><i class="fas fa-file-alt"></i></span>
                 Halaman Statis
             </a>
+            <a href="{{ route('admin.menus.index') }}"
+               class="nav-item {{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-bars"></i></span>
+                Menu Dinamis
+            </a>
 
             <!-- Profil Kampus -->
             <div class="nav-section">

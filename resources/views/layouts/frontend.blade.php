@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -52,78 +52,74 @@
                     <div class="text-xs text-gray-500">{{ $siteSettings->get("tagline","Sekolah Tinggi Teologi") }}</div>
                 </div>
             </a>
+            {{-- DESKTOP NAV: Menu Dinamis --}}
             <div class="hidden lg:flex items-center">
-                <a href="{{ route("home") }}" class="nav-link">Beranda</a>
-                <div class="relative group"><button class="nav-link flex items-center gap-1">Profil <i class="fas fa-chevron-down text-xs"></i></button>
-                    <div class="dropdown-menu"><div class="py-1">
-                        <a href="{{ route("profil.sejarah") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Sejarah Kampus</a>
-                        <a href="{{ route("profil.visi-misi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Visi, Misi & Tujuan</a>
-                        <a href="{{ route("profil.struktur") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Struktur Organisasi</a>
-                        <a href="{{ route("profil.pimpinan") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Pimpinan</a>
-                        <a href="{{ route("profil.dosen-staff") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Dosen & Staff</a>
-                        <a href="{{ route("profil.fasilitas") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Fasilitas</a>
-                        <a href="{{ route("profil.akreditasi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Akreditasi</a>
-                        <a href="{{ route("profil.lokasi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Lokasi & Kontak</a>
-                    </div></div>
-                </div>
-                <div class="relative group"><button class="nav-link flex items-center gap-1">Akademik <i class="fas fa-chevron-down text-xs"></i></button>
-                    <div class="dropdown-menu"><div class="py-1">
-                        <a href="{{ route("akademik.program-studi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Program Studi</a>
-                        <a href="{{ route("akademik.kurikulum") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Kurikulum</a>
-                        <a href="{{ route("akademik.kalender") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Kalender Akademik</a>
-                        <a href="{{ route("akademik.elearning") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">E-Learning</a>
-                        <a href="{{ route("akademik.perpustakaan") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Perpustakaan Digital</a>
-                    </div></div>
-                </div>
-                <div class="relative group"><button class="nav-link flex items-center gap-1">PMB <i class="fas fa-chevron-down text-xs"></i></button>
-                    <div class="dropdown-menu"><div class="py-1">
-                        <a href="{{ route("pmb.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Info PMB</a>
-                        <a href="{{ route("pmb.syarat") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Syarat & Ketentuan</a>
-                        <a href="{{ route("pmb.biaya") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Biaya Pendidikan</a>
-                        <a href="{{ route("pmb.beasiswa") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Beasiswa</a>
-                        <a href="{{ route("pmb.jadwal") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Jadwal PMB</a>
-                        <div class="border-t my-1"></div>
-                        <a href="{{ route("pmb.daftar") }}" class="block px-4 py-2 text-sm font-semibold text-blue-900 hover:bg-blue-50"><i class="fas fa-user-plus mr-1"></i>Daftar Sekarang</a>
-                    </div></div>
-                </div>
-                <a href="{{ route("penelitian.index") }}" class="nav-link">Penelitian</a>
-                <div class="relative group"><button class="nav-link flex items-center gap-1">Berita <i class="fas fa-chevron-down text-xs"></i></button>
-                    <div class="dropdown-menu"><div class="py-1">
-                        <a href="{{ route("berita.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Berita & Artikel</a>
-                        <a href="{{ route("media.agenda") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Event & Agenda</a>
-                        <a href="{{ route("media.galeri") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Galeri Foto</a>
-                        <a href="{{ route("media.video") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Video</a>
-                    </div></div>
-                </div>
-                <div class="relative group"><button class="nav-link flex items-center gap-1">Mahasiswa <i class="fas fa-chevron-down text-xs"></i></button>
-                    <div class="dropdown-menu"><div class="py-1">
-                        <a href="{{ route("kemahasiswaan.organisasi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Organisasi Mahasiswa</a>
-                        <a href="{{ route("kemahasiswaan.prestasi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Prestasi</a>
-                        <a href="{{ route("kemahasiswaan.alumni") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Alumni</a>
-                        <a href="{{ route("kemahasiswaan.layanan") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Layanan Mahasiswa</a>
-                        <a href="{{ route("kemahasiswaan.karir") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">Karir & Tracer Study</a>
-                    </div></div>
-                </div>
-                <a href="{{ route("kerjasama.index") }}" class="nav-link">Kerjasama</a>
-                <a href="{{ route("kontak.index") }}" class="nav-link">Kontak</a>
+                @foreach($navMenus as $menu)
+                    @if($menu->children->count() > 0)
+                    {{-- Dropdown --}}
+                    <div class="relative group">
+                        <button class="nav-link flex items-center gap-1">
+                            @if($menu->icon)<i class="{{ $menu->icon }} text-xs mr-1"></i>@endif
+                            {{ $menu->title }}
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="py-1">
+                                @foreach($menu->children as $child)
+                                <a href="{{ $child->url ?: '#' }}"
+                                   target="{{ $child->target }}"
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">
+                                    @if($child->icon)<i class="{{ $child->icon }} mr-1 text-blue-400"></i>@endif
+                                    {{ $child->title }}
+                                </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    {{-- Single link --}}
+                    <a href="{{ $menu->url ?: '#' }}"
+                       target="{{ $menu->target }}"
+                       class="nav-link">
+                        @if($menu->icon)<i class="{{ $menu->icon }} text-xs mr-1"></i>@endif
+                        {{ $menu->title }}
+                    </a>
+                    @endif
+                @endforeach
             </div>
             <div class="hidden lg:flex items-center">
-                <a href="{{ route("pmb.daftar") }}" class="bg-blue-900 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 text-sm"><i class="fas fa-user-plus mr-1"></i>Daftar Sekarang</a>
+                <a href="{{ route('pmb.daftar') }}" class="bg-blue-900 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 text-sm">
+                    <i class="fas fa-user-plus mr-1"></i>Daftar Sekarang
+                </a>
             </div>
-            <button @click="open=!open" class="lg:hidden p-2 rounded-md text-gray-500 hover:bg-gray-100"><i class="fas fa-bars text-xl"></i></button>
+            <button @click="open=!open" class="lg:hidden p-2 rounded-md text-gray-500 hover:bg-gray-100">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
+
+        {{-- MOBILE NAV: Menu Dinamis --}}
         <div x-show="open" class="lg:hidden border-t py-3">
             <div class="space-y-1">
-                <a href="{{ route("home") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Beranda</a>
-                <a href="{{ route("profil.sejarah") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Profil</a>
-                <a href="{{ route("akademik.program-studi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Akademik</a>
-                <a href="{{ route("pmb.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">PMB</a>
-                <a href="{{ route("penelitian.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Penelitian</a>
-                <a href="{{ route("berita.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Berita</a>
-                <a href="{{ route("kemahasiswaan.organisasi") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Kemahasiswaan</a>
-                <a href="{{ route("kerjasama.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Kerjasama</a>
-                <a href="{{ route("kontak.index") }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Kontak</a>
-                <div class="px-4 pt-2"><a href="{{ route("pmb.daftar") }}" class="block text-center bg-blue-900 text-white py-2 rounded-lg font-semibold text-sm">Daftar Sekarang</a></div>
+                @foreach($navMenus as $menu)
+                <a href="{{ $menu->url ?: '#' }}"
+                   target="{{ $menu->target }}"
+                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">
+                    @if($menu->icon)<i class="{{ $menu->icon }} mr-1 text-blue-400"></i>@endif
+                    {{ $menu->title }}
+                </a>
+                @foreach($menu->children as $child)
+                <a href="{{ $child->url ?: '#' }}"
+                   target="{{ $child->target }}"
+                   class="block px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 rounded-md pl-8">
+                    — {{ $child->title }}
+                </a>
+                @endforeach
+                @endforeach
+                <div class="px-4 pt-2">
+                    <a href="{{ route('pmb.daftar') }}" class="block text-center bg-blue-900 text-white py-2 rounded-lg font-semibold text-sm">
+                        Daftar Sekarang
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -155,12 +151,14 @@
             <div>
                 <h3 class="font-bold text-white mb-4">Link Cepat</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ route("profil.sejarah") }}" class="hover:text-white">Profil Kampus</a></li>
-                    <li><a href="{{ route("akademik.program-studi") }}" class="hover:text-white">Program Studi</a></li>
-                    <li><a href="{{ route("pmb.daftar") }}" class="hover:text-white">Pendaftaran Mahasiswa Baru</a></li>
-                    <li><a href="{{ route("penelitian.index") }}" class="hover:text-white">Penelitian & Pengabdian</a></li>
-                    <li><a href="{{ route("berita.index") }}" class="hover:text-white">Berita & Artikel</a></li>
-                    <li><a href="{{ route("kemahasiswaan.alumni") }}" class="hover:text-white">Alumni</a></li>
+                    @foreach($footerMenus as $menu)
+                    <li>
+                        <a href="{{ $menu->url ?: '#' }}" target="{{ $menu->target }}" class="hover:text-white">
+                            @if($menu->icon)<i class="{{ $menu->icon }} mr-1 text-xs"></i>@endif
+                            {{ $menu->title }}
+                        </a>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div>
