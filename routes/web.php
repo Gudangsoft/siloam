@@ -153,9 +153,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::delete('/contacts/{contact}',[AdminContactController::class, 'destroy'])->name('contacts.destroy');
 
     // Halaman Statis
-    Route::get('/pages',               [PageController::class, 'index'])->name('pages.index');
-    Route::get('/pages/{page}/edit',   [PageController::class, 'edit'])->name('pages.edit');
-    Route::put('/pages/{page}',        [PageController::class, 'update'])->name('pages.update');
+    Route::resource('pages', PageController::class)->except(['show']);
 
     // Menu Dinamis
     Route::resource('menus', MenuController::class)->except(['show']);
