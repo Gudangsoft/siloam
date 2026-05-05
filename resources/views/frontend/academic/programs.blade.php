@@ -13,9 +13,9 @@
 </div>
 <div class="container mx-auto px-4 py-12">
     @if(isset($programs) && $programs->count() > 0)
-    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 place-content-center justify-items-center">
         @foreach($programs as $program)
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-aos="fade-up">
+        <div class="w-full bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-aos="fade-up">
             @if($program->image)
             <img src="{{ $program->image_url }}" alt="{{ $program->name }}" class="w-full h-52 object-cover">
             @else
