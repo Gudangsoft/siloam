@@ -125,6 +125,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('news',           AdminNewsController::class)->except(['show']);
     Route::resource('events',         EventController::class)->except(['show']);
     Route::resource('gallery',        GalleryController::class)->except(['show']);
+    Route::post('/gallery/{gallery}/toggle', [GalleryController::class, 'toggle'])->name('gallery.toggle');
+    Route::post('/gallery/bulk-upload',      [GalleryController::class, 'bulkStore'])->name('gallery.bulk-store');
     Route::resource('videos',         VideoController::class)->except(['show']);
     Route::resource('staff',          StaffController::class)->except(['show']);
     Route::resource('facilities',     FacilityController::class)->except(['show']);
