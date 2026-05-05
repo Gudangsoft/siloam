@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -22,7 +23,8 @@ class MenuController extends Controller
     public function create()
     {
         $parents = Menu::topLevel()->active()->orderBy('order')->get();
-        return view('admin.menus.create', compact('parents'));
+        $pages   = Page::orderBy('title')->get(['id', 'title', 'slug']);
+        return view('admin.menus.create', compact('parents', 'pages'));
     }
 
     public function store(Request $request)
@@ -52,8 +54,9 @@ class MenuController extends Controller
                        ->where('id', '!=', $menu->id)
                        ->orderBy('order')
                        ->get();
+        $pages = Page::orderBy('title')->get(['id', 'title', 'slug']);
 
-        return view('admin.menus.edit', compact('menu', 'parents'));
+        return view('admin.menus.edit', compact('menu', 'parents', 'pages'));
     }
 
     public function update(Request $request, Menu $menu)

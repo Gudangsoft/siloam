@@ -87,6 +87,12 @@ Route::get('/kerjasama', [PartnershipController::class, 'index'])->name('kerjasa
 Route::get('/kontak',  [ContactController::class, 'index'])->name('kontak.index');
 Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store');
 
+// Halaman Statis (dari database)
+Route::get('/halaman/{slug}', function (string $slug) {
+    $page = \App\Models\Page::where('slug', $slug)->firstOrFail();
+    return view('frontend.page', compact('page'));
+})->name('halaman.show');
+
 // ─── ADMIN PANEL ─────────────────────────────────────────────────────────────
 
 use App\Http\Controllers\Admin\DashboardController;

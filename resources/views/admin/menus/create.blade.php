@@ -17,19 +17,21 @@
                 <form action="{{ route('admin.menus.store') }}" method="POST">
                     @csrf
 
-                    <div class="form-group">
-                        <label class="form-label">Judul Menu <span class="text-danger">*</span></label>
-                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                               value="{{ old('title') }}" placeholder="Contoh: Beranda, Profil, Akademik...">
-                        @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
+                    @include('admin.menus._page_picker')
 
                     <div class="form-group">
                         <label class="form-label">URL / Link</label>
-                        <input type="text" name="url" class="form-control @error('url') is-invalid @enderror"
+                        <input type="text" name="url" id="menuUrl" class="form-control @error('url') is-invalid @enderror"
                                value="{{ old('url') }}" placeholder="Contoh: /beranda atau https://example.com">
                         <div class="form-hint">Kosongkan jika menu hanya sebagai grup (dropdown tanpa link)</div>
                         @error('url')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Judul Menu <span class="text-danger">*</span></label>
+                        <input type="text" name="title" id="menuTitle" class="form-control @error('title') is-invalid @enderror"
+                               value="{{ old('title') }}" placeholder="Contoh: Beranda, Profil, Akademik...">
+                        @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="form-row">
@@ -111,11 +113,32 @@
 
 @push('scripts')
 <script>
-// Preview icon secara realtime
+// Preview icon
 const iconInput = document.getElementById('iconInput');
 const iconPreview = document.getElementById('iconPreview');
 iconInput.addEventListener('input', function() {
     iconPreview.innerHTML = `<i class="${this.value || 'fas fa-link'}"></i>`;
 });
+
+// Isi URL + Judul otomatis dari dropdown halaman
+function applyPageToMenu(select) {
+    const opt = select.options[select.selectedIndex];
+    if (!opt.value) return;
+    document.getElementById('menuUrl').value   = opt.value;
+    const titleField = document.getElementById('menuTitle');
+    if (!titleField.value) titleField.value = opt.dataset.title;
+}
+
+// Quick pick dari tombol halaman
+function quickPickPage(url, title) {
+    document.getElementById('menuUrl').value = url;
+    const titleField = document.getElementById('menuTitle');
+    if (!titleField.value) titleField.value = title;
+    // sync dropdown
+    const sel = document.getElementById('pagePicker');
+    if (sel) {
+        for (let o of sel.options) { if (o.value === url) { sel.value = url; break; } }
+    }
+}
 </script>
 @endpush
