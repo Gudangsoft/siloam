@@ -86,7 +86,9 @@ class GalleryController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($gallery->image);
+            if ($gallery->image) {
+                Storage::disk('public')->delete($gallery->image);
+            }
             $data['image'] = $request->file('image')->store('gallery', 'public');
         }
 
@@ -98,7 +100,9 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
-        Storage::disk('public')->delete($gallery->image);
+        if ($gallery->image) {
+            Storage::disk('public')->delete($gallery->image);
+        }
         $gallery->delete();
 
         return redirect()->route('admin.gallery.index')
