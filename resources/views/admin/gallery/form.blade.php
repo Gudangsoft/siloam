@@ -211,26 +211,27 @@
 
     </div>
 
-    {{-- Sticky save bar --}}
-    <div style="position:sticky;bottom:0;background:white;padding:14px 0;border-top:1px solid var(--border);margin-top:8px;z-index:10">
-        <div class="d-flex gap-2 align-items-center">
-            <button type="submit" class="btn btn-primary btn-lg">
-                <i class="fas fa-save me-2"></i>{{ isset($gallery) ? 'Simpan Perubahan' : 'Upload Foto' }}
-            </button>
-            <a href="{{ route('admin.gallery.index') }}" class="btn btn-secondary btn-lg">Batal</a>
-            @if(isset($gallery))
-            <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="ms-auto"
-                  onsubmit="return confirm('Hapus foto ini secara permanen?')">
-                @csrf @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-lg">
-                    <i class="fas fa-trash me-1"></i> Hapus
-                </button>
-            </form>
-            @endif
-        </div>
-    </div>
+</form>{{-- /galleryForm --}}
 
-</form>
+{{-- Sticky save bar — di LUAR form utama agar tidak nested --}}
+<div style="position:sticky;bottom:0;background:white;padding:14px 0;border-top:1px solid var(--border);margin-top:8px;z-index:10">
+    <div class="d-flex gap-2 align-items-center">
+        <button type="button" class="btn btn-primary btn-lg"
+                onclick="document.getElementById('galleryForm').submit()">
+            <i class="fas fa-save me-2"></i>{{ isset($gallery) ? 'Simpan Perubahan' : 'Upload Foto' }}
+        </button>
+        <a href="{{ route('admin.gallery.index') }}" class="btn btn-secondary btn-lg">Batal</a>
+        @if(isset($gallery))
+        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="ms-auto"
+              onsubmit="return confirm('Hapus foto ini secara permanen?')">
+            @csrf @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-lg">
+                <i class="fas fa-trash me-1"></i> Hapus
+            </button>
+        </form>
+        @endif
+    </div>
+</div>
 @endsection
 
 @push('scripts')
