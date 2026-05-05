@@ -130,35 +130,95 @@
 
 {{-- Sambutan Ketua Section --}}
 @if(isset($siteSettings))
-<section class="py-16 bg-white" data-aos="fade-up">
+<section class="py-16 bg-gray-50 overflow-hidden" data-aos="fade-up">
     <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/3 text-center">
-                <div class="w-48 h-48 rounded-full overflow-hidden mx-auto border-4 border-yellow-500 shadow-xl">
-                    @if($siteSettings->get('rector_photo'))
-                    <img src="{{ Storage::disk('public')->url($siteSettings->get('rector_photo')) }}" alt="Ketua STT" class="w-full h-full object-cover">
-                    @else
-                    <div class="w-full h-full bg-blue-100 flex items-center justify-center">
-                        <svg class="w-24 h-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
+        <div class="rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[520px]">
+
+            {{-- Panel Kiri: Foto --}}
+            <div class="lg:w-2/5 bg-blue-900 relative flex flex-col items-center justify-center py-14 px-10"
+                 style="background: linear-gradient(145deg, #1e3a8a 0%, #1e40af 60%, #1d4ed8 100%);">
+                {{-- Dekorasi lingkaran latar --}}
+                <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-5"
+                     style="background:#fff;transform:translate(30%,-30%)"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-5"
+                     style="background:#fff;transform:translate(-30%,30%)"></div>
+                {{-- Foto persegi panjang dengan shadow offset kuning --}}
+                <div class="relative z-10">
+                    <div class="relative" style="width:240px;height:300px">
+                        {{-- Yellow shadow offset --}}
+                        <div class="absolute rounded-2xl bg-yellow-400"
+                             style="inset:0;transform:translate(10px,10px)"></div>
+                        {{-- Photo frame --}}
+                        <div class="absolute inset-0 rounded-2xl overflow-hidden border-4 border-white shadow-2xl bg-blue-800">
+                            @if($siteSettings->get('rector_photo'))
+                            <img src="{{ Storage::disk('public')->url($siteSettings->get('rector_photo')) }}"
+                                 alt="{{ $siteSettings->get('rector_name','Ketua STT') }}"
+                                 class="w-full h-full object-cover object-top">
+                            @else
+                            <div class="w-full h-full flex items-center justify-center">
+                                <i class="fas fa-user text-6xl text-blue-400"></i>
+                            </div>
+                            @endif
+                        </div>
                     </div>
-                    @endif
+                    {{-- Name card --}}
+                    <div class="text-center mt-8 relative z-10">
+                        <div class="inline-block bg-white bg-opacity-10 backdrop-blur rounded-xl px-6 py-3 border border-white border-opacity-20">
+                            <p class="text-white font-bold text-base tracking-wide">
+                                {{ $siteSettings->get('rector_name', 'Ketua STT Siloam Medan') }}
+                            </p>
+                            <p class="text-yellow-300 text-sm mt-0.5">Ketua STT Siloam Medan</p>
+                        </div>
+                        <div class="flex justify-center gap-1 mt-4">
+                            <div class="w-8 h-0.5 bg-yellow-400 rounded"></div>
+                            <div class="w-2 h-0.5 bg-yellow-400 rounded"></div>
+                            <div class="w-2 h-0.5 bg-yellow-400 rounded"></div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold text-blue-900 mt-4">{{ $siteSettings->get('rector_name', 'Ketua STT Siloam Medan') }}</h3>
-                <p class="text-gray-500 text-sm">Ketua STT Siloam Medan</p>
             </div>
-            <div class="md:w-2/3">
-                <div class="text-center md:text-left mb-6">
-                    <h2 class="text-3xl font-bold text-blue-900 mb-3">Sambutan Ketua</h2>
-                    <div class="w-20 h-1 bg-yellow-500 md:mx-0 mx-auto"></div>
+
+            {{-- Panel Kanan: Teks --}}
+            <div class="lg:w-3/5 bg-white flex flex-col justify-center px-10 lg:px-16 py-14">
+                <span class="text-yellow-500 font-semibold text-xs uppercase tracking-widest mb-2">
+                    <i class="fas fa-cross mr-1"></i>Pesan Pimpinan
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-blue-900 mb-4 leading-tight">Sambutan Ketua</h2>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-16 h-1 bg-yellow-500 rounded"></div>
+                    <div class="w-3 h-1 bg-yellow-300 rounded"></div>
                 </div>
-                <div class="text-gray-700 leading-relaxed italic text-lg">
-                    <span class="text-5xl text-yellow-400 font-serif leading-none float-left mr-2">"</span>
-                    {!! nl2br(e($siteSettings->get('rector_message', 'STT Siloam Medan hadir untuk mencetak pemimpin gereja yang berkarakter Kristus, berpengetahuan teologi yang mendalam, dan siap melayani di berbagai bidang kehidupan.'))) !!}
-                    <span class="text-5xl text-yellow-400 font-serif leading-none">"</span>
+
+                {{-- Kutipan --}}
+                <div class="relative">
+                    <i class="fas fa-quote-left absolute text-yellow-200"
+                       style="font-size:72px;top:-20px;left:-16px;line-height:1;z-index:0"></i>
+                    <div class="relative z-10 text-gray-700 leading-relaxed text-base lg:text-lg"
+                         style="font-style:italic;padding-left:10px">
+                        {!! nl2br(e($siteSettings->get('rector_message', 'STT Siloam Medan hadir untuk mencetak pemimpin gereja yang berkarakter Kristus, berpengetahuan teologi yang mendalam, dan siap melayani di berbagai bidang kehidupan.'))) !!}
+                    </div>
+                </div>
+
+                {{-- Tanda tangan / penutup --}}
+                <div class="mt-10 pt-6 border-t border-gray-100 flex items-center gap-4">
+                    <div class="flex gap-1.5">
+                        <div class="w-10 h-0.5 bg-yellow-500 rounded"></div>
+                        <div class="w-3 h-0.5 bg-yellow-300 rounded"></div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-blue-900 text-sm">{{ $siteSettings->get('rector_name', 'Ketua STT Siloam Medan') }}</p>
+                        <p class="text-gray-400 text-xs">Ketua STT Siloam Medan</p>
+                    </div>
+                    <div class="ml-auto">
+                        <a href="{{ route('profil.pimpinan') }}"
+                           class="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900 font-semibold text-sm">
+                            Profil Pimpinan
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
