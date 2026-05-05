@@ -91,38 +91,134 @@
 
 {{-- Program Studi Section --}}
 @if(isset($programs) && $programs->count() > 0)
-<section class="py-16 bg-gray-50" data-aos="fade-up">
+@php
+$cardStyles = [
+    ['grad'=>'linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)', 'icon'=>'fas fa-cross', 'accent'=>'#f59e0b'],
+    ['grad'=>'linear-gradient(135deg,#4c1d95 0%,#7c3aed 100%)', 'icon'=>'fas fa-book-open', 'accent'=>'#a78bfa'],
+    ['grad'=>'linear-gradient(135deg,#0f4c75 0%,#0ea5e9 100%)', 'icon'=>'fas fa-graduation-cap', 'accent'=>'#38bdf8'],
+    ['grad'=>'linear-gradient(135deg,#7c2d12 0%,#ea580c 100%)', 'icon'=>'fas fa-users', 'accent'=>'#fb923c'],
+];
+@endphp
+<section class="py-20 bg-white" data-aos="fade-up">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-blue-900 mb-3">Program Studi</h2>
-            <p class="text-gray-600 max-w-xl mx-auto">Pilih program studi yang sesuai dengan panggilan dan tujuan pelayanan Anda</p>
-            <div class="w-20 h-1 bg-yellow-500 mx-auto mt-4"></div>
+        {{-- Heading --}}
+        <div class="text-center mb-14">
+            <span class="text-yellow-500 font-semibold text-xs uppercase tracking-widest">
+                <i class="fas fa-graduation-cap mr-1"></i>Akademik
+            </span>
+            <h2 class="text-3xl lg:text-4xl font-bold text-blue-900 mt-2 mb-3">Program Studi</h2>
+            <p class="text-gray-500 max-w-lg mx-auto text-sm leading-relaxed">
+                Pilih program studi yang sesuai dengan panggilan dan tujuan pelayanan Anda
+            </p>
+            <div class="flex justify-center items-center gap-2 mt-4">
+                <div class="w-16 h-1 bg-yellow-500 rounded"></div>
+                <div class="w-3 h-1 bg-yellow-300 rounded"></div>
+            </div>
         </div>
-        <div class="flex flex-wrap justify-center gap-8">
-            @foreach($programs as $program)
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1 w-full md:w-80" data-aos="fade-up">
-                @if($program->image)
-                <img src="{{ $program->image_url }}" alt="{{ $program->name }}" class="w-full h-48 object-cover">
-                @else
-                <div class="w-full h-48 bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
-                    <svg class="w-16 h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                    </svg>
-                </div>
-                @endif
-                <div class="p-6">
-                    @if($program->degree)
-                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full">{{ $program->degree }}</span>
+
+        {{-- Cards Grid --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            @foreach($programs as $i => $program)
+            @php $style = $cardStyles[$i % count($cardStyles)]; @endphp
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col"
+                 data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
+
+                {{-- Top Banner --}}
+                <div class="relative h-52 flex items-center justify-center overflow-hidden"
+                     style="background:{{ $style['grad'] }}">
+                    {{-- Decorative circles --}}
+                    <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full"
+                         style="background:rgba(255,255,255,0.07)"></div>
+                    <div class="absolute -bottom-8 -left-8 w-36 h-36 rounded-full"
+                         style="background:rgba(255,255,255,0.07)"></div>
+                    <div class="absolute top-4 left-4 w-16 h-16 rounded-full"
+                         style="background:rgba(255,255,255,0.05)"></div>
+
+                    {{-- Image or Icon --}}
+                    @if($program->image)
+                    <img src="{{ $program->image_url }}" alt="{{ $program->name }}"
+                         class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500">
                     @endif
-                    <h3 class="text-xl font-bold text-blue-900 mt-3 mb-2">{{ $program->name }}</h3>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ Str::limit($program->description, 120) }}</p>
-                    <a href="{{ route('akademik.program-detail', $program->slug) }}" class="text-blue-700 font-semibold hover:text-blue-900 flex items-center gap-1 text-sm">
-                        Lihat Detail
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
+                    <div class="relative z-10 text-center">
+                        <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300"
+                             style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,0.25)">
+                            <i class="{{ $style['icon'] }} text-white" style="font-size:32px"></i>
+                        </div>
+                        {{-- Degree badge --}}
+                        @if($program->degree)
+                        <span class="inline-block text-xs font-bold px-3 py-1 rounded-full text-blue-900"
+                              style="background:{{ $style['accent'] }}">
+                            {{ $program->degree }}
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Content --}}
+                <div class="flex flex-col flex-1 p-7">
+                    {{-- Accreditation badge --}}
+                    @if($program->accreditation)
+                    <div class="flex items-center gap-1.5 mb-3">
+                        <i class="fas fa-shield-alt text-green-500 text-xs"></i>
+                        <span class="text-green-700 text-xs font-semibold">Akreditasi {{ $program->accreditation }}</span>
+                    </div>
+                    @endif
+
+                    {{-- Name --}}
+                    <h3 class="text-xl font-bold text-blue-900 mb-3 group-hover:text-blue-700 transition-colors leading-tight">
+                        {{ $program->name }}
+                    </h3>
+
+                    {{-- Description --}}
+                    <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-6"
+                       style="-webkit-line-clamp:3;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden">
+                        {{ $program->description ?: 'Program unggulan yang dirancang untuk mempersiapkan lulusan yang kompeten dan berdampak.' }}
+                    </p>
+
+                    {{-- Highlights (career prospects, head name) --}}
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        @if($program->head_name)
+                        <div class="flex items-center gap-1.5 text-xs text-gray-500">
+                            <i class="fas fa-user-tie text-blue-400"></i>
+                            <span>{{ $program->head_name }}</span>
+                        </div>
+                        @endif
+                        <div class="flex items-center gap-1.5 text-xs text-gray-500">
+                            <i class="fas fa-clock text-blue-400"></i>
+                            <span>8 Semester</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-xs text-gray-500">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            <span>Kampus Medan</span>
+                        </div>
+                    </div>
+
+                    {{-- Footer CTA --}}
+                    <div class="flex items-center justify-between pt-5 border-t border-gray-100">
+                        <a href="{{ route('akademik.program-detail', $program->slug) }}"
+                           class="inline-flex items-center gap-2 font-semibold text-sm group-hover:gap-3 transition-all"
+                           style="color:{{ $style['accent'] === '#f59e0b' ? '#1d4ed8' : substr($style['grad'], strpos($style['grad'],'#',20), 7) }}">
+                            Lihat Program
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="{{ route('pmb.daftar') }}"
+                           class="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full text-white transition-opacity hover:opacity-90"
+                           style="background:{{ $style['grad'] }}">
+                            <i class="fas fa-user-plus text-xs"></i>Daftar
+                        </a>
+                    </div>
                 </div>
             </div>
             @endforeach
+        </div>
+
+        {{-- CTA bawah --}}
+        <div class="text-center mt-12">
+            <a href="{{ route('akademik.program-studi') }}"
+               class="inline-flex items-center gap-2 border-2 border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white font-semibold px-8 py-3 rounded-full transition-all duration-300">
+                <i class="fas fa-th-large"></i>
+                Lihat Semua Program Studi
+            </a>
         </div>
     </div>
 </section>
