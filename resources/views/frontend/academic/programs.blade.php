@@ -1,4 +1,4 @@
-﻿@extends('layouts.frontend')
+@extends('layouts.frontend')
 @section('title', 'Program Studi | STT Siloam Medan')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
@@ -13,7 +13,7 @@
 </div>
 <div class="container mx-auto px-4 py-12">
     @if(isset($programs) && $programs->count() > 0)
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
         @foreach($programs as $program)
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-aos="fade-up">
             @if($program->image)
