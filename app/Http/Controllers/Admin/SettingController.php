@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Setting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class SettingController extends Controller
+{
+    public function index()
+    {
+        $settings = Setting::all()->pluck('value', 'key');
+        return view('admin.settings.index', compact('settings'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'app_name'         => 'required|string|max:255',
+            'tagline'          => 'nullable|string|max:255',
+            'address'          => 'nullable|string',
+            'phone'            => 'nullable|string|max:30',
+            'email'            => 'nullable|email|max:100',
+            'facebook'         => 'nullable|url|max:255',
+            'instagram'        => 'nullable|url|max:255',
+            'youtube'          => 'nullable|url|max:255',
+            'whatsapp'         => 'nullable|string|max:20',
+            'maps_embed'       => 'nullable|string',
+            'welcome_message'  => 'nullable|string',
+            'rector_name'      => 'nullable|string|max:255',
+            'rector_message'   => 'nullable|string',
+            'total_students'   => 'nullable|integer',
+            'total_alumni'     => 'nullable|integer',
+            'total_lecturers'  => 'nullable|integer',
+            'logo'             => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
+            'favicon'          => 'nullable|mimes:ico,png,jpg,jpeg,svg|max:512',
+            'rector_photo'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
+        $textKeys = [
+            'app_name', 'tagline', 'address', 'phone', 'email',
+            'facebook', 'instagram', 'youtube', 'whatsapp', 'maps_embed',
+            'welcome_message', 'rector_name', 'rector_message',
+            'total_students', 'total_alumni', 'total_lecturers',
+        ];
+
+        foreach ($textKeys as $key) {
+            if ($request->has($key)) {
+                Setting::set($key, $request->$key);
+            }
+        }
+
+        if ($request->hasFile('logo')) {
+            $old = Setting::get('logo');
+            if ($old) Storage::disk('public')->delete($old);
+            Setting::set('logo', $request->file('logo')->store('settings', 'public'));
+        }
+
+        if ($request->hasFile('favicon')) {
+            $old = Setting::get('favicon');
+            if ($old) Storage::disk('public')->delete($old);
+            Setting::set('favicon', $request->file('favicon')->store('settings', 'public'));
+        }
+
+        if ($request->hasFile('rector_photo')) {
+            $old = Setting::get('rector_photo');
+            if ($old) Storage::disk('public')->delete($old);
+            Setting::set('rector_photo', $request->file('rector_photo')->store('settings', 'public'));
+        }
+
+        return redirect()->route('admin.settings.index')->with('success', 'Pengaturan berhasil disimpan!');
+    }
+}
