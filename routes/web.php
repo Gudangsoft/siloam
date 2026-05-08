@@ -47,7 +47,8 @@ Route::prefix('pmb')->name('pmb.')->group(function () {
     Route::get('/beasiswa',         [PmbController::class, 'scholarships'])->name('beasiswa');
     Route::get('/jadwal',           [PmbController::class, 'schedule'])->name('jadwal');
     Route::get('/daftar',           [PmbController::class, 'register'])->name('daftar');
-    Route::post('/daftar',          [PmbController::class, 'store'])->name('store');
+    Route::post('/daftar',          [PmbController::class, 'store'])->name('store')
+         ->middleware('throttle:10,30'); // maks 10 pendaftaran per 30 menit per IP
     Route::get('/sukses/{number}',  [PmbController::class, 'success'])->name('success');
 });
 
@@ -85,7 +86,8 @@ Route::get('/kerjasama', [PartnershipController::class, 'index'])->name('kerjasa
 
 // Kontak
 Route::get('/kontak',  [ContactController::class, 'index'])->name('kontak.index');
-Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store');
+Route::post('/kontak', [ContactController::class, 'store'])->name('kontak.store')
+     ->middleware('throttle:5,10'); // maks 5 kiriman per 10 menit
 
 // Halaman Statis (dari database)
 Route::get('/halaman/{slug}', function (string $slug) {

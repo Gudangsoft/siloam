@@ -30,7 +30,7 @@ class ResearchController extends Controller
             'year'           => 'nullable|string|max:10',
             'funding_source' => 'nullable|string|max:255',
             'link'           => 'nullable|url|max:255',
-            'document'       => 'nullable|file|max:5120',
+            'document'       => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx|max:5120',
             'is_published'   => 'nullable|boolean',
         ]);
 

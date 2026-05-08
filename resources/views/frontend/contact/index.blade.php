@@ -1,99 +1,121 @@
-﻿@extends('layouts.frontend')
+@extends('layouts.frontend')
 @section('title', 'Hubungi Kami | STT Siloam Medan')
 @section('content')
 
-<div class="bg-blue-900 text-white py-12">
-    <div class="container mx-auto px-4">
-        <h1 class="text-3xl font-bold">Hubungi Kami</h1>
-        <nav class="text-sm mt-2">
-            <a href="{{ route('home') }}" class="text-blue-300 hover:text-white">Beranda</a>
-            <span class="mx-2 text-blue-400">&#x203A;</span>
-            <span class="text-white">Kontak</span>
-        </nav>
+{{-- Hero --}}
+<div class="text-white py-16 relative overflow-hidden"
+     style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#1d4ed8 100%)">
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg bg-white bg-opacity-15 flex items-center justify-center">
+                <i class="fas fa-envelope text-yellow-400 text-lg"></i>
+            </div>
+            <nav class="text-sm text-blue-300">
+                <a href="{{ route('home') }}" class="hover:text-white">Beranda</a>
+                <span class="mx-2">›</span>
+                <span class="text-white">Hubungi Kami</span>
+            </nav>
+        </div>
+        <h1 class="text-4xl font-bold mb-2">Hubungi Kami</h1>
+        <p class="text-blue-200 text-sm max-w-xl">
+            Ada pertanyaan? Kami siap membantu. Isi formulir di bawah atau hubungi kami langsung.
+        </p>
     </div>
 </div>
 
-<div class="container mx-auto px-4 py-12">
+<div class="container mx-auto px-4 py-14">
     <div class="flex flex-col lg:flex-row gap-10">
 
-        {{-- Contact Info --}}
-        <div class="lg:w-1/3 space-y-6" data-aos="fade-right">
-            <div class="bg-blue-900 text-white rounded-xl p-6">
-                <h2 class="text-xl font-bold mb-6">Informasi Kontak</h2>
-                <div class="space-y-5">
-                    <div class="flex gap-4">
-                        <div class="bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+        {{-- ── Info Kontak ───────────────────────── --}}
+        <div class="lg:w-2/5 space-y-6" data-aos="fade-right">
+
+            {{-- Card info --}}
+            <div class="rounded-2xl overflow-hidden shadow-lg"
+                 style="background:linear-gradient(145deg,#1e3a8a,#1d4ed8)">
+                <div class="p-8">
+                    <h2 class="text-xl font-bold text-white mb-6">Informasi Kontak</h2>
+                    <div class="space-y-5">
+                        @foreach([
+                            ['fa-map-marker-alt', 'Alamat', $siteSettings->get('address','Jl. Siloam No.1, Medan')],
+                            ['fa-phone', 'Telepon', $siteSettings->get('phone','(061) 8888-1234')],
+                            ['fa-envelope', 'Email', $siteSettings->get('email','info@sttsiloammedan.ac.id')],
+                            ['fa-clock', 'Jam Operasional', "Senin–Jumat: 08.00–17.00 WIB\nSabtu: 08.00–12.00 WIB"],
+                        ] as [$icon, $label, $val])
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                                 style="background:rgba(255,255,255,0.15)">
+                                <i class="fas {{ $icon }} text-yellow-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-blue-300 text-xs font-semibold uppercase tracking-wider">{{ $label }}</p>
+                                <p class="text-white text-sm mt-0.5" style="white-space:pre-line">{{ $val }}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-semibold text-blue-200 text-sm">Alamat</p>
-                            <p class="text-white text-sm">{{ isset($siteSettings) ? $siteSettings->get('address', 'Jl. Bunga Raya No. 1, Medan, Sumatera Utara') : 'Jl. Bunga Raya No. 1, Medan, Sumatera Utara' }}</p>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="flex gap-4">
-                        <div class="bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-blue-200 text-sm">Telepon</p>
-                            <p class="text-white text-sm">{{ isset($siteSettings) ? $siteSettings->get('phone', '(061) 8888-1234') : '(061) 8888-1234' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-blue-200 text-sm">Email</p>
-                            <p class="text-white text-sm">{{ isset($siteSettings) ? $siteSettings->get('email', 'info@sttsiloammedan.ac.id') : 'info@sttsiloammedan.ac.id' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-blue-200 text-sm">Jam Operasional</p>
-                            <p class="text-white text-sm">Senin - Jumat: 08.00 - 17.00 WIB</p>
-                            <p class="text-white text-sm">Sabtu: 08.00 - 12.00 WIB</p>
-                        </div>
-                    </div>
+                </div>
+
+                {{-- Social media --}}
+                <div class="px-8 pb-8 flex gap-3">
+                    @if($siteSettings->get('facebook'))
+                    <a href="{{ $siteSettings->get('facebook') }}" target="_blank" rel="noopener"
+                       class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition text-white"
+                       style="background:#1877f2"><i class="fab fa-facebook-f text-xs"></i></a>
+                    @endif
+                    @if($siteSettings->get('instagram'))
+                    <a href="{{ $siteSettings->get('instagram') }}" target="_blank" rel="noopener"
+                       class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition text-white"
+                       style="background:#e1306c"><i class="fab fa-instagram text-xs"></i></a>
+                    @endif
+                    @if($siteSettings->get('youtube'))
+                    <a href="{{ $siteSettings->get('youtube') }}" target="_blank" rel="noopener"
+                       class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition text-white"
+                       style="background:#ff0000"><i class="fab fa-youtube text-xs"></i></a>
+                    @endif
+                    @if($siteSettings->get('whatsapp'))
+                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings->get('whatsapp')) }}"
+                       target="_blank" rel="noopener"
+                       class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition text-white"
+                       style="background:#25d366"><i class="fab fa-whatsapp text-xs"></i></a>
+                    @endif
                 </div>
             </div>
 
-            {{-- Social Media --}}
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <h3 class="font-bold text-blue-900 mb-4">Ikuti Kami</h3>
-                <div class="flex gap-3">
-                    @if(isset($siteSettings) && $siteSettings->get('facebook'))
-                    <a href="{{ $siteSettings->get('facebook') }}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition">f</a>
-                    @endif
-                    @if(isset($siteSettings) && $siteSettings->get('instagram'))
-                    <a href="{{ $siteSettings->get('instagram') }}" target="_blank" class="bg-pink-500 hover:bg-pink-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition">ig</a>
-                    @endif
-                    @if(isset($siteSettings) && $siteSettings->get('youtube'))
-                    <a href="{{ $siteSettings->get('youtube') }}" target="_blank" class="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition">yt</a>
-                    @endif
-                    <a href="#" class="bg-green-500 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition text-xs font-bold">WA</a>
+            {{-- Google Maps --}}
+            @if($siteSettings->get('maps_embed'))
+            <div class="rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up">
+                <div class="bg-gray-50 px-5 py-3 border-b border-gray-100">
+                    <p class="font-bold text-blue-900 text-sm"><i class="fas fa-map-marker-alt mr-1 text-red-500"></i>Lokasi Kampus</p>
+                </div>
+                <div class="aspect-video">
+                    {!! $siteSettings->get('maps_embed') !!}
                 </div>
             </div>
+            @endif
         </div>
 
-        {{-- Contact Form + Map --}}
-        <div class="lg:w-2/3 space-y-8">
-            {{-- Contact Form --}}
-            <div class="bg-white rounded-xl shadow-md p-8" data-aos="fade-left">
-                <h2 class="text-2xl font-bold text-blue-900 mb-6">Kirim Pesan</h2>
+        {{-- ── Formulir ──────────────────────────── --}}
+        <div class="lg:w-3/5" data-aos="fade-left">
+            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+                <h2 class="text-2xl font-bold text-blue-900 mb-1">Kirim Pesan</h2>
+                <p class="text-gray-500 text-sm mb-7">Kami akan membalas dalam 1×24 jam kerja.</p>
 
+                {{-- Success --}}
                 @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
-                    {{ session('success') }}
+                <div class="flex items-start gap-3 bg-green-50 border border-green-200 text-green-800 px-5 py-4 rounded-xl mb-6">
+                    <i class="fas fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                    <div>
+                        <p class="font-semibold">Pesan Terkirim!</p>
+                        <p class="text-sm mt-0.5">{{ session('success') }}</p>
+                    </div>
                 </div>
                 @endif
 
+                {{-- Errors --}}
                 @if($errors->any())
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
-                    <ul class="list-disc list-inside">
+                <div class="flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 px-5 py-4 rounded-xl mb-6">
+                    <i class="fas fa-exclamation-triangle text-red-500 mt-0.5 flex-shrink-0"></i>
+                    <ul class="text-sm space-y-0.5">
                         @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                         @endforeach
@@ -103,72 +125,106 @@
 
                 <form action="{{ route('kontak.store') }}" method="POST" class="space-y-5">
                     @csrf
+
+                    {{-- Row 1: Nama + Email --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Nama Lengkap <span class="text-red-500">*</span>
+                            </label>
                             <input type="text" name="name" value="{{ old('name') }}" required
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') border-red-500 @enderror"
-                                   placeholder="Nama Anda">
-                            @error('name')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+                                   maxlength="255"
+                                   class="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition
+                                          {{ $errors->has('name') ? 'border-red-400 bg-red-50' : 'border-gray-200' }}"
+                                   placeholder="Nama lengkap Anda">
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Email <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Email <span class="text-red-500">*</span>
+                            </label>
                             <input type="email" name="email" value="{{ old('email') }}" required
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('email') border-red-500 @enderror"
+                                   maxlength="100"
+                                   class="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition
+                                          {{ $errors->has('email') ? 'border-red-400 bg-red-50' : 'border-gray-200' }}"
                                    placeholder="email@domain.com">
-                            @error('email')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
                         </div>
                     </div>
+
+                    {{-- Row 2: Telepon + Subjek --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Nomor Telepon</label>
-                            <input type="text" name="phone" value="{{ old('phone') }}"
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nomor Telepon</label>
+                            <input type="tel" name="phone" value="{{ old('phone') }}"
+                                   maxlength="20"
+                                   class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                                    placeholder="08xxxxxxxxxx">
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Subjek <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Subjek <span class="text-red-500">*</span>
+                            </label>
                             <input type="text" name="subject" value="{{ old('subject') }}" required
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('subject') border-red-500 @enderror"
+                                   maxlength="255"
+                                   class="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition
+                                          {{ $errors->has('subject') ? 'border-red-400 bg-red-50' : 'border-gray-200' }}"
                                    placeholder="Perihal pesan Anda">
-                            @error('subject')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
                         </div>
                     </div>
+
+                    {{-- Pesan --}}
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Pesan <span class="text-red-500">*</span></label>
-                        <textarea name="message" required rows="6"
-                                  class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('message') border-red-500 @enderror"
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">
+                            Pesan <span class="text-red-500">*</span>
+                        </label>
+                        <textarea name="message" required rows="5" maxlength="3000"
+                                  class="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none
+                                         {{ $errors->has('message') ? 'border-red-400 bg-red-50' : 'border-gray-200' }}"
                                   placeholder="Tulis pesan Anda di sini...">{{ old('message') }}</textarea>
-                        @error('message')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+                        <p class="text-xs text-gray-400 mt-1 text-right">Maks. 3000 karakter</p>
                     </div>
-                    <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full transition shadow-md w-full md:w-auto">
+
+                    {{-- CAPTCHA --}}
+                    <div class="rounded-xl border-2 border-dashed border-blue-100 bg-blue-50 px-5 py-4">
+                        <p class="text-sm font-semibold text-blue-900 mb-3">
+                            <i class="fas fa-shield-alt mr-1 text-blue-500"></i>
+                            Verifikasi Keamanan
+                        </p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl font-bold text-blue-900">{{ $a }}</span>
+                                <span class="text-xl font-bold text-blue-400">+</span>
+                                <span class="text-2xl font-bold text-blue-900">{{ $b }}</span>
+                                <span class="text-xl font-bold text-blue-400">=</span>
+                            </div>
+                            <input type="number" name="captcha" required
+                                   min="0" max="99"
+                                   style="width:90px"
+                                   class="border-2 rounded-xl px-4 py-2 text-center text-xl font-bold text-blue-900 focus:outline-none focus:border-blue-500 transition
+                                          {{ $errors->has('captcha') ? 'border-red-400 bg-red-50' : 'border-blue-200 bg-white' }}"
+                                   placeholder="?">
+                        </div>
+                        <p class="text-xs text-blue-500 mt-2">Isi jawaban dari perhitungan di atas untuk membuktikan Anda bukan robot.</p>
+                        @error('captcha')
+                        <p class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Submit --}}
+                    <button type="submit"
+                            class="w-full md:w-auto inline-flex items-center justify-center gap-2 text-white font-bold py-3 px-10 rounded-full transition shadow-md hover:shadow-lg hover:-translate-y-0.5 transform"
+                            style="background:linear-gradient(135deg,#1e3a8a,#2563eb)">
+                        <i class="fas fa-paper-plane"></i>
                         Kirim Pesan
                     </button>
-                </form>
-            </div>
 
-            {{-- Google Maps --}}
-            <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
-                <div class="p-4 bg-gray-50 border-b">
-                    <h3 class="font-bold text-blue-900">Lokasi Kampus</h3>
-                </div>
-                @if(isset($siteSettings) && $siteSettings->get('maps_embed'))
-                <div class="aspect-video">
-                    {!! $siteSettings->get('maps_embed') !!}
-                </div>
-                @else
-                <div class="aspect-video bg-gray-200 flex items-center justify-center">
-                    <div class="text-center text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                        <p>Peta belum dikonfigurasi</p>
-                        <a href="{{ route('profil.lokasi') }}" class="text-blue-600 text-sm hover:underline mt-1 block">Lihat Lokasi</a>
-                    </div>
-                </div>
-                @endif
+                    <p class="text-xs text-gray-400">
+                        <i class="fas fa-lock mr-1"></i>
+                        Data Anda aman dan tidak akan disebarkan kepada pihak ketiga.
+                    </p>
+                </form>
             </div>
         </div>
 
     </div>
 </div>
-
 @endsection

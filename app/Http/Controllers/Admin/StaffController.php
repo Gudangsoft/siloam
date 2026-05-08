@@ -32,7 +32,7 @@ class StaffController extends Controller
             'education' => 'nullable|string|max:255',
             'expertise' => 'nullable|string|max:255',
             'bio'       => 'nullable|string',
-            'photo'     => 'nullable|image|max:2048',
+            'photo'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'order'     => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
@@ -64,7 +64,7 @@ class StaffController extends Controller
             'education' => 'nullable|string|max:255',
             'expertise' => 'nullable|string|max:255',
             'bio'       => 'nullable|string',
-            'photo'     => 'nullable|image|max:2048',
+            'photo'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'order'     => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);

@@ -30,7 +30,7 @@ class PartnershipController extends Controller
             'website'    => 'nullable|url|max:255',
             'mou_date'   => 'nullable|date',
             'mou_expiry' => 'nullable|date',
-            'logo'       => 'nullable|image|max:2048',
+            'logo'       => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_active'  => 'nullable|boolean',
             'order'      => 'nullable|integer',
         ]);
@@ -60,7 +60,7 @@ class PartnershipController extends Controller
             'website'    => 'nullable|url|max:255',
             'mou_date'   => 'nullable|date',
             'mou_expiry' => 'nullable|date',
-            'logo'       => 'nullable|image|max:2048',
+            'logo'       => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_active'  => 'nullable|boolean',
             'order'      => 'nullable|integer',
         ]);

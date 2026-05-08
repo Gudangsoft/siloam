@@ -33,7 +33,7 @@ class StudyProgramController extends Controller
             'objectives'       => 'nullable|string',
             'career_prospects' => 'nullable|string',
             'head_name'        => 'nullable|string|max:255',
-            'image'            => 'nullable|image|max:2048',
+            'image'            => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_active'        => 'nullable|boolean',
             'order'            => 'nullable|integer',
         ]);
@@ -66,7 +66,7 @@ class StudyProgramController extends Controller
             'objectives'       => 'nullable|string',
             'career_prospects' => 'nullable|string',
             'head_name'        => 'nullable|string|max:255',
-            'image'            => 'nullable|image|max:2048',
+            'image'            => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_active'        => 'nullable|boolean',
             'order'            => 'nullable|integer',
         ]);

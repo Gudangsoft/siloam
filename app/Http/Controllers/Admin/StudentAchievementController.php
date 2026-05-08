@@ -30,7 +30,7 @@ class StudentAchievementController extends Controller
             'award'         => 'nullable|string|max:100',
             'description'   => 'nullable|string',
             'year'          => 'required|integer|min:2000|max:2099',
-            'image'         => 'nullable|image|max:2048',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_published'  => 'nullable|boolean',
         ]);
 
@@ -59,7 +59,7 @@ class StudentAchievementController extends Controller
             'award'         => 'nullable|string|max:100',
             'description'   => 'nullable|string',
             'year'          => 'required|integer|min:2000|max:2099',
-            'image'         => 'nullable|image|max:2048',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_published'  => 'nullable|boolean',
         ]);
 

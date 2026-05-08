@@ -30,7 +30,7 @@ class EventController extends Controller
             'start_date'   => 'required|date',
             'end_date'     => 'nullable|date|after_or_equal:start_date',
             'organizer'    => 'nullable|string|max:255',
-            'image'        => 'nullable|image|max:2048',
+            'image'        => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_published' => 'nullable|boolean',
         ]);
 
@@ -59,7 +59,7 @@ class EventController extends Controller
             'start_date'   => 'required|date',
             'end_date'     => 'nullable|date|after_or_equal:start_date',
             'organizer'    => 'nullable|string|max:255',
-            'image'        => 'nullable|image|max:2048',
+            'image'        => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'is_published' => 'nullable|boolean',
         ]);
 

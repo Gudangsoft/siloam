@@ -62,7 +62,7 @@ class PmbController extends Controller
             'registration_path' => 'nullable|string|max:100',
             'parent_name'       => 'required|string|max:255',
             'parent_phone'      => 'required|string|max:20',
-            'photo'             => 'nullable|image|max:2048',
+            'photo'             => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'ijazah_document'   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:4096',
         ], [
             'full_name.required'        => 'Nama lengkap wajib diisi.',

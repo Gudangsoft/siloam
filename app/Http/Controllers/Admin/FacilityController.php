@@ -22,7 +22,7 @@ class FacilityController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|string|max:255', 'image' => 'nullable|image|max:2048']);
+        $request->validate(['name' => 'required|string|max:255', 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048']);
 
         $data = $request->except('image', '_token');
         $data['is_published'] = $request->boolean('is_published');
@@ -42,7 +42,7 @@ class FacilityController extends Controller
 
     public function update(Request $request, Facility $facility)
     {
-        $request->validate(['name' => 'required|string|max:255', 'image' => 'nullable|image|max:2048']);
+        $request->validate(['name' => 'required|string|max:255', 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048']);
 
         $data = $request->except('image', '_token', '_method');
         $data['is_published'] = $request->boolean('is_published');
