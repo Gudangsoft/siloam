@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Penerimaan Mahasiswa Baru | STT Siloam Medan')
+@section('title', 'Penerimaan Mahasiswa Baru')
 @section('content')
 
 {{-- Hero Section --}}
@@ -7,7 +7,7 @@
     <div class="container mx-auto px-4 text-center">
         <p class="text-yellow-400 font-semibold text-lg uppercase tracking-wider mb-2">Tahun Akademik {{ date('Y') }}/{{ date('Y') + 1 }}</p>
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Penerimaan Mahasiswa Baru</h1>
-        <p class="text-xl text-blue-200 max-w-2xl mx-auto mb-8">STT Siloam Medan membuka pendaftaran untuk calon mahasiswa baru. Wujudkan panggilan pelayanan Anda bersama kami.</p>
+        <p class="text-xl text-blue-200 max-w-2xl mx-auto mb-8">{{ $siteSettings->get('app_name') }} membuka pendaftaran untuk calon mahasiswa baru. Wujudkan panggilan pelayanan Anda bersama kami.</p>
         <a href="{{ route('pmb.daftar') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full text-lg transition duration-300 shadow-xl inline-block">
             Daftar Sekarang
         </a>
@@ -66,7 +66,7 @@
                     <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
                 <h3 class="text-xl font-bold text-blue-900 mb-3">Jalur Kerjasama</h3>
-                <p class="text-gray-600 text-sm mb-4">Bagi calon mahasiswa yang diutus oleh gereja atau lembaga mitra STT Siloam Medan.</p>
+                <p class="text-gray-600 text-sm mb-4">Bagi calon mahasiswa yang diutus oleh gereja atau lembaga mitra {{ $siteSettings->get('app_name') }}.</p>
                 <ul class="text-left text-sm text-gray-600 space-y-2 mb-6">
                     <li class="flex items-center gap-2"><span class="text-green-500">&#x2713;</span> Rekomendasi Gereja</li>
                     <li class="flex items-center gap-2"><span class="text-green-500">&#x2713;</span> Dukungan Gereja</li>
@@ -83,7 +83,7 @@
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-blue-900 mb-3">Proses Pendaftaran</h2>
-            <p class="text-gray-600">Langkah mudah untuk bergabung dengan STT Siloam Medan</p>
+            <p class="text-gray-600">Langkah mudah untuk bergabung dengan {{ $siteSettings->get('app_name') }}</p>
             <div class="w-20 h-1 bg-yellow-500 mx-auto mt-4"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -149,7 +149,7 @@
 <section class="py-16 bg-blue-900 text-white text-center" data-aos="fade-up">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold mb-4">Siap Mendaftar?</h2>
-        <p class="text-blue-200 mb-8 max-w-xl mx-auto">Jangan lewatkan kesempatan untuk bergabung dengan STT Siloam Medan dan memulai perjalanan pelayanan Anda.</p>
+        <p class="text-blue-200 mb-8 max-w-xl mx-auto">Jangan lewatkan kesempatan untuk bergabung dengan {{ $siteSettings->get('app_name') }} dan memulai perjalanan pelayanan Anda.</p>
         <a href="{{ route('pmb.daftar') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full text-lg transition shadow-xl inline-block">
             Daftar Sekarang
         </a>

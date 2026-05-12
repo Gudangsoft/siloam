@@ -77,7 +77,7 @@ class PmbController extends Controller
             'phone.required'              => 'Nomor telepon wajib diisi.',
             'high_school_name.required'   => 'Asal sekolah wajib diisi.',
             'study_program.required'      => 'Program studi wajib dipilih.',
-            'reason.required'             => 'Alasan memilih STT Siloam wajib diisi.',
+            'reason.required'             => 'Alasan memilih kampus ini wajib diisi.',
             'service_experience.required' => 'Pengalaman pelayanan wajib diisi.',
         ]);
 

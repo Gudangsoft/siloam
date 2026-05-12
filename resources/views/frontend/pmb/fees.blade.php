@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Biaya Pendidikan | STT Siloam Medan')
+@section('title', 'Biaya Pendidikan')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">
@@ -16,7 +16,7 @@
 <div class="container mx-auto px-4 py-12">
     <div class="max-w-4xl mx-auto">
         <div class="text-center mb-10">
-            <p class="text-gray-600">Informasi biaya pendidikan di STT Siloam Medan untuk Tahun Akademik {{ date('Y') }}/{{ date('Y') + 1 }}</p>
+            <p class="text-gray-600">Informasi biaya pendidikan di {{ $siteSettings->get('app_name') }} untuk Tahun Akademik {{ date('Y') }}/{{ date('Y') + 1 }}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8" data-aos="fade-up">
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">

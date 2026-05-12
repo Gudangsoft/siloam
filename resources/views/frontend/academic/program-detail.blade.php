@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', isset($program) ? $program->name . ' | STT Siloam Medan' : 'Program Studi | STT Siloam Medan')
+@section('title', isset($program) ? $program->name : 'Program Studi')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">

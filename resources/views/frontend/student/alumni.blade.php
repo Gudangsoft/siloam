@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Alumni | STT Siloam Medan')
+@section('title', 'Alumni')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -27,7 +27,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:#334155}
 <div class="wrap">
     <div class="header">
         <h1>📬 Pesan Baru dari Website</h1>
-        <p>STT Siloam Medan — Formulir Kontak</p>
+        <p>{{ $siteSettings->get('app_name') }} — Formulir Kontak</p>
     </div>
     <div class="body">
         <span class="badge">{{ now()->format('d M Y, H:i') }} WIB</span>
@@ -67,7 +67,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:#334155}
         <a href="{{ config('app.url') }}/admin/contacts" class="btn">Buka Panel Admin</a>
     </div>
     <div class="footer">
-        <strong>STT Siloam Medan</strong> &bull; Email otomatis dari sistem website<br>
+        <strong>{{ $siteSettings->get('app_name') }}</strong> &bull; Email otomatis dari sistem website<br>
         Jangan balas email ini secara langsung.
     </div>
 </div>

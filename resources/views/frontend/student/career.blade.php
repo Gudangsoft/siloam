@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Karir & Tracer Study | STT Siloam Medan')
+@section('title', 'Karir & Tracer Study')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="bg-gradient-to-r from-blue-800 to-blue-900 rounded-xl p-8 text-white text-center" data-aos="fade-up">
-            <h2 class="text-2xl font-bold mb-3">Prospek Karir Alumni STT Siloam Medan</h2>
+            <h2 class="text-2xl font-bold mb-3">Prospek Karir Alumni {{ $siteSettings->get('app_name') }}</h2>
             <p class="text-blue-200 mb-6">Alumni kami tersebar di berbagai bidang pelayanan dan profesi</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 @foreach(['Pendeta/Gembala', 'Guru/Dosen', 'Misionaris', 'Konselor'] as $career_item)

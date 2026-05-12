@@ -1,5 +1,5 @@
-@extends('layouts.frontend')
-@section('title', 'Sejarah Kampus | STT Siloam Medan')
+﻿@extends('layouts.frontend')
+@section('title', 'Sejarah Kampus')
 
 @section('content')
 
@@ -34,13 +34,13 @@
                     Sejarah Kampus
                 </h1>
                 <p class="mt-3 text-blue-200 text-lg max-w-xl" data-aos="fade-up" data-aos-delay="100">
-                    Perjalanan panjang STT Siloam Medan sejak berdiri hingga menjadi lembaga pendidikan teologi terpercaya
+                    Perjalanan panjang {{ $siteSettings->get('app_name') }} sejak berdiri hingga menjadi lembaga pendidikan teologi terpercaya
                 </p>
             </div>
             <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-2xl border border-white/20" data-aos="fade-left">
                 <i class="fas fa-university text-yellow-400 text-2xl"></i>
                 <div>
-                    <div class="text-white font-bold text-xl leading-none">STT Siloam</div>
+                    <div class="text-white font-bold text-xl leading-none">{{ $siteSettings->get('app_name') }}</div>
                     <div class="text-blue-300 text-xs mt-0.5">Medan, Sumatera Utara</div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
         <div class="max-w-4xl mx-auto">
             @if($page->image ?? null)
             <div class="mb-8 rounded-2xl overflow-hidden shadow-xl" data-aos="fade-up">
-                <img loading="lazy" src="{{ $page->image_url }}" alt="Sejarah STT Siloam Medan"
+                <img loading="lazy" src="{{ $page->image_url }}" alt="Sejarah {{ $siteSettings->get('app_name') }}"
                      class="w-full max-h-96 object-cover">
             </div>
             @endif
@@ -87,7 +87,7 @@
                         Berdiri atas Panggilan Tuhan untuk Mendidik Hamba-Nya
                     </h2>
                     <p class="text-gray-600 leading-relaxed">
-                        STT Siloam Medan lahir dari kerinduan mendalam untuk menyediakan pendidikan teologi
+                        {{ $siteSettings->get('app_name') }} lahir dari kerinduan mendalam untuk menyediakan pendidikan teologi
                         yang berkualitas di Sumatera Utara. Sejak awal berdirinya, kampus ini berkomitmen
                         mencetak hamba Tuhan yang kompeten, berkarakter, dan berdampak bagi gereja serta masyarakat.
                     </p>
@@ -107,23 +107,23 @@
                     <i class="fas fa-clock text-xs"></i> Perjalanan Waktu
                 </span>
                 <h2 class="text-3xl font-extrabold text-blue-900">Tonggak Sejarah</h2>
-                <p class="text-gray-500 mt-2">Jejak langkah STT Siloam Medan dari tahun ke tahun</p>
+                <p class="text-gray-500 mt-2">Jejak langkah {{ $siteSettings->get('app_name') }} dari tahun ke tahun</p>
             </div>
 
             @php
             $milestones = [
                 ['year' => 'Awal', 'icon' => 'fas fa-seedling', 'color' => 'green',
                  'title' => 'Pendirian Kampus',
-                 'desc'  => 'STT Siloam Medan didirikan atas kerinduan para pemimpin gereja untuk memiliki lembaga pendidikan teologi yang handal di Sumatera Utara.'],
+                 'desc'  => '{{ $siteSettings->get('app_name') }} didirikan atas kerinduan para pemimpin gereja untuk memiliki lembaga pendidikan teologi yang handal di Sumatera Utara.'],
                 ['year' => 'Tumbuh', 'icon' => 'fas fa-users', 'color' => 'blue',
                  'title' => 'Perkembangan Program Studi',
                  'desc'  => 'Kampus mulai mengembangkan program studi di bidang Pendidikan Agama Kristen dan penggembalaan jemaat, menarik mahasiswa dari berbagai daerah.'],
                 ['year' => 'Maju', 'icon' => 'fas fa-certificate', 'color' => 'indigo',
                  'title' => 'Akreditasi & Pengakuan',
-                 'desc'  => 'STT Siloam Medan meraih akreditasi resmi sebagai bentuk pengakuan atas kualitas pendidikan yang diselenggarakan.'],
+                 'desc'  => '{{ $siteSettings->get('app_name') }} meraih akreditasi resmi sebagai bentuk pengakuan atas kualitas pendidikan yang diselenggarakan.'],
                 ['year' => 'Kini',  'icon' => 'fas fa-graduation-cap', 'color' => 'purple',
                  'title' => 'Menghasilkan Hamba Tuhan',
-                 'desc'  => 'Hingga kini STT Siloam Medan telah meluluskan ratusan alumni yang tersebar melayani di berbagai gereja, sekolah, dan lembaga pelayanan di seluruh Indonesia.'],
+                 'desc'  => 'Hingga kini {{ $siteSettings->get('app_name') }} telah meluluskan ratusan alumni yang tersebar melayani di berbagai gereja, sekolah, dan lembaga pelayanan di seluruh Indonesia.'],
             ];
             $tpalette = [
                 'green'  => ['dot' => 'bg-green-500',  'icon_bg' => 'bg-green-100',  'icon_txt' => 'text-green-700',  'year_bg' => 'bg-green-500',  'border' => 'border-green-200'],
@@ -198,7 +198,7 @@
                 pendidikan teologi yang baik akan menghasilkan pemimpin gereja yang mampu membawa
                 transformasi nyata di tengah-tengah masyarakat.
             </p>
-            <div class="mt-6 text-yellow-400 font-semibold relative z-10">— STT Siloam Medan</div>
+            <div class="mt-6 text-yellow-400 font-semibold relative z-10">— {{ $siteSettings->get('app_name') }}</div>
         </blockquote>
 
     </div>
@@ -210,7 +210,7 @@
 <section class="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-14 text-center" data-aos="fade-up">
     <div class="container mx-auto px-4">
         <h3 class="text-2xl md:text-3xl font-extrabold mb-3">Jadilah Bagian dari Sejarah Ini</h3>
-        <p class="text-blue-200 mb-7 max-w-lg mx-auto">Daftarkan diri Anda dan ukir cerita pelayanan bersama STT Siloam Medan.</p>
+        <p class="text-blue-200 mb-7 max-w-lg mx-auto">Daftarkan diri Anda dan ukir cerita pelayanan bersama {{ $siteSettings->get('app_name') }}.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('pmb.daftar') }}" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold px-8 py-3 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5">
                 <i class="fas fa-pen-to-square"></i> Daftar Sekarang

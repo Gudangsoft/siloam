@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', isset($news) ? $news->title . ' | STT Siloam Medan' : 'Berita | STT Siloam Medan')
+@section('title', isset($news) ? $news->title : 'Berita')
 @isset($news)
 @section('meta_description', Str::limit(strip_tags($news->content), 160))
 @section('og_type', 'article')
@@ -15,7 +15,7 @@ $_newsJsonLd = json_encode([
     'datePublished' => $news->created_at->toIso8601String(),
     'dateModified'  => $news->updated_at->toIso8601String(),
     'description'   => Str::limit(strip_tags($news->content), 160),
-    'publisher'     => ['@type' => 'Organization', 'name' => 'STT Siloam Medan'],
+    'publisher'     => ['@type' => 'Organization', 'name' => $siteSettings->get('app_name', 'Kampus')],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 @endphp
 <script type="application/ld+json">{!! $_newsJsonLd !!}</script>

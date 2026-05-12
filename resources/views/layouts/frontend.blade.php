@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @php
-    $siteName   = $siteSettings->get('app_name', 'STT Siloam Medan');
-    $_defDesc   = $siteSettings->get('meta_description', 'Sekolah Tinggi Teologi Siloam Medan - Mencetak generasi hamba Tuhan yang berdedikasi dan berkualitas.');
+    $siteName   = $siteSettings->get('app_name', 'Kampus');
+    $_defDesc   = $siteSettings->get('meta_description', 'Website resmi kampus — informasi akademik, berita, dan penerimaan mahasiswa baru.');
     $_defOgImg  = $siteSettings->get('og_image')
                     ? Storage::disk('public')->url($siteSettings->get('og_image'))
                     : asset('images/og-default.jpg');
@@ -240,9 +240,9 @@
             <div>
                 <h3 class="font-bold text-white mb-4">Kontak Kami</h3>
                 <div class="space-y-3 text-sm">
-                    <div class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-amber-400 mt-0.5 flex-shrink-0"></i><span>{{ $siteSettings->get("address","Jl. Siloam No. 1, Medan, Sumatera Utara") }}</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-phone text-amber-400"></i><a href="tel:{{ $siteSettings->get("phone") }}" class="hover:text-white">{{ $siteSettings->get("phone","+62618765432") }}</a></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-envelope text-amber-400"></i><a href="mailto:{{ $siteSettings->get("email") }}" class="hover:text-white">{{ $siteSettings->get("email","info@sttsiloammedan.ac.id") }}</a></div>
+                    <div class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-amber-400 mt-0.5 flex-shrink-0"></i><span>{{ $siteSettings->get("address") ?: '-' }}</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-phone text-amber-400"></i><a href="tel:{{ $siteSettings->get("phone") }}" class="hover:text-white">{{ $siteSettings->get("phone") ?: '-' }}</a></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-envelope text-amber-400"></i><a href="mailto:{{ $siteSettings->get("email") }}" class="hover:text-white">{{ $siteSettings->get("email") ?: '-' }}</a></div>
                 </div>
                 <div class="mt-4"><a href="{{ route("pmb.daftar") }}" class="inline-flex items-center gap-2 bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-amber-400"><i class="fas fa-user-plus"></i>Daftar Sekarang</a></div>
             </div>
@@ -250,7 +250,7 @@
     </div>
     <div class="border-t border-gray-800">
         <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
-            <span>&copy; {{ date("Y") }} {{ $siteSettings->get("app_name","STT Siloam Medan") }}. All rights reserved.</span>
+            <span>{!! $siteSettings->get('footer_text', '&copy; ' . date('Y') . ' ' . $siteSettings->get('app_name', 'Kampus') . '. Hak Cipta Dilindungi.') !!}</span>
             <span>Powered by Laravel</span>
         </div>
     </div>

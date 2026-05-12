@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Beasiswa | STT Siloam Medan')
+@section('title', 'Beasiswa')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">
@@ -15,7 +15,7 @@
 </div>
 <div class="container mx-auto px-4 py-12">
     <div class="text-center mb-10">
-        <p class="text-gray-600 max-w-xl mx-auto">STT Siloam Medan menyediakan berbagai program beasiswa untuk mendukung calon mahasiswa yang memiliki panggilan pelayanan namun memiliki keterbatasan biaya.</p>
+        <p class="text-gray-600 max-w-xl mx-auto">{{ $siteSettings->get('app_name') }} menyediakan berbagai program beasiswa untuk mendukung calon mahasiswa yang memiliki panggilan pelayanan namun memiliki keterbatasan biaya.</p>
     </div>
     @if(isset($scholarships) && $scholarships->count() > 0)
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,5 +1,5 @@
-@extends('layouts.frontend')
-@section('title', 'Visi & Misi | STT Siloam Medan')
+﻿@extends('layouts.frontend')
+@section('title', 'Visi & Misi')
 
 @push('styles')
 <style>
@@ -154,13 +154,13 @@ foreach ($tujuanSource as $i => $text) {
         <div class="max-w-3xl">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full mb-5" data-aos="fade-up">
                 <i class="fas fa-bullseye text-yellow-400"></i>
-                STT Siloam Medan
+                {{ $siteSettings->get('app_name') }}
             </div>
             <h1 class="text-5xl md:text-6xl font-black leading-tight mb-4" data-aos="fade-up" data-aos-delay="50">
                 Visi <span class="text-yellow-400">&amp;</span> Misi
             </h1>
             <p class="text-blue-200 text-lg md:text-xl leading-relaxed max-w-2xl" data-aos="fade-up" data-aos-delay="100">
-                Pondasi yang mengarahkan setiap langkah STT Siloam Medan dalam mendidik
+                Pondasi yang mengarahkan setiap langkah {{ $siteSettings->get('app_name') }} dalam mendidik
                 hamba Tuhan yang profesional dan berdampak bagi gereja serta bangsa.
             </p>
         </div>
@@ -216,7 +216,7 @@ foreach ($tujuanSource as $i => $text) {
                     <i class="fas fa-rocket"></i> Misi Kami
                 </span>
                 <h2 class="text-4xl md:text-5xl font-black gradient-text">Misi</h2>
-                <p class="text-gray-400 mt-3 text-base max-w-md mx-auto">Landasan gerak dan arah pelayanan STT Siloam Medan</p>
+                <p class="text-gray-400 mt-3 text-base max-w-md mx-auto">Landasan gerak dan arah pelayanan {{ $siteSettings->get('app_name') }}</p>
             </div>
 
             <div class="relative">
@@ -285,7 +285,7 @@ foreach ($tujuanSource as $i => $text) {
                         <i class="fas fa-flag-checkered text-xs"></i> Tujuan Kami
                     </span>
                     <h2 class="text-4xl md:text-5xl font-black text-green-900 leading-tight">Tujuan</h2>
-                    <p class="text-gray-400 mt-1 text-sm">Sasaran yang ingin dicapai STT Siloam Medan dalam penyelenggaraan pendidikan</p>
+                    <p class="text-gray-400 mt-1 text-sm">Sasaran yang ingin dicapai {{ $siteSettings->get('app_name') }} dalam penyelenggaraan pendidikan</p>
                 </div>
             </div>
 
@@ -371,7 +371,7 @@ foreach ($tujuanSource as $i => $text) {
 
     <div class="relative container mx-auto px-4 text-center text-white">
         <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-semibold px-4 py-2 rounded-full mb-6" data-aos="fade-up">
-            <i class="fas fa-church text-yellow-400"></i> STT Siloam Medan
+            <i class="fas fa-church text-yellow-400"></i> {{ $siteSettings->get('app_name') }}
         </div>
         <h3 class="text-3xl md:text-4xl font-black mb-4 leading-tight" data-aos="fade-up" data-aos-delay="50">
             Bergabunglah Bersama Kami

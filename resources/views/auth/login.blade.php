@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login — STT Siloam Medan</title>
+    <title>Admin Login — {{ $siteSettings->get('app_name', 'Admin Panel') }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -228,8 +228,8 @@
             <div class="brand-icon">
                 <i class="fas fa-cross"></i>
             </div>
-            <h1>STT Siloam Medan</h1>
-            <p>Panel Administrasi Website Resmi Sekolah Tinggi Teologi Siloam Medan</p>
+            <h1>{{ $siteSettings->get('app_name') }}</h1>
+            <p>{{ $siteSettings->get('admin_panel_subtitle', 'Panel Administrasi Website Resmi') }}</p>
         </div>
         <div class="features">
             <div class="feature-item">
@@ -249,14 +249,14 @@
                 <span>Dashboard Statistik & Laporan</span>
             </div>
         </div>
-        <span class="bottom-text">© {{ date('Y') }} STT Siloam Medan</span>
+        <span class="bottom-text">© {{ date('Y') }} {{ $siteSettings->get('app_name') }}</span>
     </div>
 
     <!-- Right Panel -->
     <div class="right-panel">
         <div class="login-header">
             <h2>Selamat Datang Kembali 👋</h2>
-            <p>Masuk ke panel administrasi STT Siloam Medan</p>
+            <p>Masuk ke panel administrasi {{ $siteSettings->get('app_name') }}</p>
         </div>
 
         @if(session('status'))
@@ -281,7 +281,7 @@
                     <i class="fas fa-envelope"></i>
                     <input type="email" id="email" name="email"
                            value="{{ old('email') }}"
-                           placeholder="admin@sttsiloam.ac.id"
+                           placeholder="admin@kampus.ac.id"
                            required autofocus autocomplete="username">
                 </div>
                 @error('email')

@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Pendaftaran Berhasil | STT Siloam Medan')
+@section('title', 'Pendaftaran Berhasil')
 @section('content')
 
 <div class="bg-blue-900 text-white py-12">
@@ -23,7 +23,7 @@
             </svg>
         </div>
         <h2 class="text-3xl font-bold text-gray-900 mb-3">Pendaftaran Berhasil Dikirim!</h2>
-        <p class="text-gray-600 mb-8">Terima kasih telah mendaftar di STT Siloam Medan. Data pendaftaran Anda telah kami terima.</p>
+        <p class="text-gray-600 mb-8">Terima kasih telah mendaftar di {{ $siteSettings->get('app_name') }}. Data pendaftaran Anda telah kami terima.</p>
 
         @if(isset($registration))
         <div class="bg-white rounded-xl shadow-lg p-8 mb-8 text-left">

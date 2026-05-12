@@ -1,5 +1,5 @@
-@extends('layouts.frontend')
-@section('title', 'Formulir Pendaftaran Mahasiswa Baru | STT Siloam Medan')
+﻿@extends('layouts.frontend')
+@section('title', 'Formulir Pendaftaran Mahasiswa Baru')
 @section('content')
 
 {{-- Header --}}
@@ -19,7 +19,7 @@
             </nav>
         </div>
         <h1 class="text-3xl md:text-4xl font-bold mb-2">Formulir Pendaftaran</h1>
-        <p class="text-blue-200 text-sm">Penerimaan Mahasiswa Baru STT Siloam Medan — isi semua data dengan benar.</p>
+        <p class="text-blue-200 text-sm">Penerimaan Mahasiswa Baru {{ $siteSettings->get('app_name') }} — isi semua data dengan benar.</p>
     </div>
 </div>
 
@@ -202,11 +202,11 @@
 
                     <div>
                         <label class="block text-gray-700 font-semibold mb-1.5 text-sm">
-                            Alasan Memilih Kuliah di STT Siloam Medan <span class="text-red-500">*</span>
+                            Alasan Memilih Kuliah di {{ $siteSettings->get('app_name') }} <span class="text-red-500">*</span>
                         </label>
                         <textarea name="reason" rows="4" required
                                   class="w-full border rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('reason') border-red-400 bg-red-50 @enderror border-gray-300"
-                                  placeholder="Ceritakan alasan Anda memilih STT Siloam Medan sebagai tempat belajar teologi...">{{ old('reason') }}</textarea>
+                                  placeholder="Ceritakan alasan Anda memilih {{ $siteSettings->get('app_name') }} sebagai tempat belajar teologi...">{{ old('reason') }}</textarea>
                         @error('reason')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                     </div>
 

@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', isset($research) ? $research->title . ' | STT Siloam Medan' : 'Penelitian | STT Siloam Medan')
+@section('title', isset($research) ? $research->title : 'Penelitian')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">

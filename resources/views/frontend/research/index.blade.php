@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Penelitian & Pengabdian | STT Siloam Medan')
+@section('title', 'Penelitian & Pengabdian')
 @section('content')
 <div class="bg-blue-900 text-white py-12">
     <div class="container mx-auto px-4">

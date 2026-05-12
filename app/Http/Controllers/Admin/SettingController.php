@@ -29,9 +29,13 @@ class SettingController extends Controller
             'whatsapp'         => 'nullable|string|max:20',
             'maps_embed'       => 'nullable|string',
             'welcome_message'  => 'nullable|string',
-            'rector_name'      => 'nullable|string|max:255',
-            'rector_message'   => 'nullable|string',
-            'total_students'   => 'nullable|integer',
+            'rector_name'          => 'nullable|string|max:255',
+            'rector_title'         => 'nullable|string|max:100',
+            'rector_message'       => 'nullable|string',
+            'meta_description'     => 'nullable|string|max:300',
+            'footer_text'          => 'nullable|string|max:255',
+            'admin_panel_subtitle' => 'nullable|string|max:255',
+            'total_students'       => 'nullable|integer',
             'total_alumni'     => 'nullable|integer',
             'total_lecturers'  => 'nullable|integer',
             'logo'             => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
@@ -42,7 +46,8 @@ class SettingController extends Controller
         $textKeys = [
             'app_name', 'tagline', 'address', 'phone', 'email',
             'facebook', 'instagram', 'youtube', 'whatsapp', 'maps_embed',
-            'welcome_message', 'rector_name', 'rector_message',
+            'welcome_message', 'rector_name', 'rector_title', 'rector_message',
+            'meta_description', 'footer_text', 'admin_panel_subtitle',
             'total_students', 'total_alumni', 'total_lecturers',
         ];
 

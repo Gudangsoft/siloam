@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Berita & Artikel | STT Siloam Medan')
+@section('title', 'Berita & Artikel')
 @section('content')
 
 {{-- Page Header --}}

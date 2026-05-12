@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -84,14 +84,14 @@ class ProfilKontenController extends Controller
 
     public function editSejarah()
     {
-        $page = Page::findOrCreateBySlug('sejarah', 'Sejarah STT Siloam');
+        $page = Page::findOrCreateBySlug('sejarah', 'Sejarah Kampus');
         return view('admin.profil.sejarah', compact('page'));
     }
 
     public function updateSejarah(Request $request)
     {
         $request->validate(['content' => 'nullable|string']);
-        $page = Page::findOrCreateBySlug('sejarah', 'Sejarah STT Siloam');
+        $page = Page::findOrCreateBySlug('sejarah', 'Sejarah Kampus');
         $page->update(['content' => $request->content]);
         return redirect()->route('admin.profil.sejarah.edit')
             ->with('success', 'Konten Sejarah berhasil disimpan!');
@@ -100,7 +100,7 @@ class ProfilKontenController extends Controller
     public function editElearning()
     {
         $page = Page::findOrCreateBySlug('elearning', 'E-Learning');
-        $defaultContent = $page->content ?: '<h2>Portal E-Learning STT Siloam Medan</h2>
+        $defaultContent = $page->content ?: '<h2>Portal E-Learning</h2>
 <p>Akses materi kuliah, tugas, dan berbagai sumber belajar digital melalui portal e-learning kami.</p>
 <p><a href="#">Akses E-Learning</a></p>';
         return view('admin.akademik.elearning', compact('page', 'defaultContent'));
@@ -118,7 +118,7 @@ class ProfilKontenController extends Controller
     public function editPerpustakaan()
     {
         $page = Page::findOrCreateBySlug('perpustakaan', 'Perpustakaan Digital');
-        $defaultContent = $page->content ?: '<h2>Perpustakaan Digital STT Siloam Medan</h2>
+        $defaultContent = $page->content ?: '<h2>Perpustakaan Digital</h2>
 <h3>Koleksi Buku</h3>
 <p>Ribuan judul buku teologi, alkitab, dan referensi akademik tersedia untuk mahasiswa.</p>
 <h3>Digital Library</h3>

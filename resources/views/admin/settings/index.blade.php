@@ -14,9 +14,17 @@
                 <div class="card-header"><h4><i class="fas fa-university me-2" style="color:var(--primary)"></i>Identitas Institusi</h4></div>
                 <div class="card-body">
                     <div class="form-group"><label class="form-label">Nama Institusi <span class="text-danger">*</span></label>
-                        <input type="text" name="app_name" class="form-control" value="{{ $settings['app_name'] ?? 'STT Siloam Medan' }}" required></div>
+                        <input type="text" name="app_name" class="form-control" value="{{ $settings['app_name'] ?? '' }}" required placeholder="Contoh: STT Siloam Medan"></div>
                     <div class="form-group"><label class="form-label">Tagline</label>
-                        <input type="text" name="tagline" class="form-control" value="{{ $settings['tagline'] ?? '' }}" placeholder="Sekolah Tinggi Teologi Siloam Medan"></div>
+                        <input type="text" name="tagline" class="form-control" value="{{ $settings['tagline'] ?? '' }}" placeholder="Tagline singkat kampus Anda..."></div>
+                    <div class="form-group"><label class="form-label">Deskripsi Singkat <span style="color:#94a3b8;font-size:12px">(muncul di Google)</span></label>
+                        <textarea name="meta_description" class="form-control" rows="2" placeholder="Deskripsi singkat kampus untuk mesin pencari, maks 160 karakter...">{{ $settings['meta_description'] ?? '' }}</textarea>
+                        <div class="form-hint">Digunakan sebagai deskripsi website di hasil pencarian Google.</div></div>
+                    <div class="form-group"><label class="form-label">Teks Footer</label>
+                        <input type="text" name="footer_text" class="form-control" value="{{ $settings['footer_text'] ?? '' }}" placeholder="Contoh: &copy; 2025 Nama Kampus. Hak Cipta Dilindungi.">
+                        <div class="form-hint">Kosongkan untuk menggunakan format default: © [tahun] [nama kampus].</div></div>
+                    <div class="form-group"><label class="form-label">Subjudul Halaman Login Admin</label>
+                        <input type="text" name="admin_panel_subtitle" class="form-control" value="{{ $settings['admin_panel_subtitle'] ?? '' }}" placeholder="Panel Administrasi Website Resmi"></div>
                     <div class="form-group"><label class="form-label">Sambutan Singkat</label>
                         <textarea name="welcome_message" class="form-control" rows="3">{{ $settings['welcome_message'] ?? '' }}</textarea></div>
 
@@ -74,14 +82,17 @@
             <div class="card mb-4">
                 <div class="card-header"><h4><i class="fas fa-user-tie me-2" style="color:var(--success)"></i>Sambutan Pimpinan</h4></div>
                 <div class="card-body">
-                    <div class="form-group"><label class="form-label">Nama Ketua STT</label>
+                    <div class="form-group"><label class="form-label">Nama Pimpinan</label>
                         <input type="text" name="rector_name" class="form-control" value="{{ $settings['rector_name'] ?? '' }}"></div>
-                    <div class="form-group"><label class="form-label">Sambutan / Kata Ketua</label>
+                    <div class="form-group"><label class="form-label">Jabatan / Gelar Pimpinan</label>
+                        <input type="text" name="rector_title" class="form-control" value="{{ $settings['rector_title'] ?? '' }}" placeholder="Contoh: Ketua STT, Rektor, Direktur">
+                        <div class="form-hint">Ditampilkan di bawah nama pimpinan di halaman beranda.</div></div>
+                    <div class="form-group"><label class="form-label">Sambutan / Kata Pimpinan</label>
                         <textarea name="rector_message" class="form-control" rows="4">{{ $settings['rector_message'] ?? '' }}</textarea></div>
 
                     {{-- Foto Ketua --}}
                     <div class="form-group">
-                        <label class="form-label fw-bold">Foto Ketua STT</label>
+                        <label class="form-label fw-bold">Foto Pimpinan</label>
                         <div class="d-flex align-items-start gap-3 mb-2">
                             @if(!empty($settings['rector_photo']))
                                 <div style="padding:6px;background:#f8fafc;border:1px solid var(--border);border-radius:8px">
@@ -126,7 +137,7 @@
                 <div class="card-body">
                     <div class="form-group"><label class="form-label">Alamat Lengkap</label><textarea name="address" class="form-control" rows="3">{{ $settings['address'] ?? '' }}</textarea></div>
                     <div class="form-group"><label class="form-label">Nomor Telepon</label><input type="text" name="phone" class="form-control" value="{{ $settings['phone'] ?? '' }}" placeholder="+62618765432"></div>
-                    <div class="form-group"><label class="form-label">Email Resmi</label><input type="email" name="email" class="form-control" value="{{ $settings['email'] ?? '' }}" placeholder="info@sttsiloammedan.ac.id"></div>
+                    <div class="form-group"><label class="form-label">Email Resmi</label><input type="email" name="email" class="form-control" value="{{ $settings['email'] ?? '' }}" placeholder="info@kampus.ac.id"></div>
                     <div class="form-group">
                         <label class="form-label">WhatsApp</label>
                         <div class="input-group">

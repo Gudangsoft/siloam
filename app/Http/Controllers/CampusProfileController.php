@@ -10,7 +10,7 @@ class CampusProfileController extends Controller
 {
     public function history()
     {
-        $page = Page::findOrCreateBySlug('sejarah', 'Sejarah STT Siloam');
+        $page = Page::findOrCreateBySlug('sejarah', 'Sejarah Kampus');
         return view('frontend.profile.history', compact('page'));
     }
 

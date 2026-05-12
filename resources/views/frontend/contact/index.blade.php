@@ -1,5 +1,5 @@
-@extends('layouts.frontend')
-@section('title', 'Hubungi Kami | STT Siloam Medan')
+﻿@extends('layouts.frontend')
+@section('title', 'Hubungi Kami')
 @section('content')
 
 {{-- Hero --}}
@@ -36,9 +36,9 @@
                     <h2 class="text-xl font-bold text-white mb-6">Informasi Kontak</h2>
                     <div class="space-y-5">
                         @foreach([
-                            ['fa-map-marker-alt', 'Alamat', $siteSettings->get('address','Jl. Siloam No.1, Medan')],
-                            ['fa-phone', 'Telepon', $siteSettings->get('phone','(061) 8888-1234')],
-                            ['fa-envelope', 'Email', $siteSettings->get('email','info@sttsiloammedan.ac.id')],
+                            ['fa-map-marker-alt', 'Alamat', $siteSettings->get('address') ?: '-'],
+                            ['fa-phone', 'Telepon', $siteSettings->get('phone') ?: '-'],
+                            ['fa-envelope', 'Email', $siteSettings->get('email') ?: '-'],
                             ['fa-clock', 'Jam Operasional', "Senin–Jumat: 08.00–17.00 WIB\nSabtu: 08.00–12.00 WIB"],
                         ] as [$icon, $label, $val])
                         <div class="flex gap-4">

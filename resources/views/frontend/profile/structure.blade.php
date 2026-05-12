@@ -1,5 +1,5 @@
 ﻿@extends('layouts.frontend')
-@section('title', 'Struktur Organisasi | STT Siloam Medan')
+@section('title', 'Struktur Organisasi')
 
 @push('styles')
 <style>
@@ -67,7 +67,7 @@
         </div>
         <h1 class="text-4xl font-bold mb-2">Struktur Organisasi</h1>
         <p class="text-blue-200 max-w-xl text-sm leading-relaxed">
-            Susunan kepemimpinan dan tata kelola STT Siloam Medan yang mendukung penyelenggaraan pendidikan teologi berkualitas.
+            Susunan kepemimpinan dan tata kelola {{ $siteSettings->get('app_name') }} yang mendukung penyelenggaraan pendidikan teologi berkualitas.
         </p>
     </div>
 </div>
@@ -153,9 +153,9 @@ $subs = [
             </div>
             <div class="org-stem-down mt-2"></div>
 
-            {{-- ── STT Siloam Medan label ── --}}
+            {{-- ── {{ $siteSettings->get('app_name') }} label ── --}}
             <div style="background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border-radius:12px;padding:7px 24px;font-size:13px;font-weight:700;letter-spacing:.5px;box-shadow:0 4px 12px rgba(245,158,11,.35)">
-                <i class="fas fa-school mr-2"></i>STT Siloam Medan
+                <i class="fas fa-school mr-2"></i>{{ $siteSettings->get('app_name') }}
             </div>
             <div class="org-stem-down"></div>
 
@@ -242,7 +242,7 @@ $subs = [
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
             <span class="text-yellow-500 text-xs font-semibold uppercase tracking-widest">
-                <i class="fas fa-star mr-1"></i>Fungsionaris STT Siloam Medan
+                <i class="fas fa-star mr-1"></i>Fungsionaris {{ $siteSettings->get('app_name') }}
             </span>
             <h2 class="text-3xl font-bold text-blue-900 mt-2 mb-3">Tim Pimpinan</h2>
             <div class="flex justify-center items-center gap-2">

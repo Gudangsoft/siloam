@@ -1,6 +1,6 @@
-@extends('layouts.frontend')
-@section('title', 'Beranda | STT Siloam Medan')
-@section('meta_description', 'STT Siloam Medan — Sekolah Tinggi Teologi terpercaya di Medan, mencetak hamba Tuhan yang berdedikasi melalui pendidikan teologi berkualitas.')
+﻿@extends('layouts.frontend')
+@section('title', 'Beranda')
+{{-- meta_description diambil dari Pengaturan Website --}}
 @section('content')
 
 {{-- Hero Slider Section --}}
@@ -48,7 +48,7 @@
         <div class="relative z-10 container mx-auto px-4 h-full flex items-center">
             <div class="text-white max-w-2xl" data-aos="fade-right">
                 <p class="text-yellow-400 font-semibold text-lg mb-2 uppercase tracking-wider">Sekolah Tinggi Teologi</p>
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">STT Siloam Medan</h1>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">{{ $siteSettings->get('app_name') }}</h1>
                 <p class="text-xl mb-6 text-gray-200">Mencetak Pemimpin Gereja yang Berkualitas, Berdedikasi, dan Berdampak bagi Bangsa</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('pmb.index') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
@@ -237,9 +237,9 @@ $cardStyles = [
                     <div class="text-center mt-8 relative z-10">
                         <div class="inline-block bg-white bg-opacity-10 backdrop-blur rounded-xl px-6 py-3 border border-white border-opacity-20">
                             <p class="text-white font-bold text-base tracking-wide">
-                                {{ $siteSettings->get('rector_name', 'Ketua STT Siloam Medan') }}
+                                {{ $siteSettings->get('rector_name', 'Pimpinan Kampus') }}
                             </p>
-                            <p class="text-yellow-300 text-sm mt-0.5">Ketua STT Siloam Medan</p>
+                            <p class="text-yellow-300 text-sm mt-0.5">{{ $siteSettings->get('rector_title', 'Pimpinan Kampus') }}</p>
                         </div>
                         <div class="flex justify-center gap-1 mt-4">
                             <div class="w-8 h-0.5 bg-yellow-400 rounded"></div>
@@ -267,7 +267,7 @@ $cardStyles = [
                        style="font-size:72px;top:-20px;left:-16px;line-height:1;z-index:0"></i>
                     <div class="relative z-10 text-gray-700 leading-relaxed text-base lg:text-lg"
                          style="font-style:italic;padding-left:10px">
-                        {!! nl2br(e($siteSettings->get('rector_message', 'STT Siloam Medan hadir untuk mencetak pemimpin gereja yang berkarakter Kristus, berpengetahuan teologi yang mendalam, dan siap melayani di berbagai bidang kehidupan.'))) !!}
+                        {!! nl2br(e($siteSettings->get('rector_message', 'Kampus kami hadir untuk mencetak pemimpin yang berkarakter, berpengetahuan mendalam, dan siap melayani di berbagai bidang kehidupan.'))) !!}
                     </div>
                 </div>
 
@@ -278,8 +278,8 @@ $cardStyles = [
                         <div class="w-3 h-0.5 bg-yellow-300 rounded"></div>
                     </div>
                     <div>
-                        <p class="font-bold text-blue-900 text-sm">{{ $siteSettings->get('rector_name', 'Ketua STT Siloam Medan') }}</p>
-                        <p class="text-gray-400 text-xs">Ketua STT Siloam Medan</p>
+                        <p class="font-bold text-blue-900 text-sm">{{ $siteSettings->get('rector_name', 'Pimpinan Kampus') }}</p>
+                        <p class="text-gray-400 text-xs">{{ $siteSettings->get('rector_title', 'Pimpinan Kampus') }}</p>
                     </div>
                     <div class="ml-auto">
                         <a href="{{ route('profil.pimpinan') }}"
@@ -421,7 +421,7 @@ $cardStyles = [
 <section class="py-20 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white" data-aos="fade-up">
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Siap Memulai Perjalanan Pelayanan Anda?</h2>
-        <p class="text-lg mb-8 text-yellow-100 max-w-2xl mx-auto">Bergabunglah dengan ribuan alumni STT Siloam Medan yang telah berdampak bagi gereja dan bangsa Indonesia</p>
+        <p class="text-lg mb-8 text-yellow-100 max-w-2xl mx-auto">Bergabunglah dengan ribuan alumni {{ $siteSettings->get('app_name') }} yang telah berdampak bagi gereja dan bangsa Indonesia</p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ route('pmb.daftar') }}" class="bg-white text-yellow-600 hover:bg-gray-100 font-bold py-4 px-10 rounded-full text-lg transition duration-300 shadow-lg">
                 Daftar Sekarang
