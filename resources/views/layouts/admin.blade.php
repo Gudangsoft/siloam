@@ -489,6 +489,16 @@
             <div class="nav-section">
                 <div class="nav-section-label">Profil Kampus</div>
             </div>
+            <a href="{{ route('admin.konten.edit', 'sejarah') }}"
+               class="nav-item {{ request()->routeIs('admin.konten.edit') && request()->segment(4) === 'sejarah' ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-landmark"></i></span>
+                Sejarah Kampus
+            </a>
+            <a href="{{ route('admin.konten.edit', 'visi-misi') }}"
+               class="nav-item {{ request()->routeIs('admin.konten.edit') && request()->segment(4) === 'visi-misi' ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-bullseye"></i></span>
+                Visi &amp; Misi
+            </a>
             <a href="{{ route('admin.staff.index') }}"
                class="nav-item {{ request()->routeIs('admin.staff.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-user-tie"></i></span>

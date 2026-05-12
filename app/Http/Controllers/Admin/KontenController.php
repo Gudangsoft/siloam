@@ -9,8 +9,6 @@ class KontenController extends Controller
 {
     private array $groups = [
         'Profil Kampus' => [
-            ['slug' => 'sejarah',              'title' => 'Sejarah STT Siloam',    'icon' => 'fas fa-landmark',       'url_name' => 'profil.sejarah'],
-            ['slug' => 'visi-misi',            'title' => 'Visi & Misi',           'icon' => 'fas fa-bullseye',       'url_name' => 'profil.visi-misi'],
             ['slug' => 'struktur-organisasi',  'title' => 'Struktur Organisasi',   'icon' => 'fas fa-sitemap',        'url_name' => 'profil.struktur'],
             ['slug' => 'akreditasi',           'title' => 'Akreditasi',            'icon' => 'fas fa-certificate',   'url_name' => 'profil.akreditasi'],
         ],
