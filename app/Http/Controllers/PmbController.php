@@ -13,32 +13,32 @@ class PmbController extends Controller
 {
     public function index()
     {
-        $page = Page::findBySlug('pmb');
+        $page = Page::findOrCreateBySlug('pmb', 'Halaman Utama PMB');
         return view('frontend.pmb.index', compact('page'));
     }
 
     public function requirements()
     {
-        $page = Page::findBySlug('pmb-syarat');
+        $page = Page::findOrCreateBySlug('pmb-syarat', 'Syarat Pendaftaran');
         return view('frontend.pmb.requirements', compact('page'));
     }
 
     public function fees()
     {
-        $page = Page::findBySlug('pmb-biaya');
+        $page = Page::findOrCreateBySlug('pmb-biaya', 'Biaya Pendidikan');
         return view('frontend.pmb.fees', compact('page'));
     }
 
     public function scholarships()
     {
-        $page         = Page::findBySlug('pmb-beasiswa');
+        $page         = Page::findOrCreateBySlug('pmb-beasiswa', 'Program Beasiswa');
         $scholarships = Scholarship::active()->get();
         return view('frontend.pmb.scholarships', compact('scholarships', 'page'));
     }
 
     public function schedule()
     {
-        $page = Page::findBySlug('pmb-jadwal');
+        $page = Page::findOrCreateBySlug('pmb-jadwal', 'Jadwal PMB');
         return view('frontend.pmb.schedule', compact('page'));
     }
 

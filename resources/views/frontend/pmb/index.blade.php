@@ -134,6 +134,17 @@
     </div>
 </section>
 
+{{-- Konten tambahan dari admin --}}
+@if(isset($page) && $page?->content)
+<section class="py-12" data-aos="fade-up">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <div class="bg-white rounded-xl shadow-md p-8 prose prose-blue max-w-none text-gray-700">
+            {!! clean($page->content) !!}
+        </div>
+    </div>
+</section>
+@endif
+
 {{-- CTA --}}
 <section class="py-16 bg-blue-900 text-white text-center" data-aos="fade-up">
     <div class="container mx-auto px-4">

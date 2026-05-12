@@ -20,7 +20,7 @@ class KontenController extends Controller
         ],
         'PMB' => [
             ['slug' => 'pmb',          'title' => 'Halaman Utama PMB',    'icon' => 'fas fa-door-open',  'url_name' => 'pmb.index'],
-            ['slug' => 'pmb-syarat',   'title' => 'Syarat Pendaftaran',   'icon' => 'fas fa-clipboard-list', 'url_name' => 'pmb.persyaratan'],
+            ['slug' => 'pmb-syarat',   'title' => 'Syarat Pendaftaran',   'icon' => 'fas fa-clipboard-list', 'url_name' => 'pmb.syarat'],
             ['slug' => 'pmb-biaya',    'title' => 'Biaya Pendidikan',     'icon' => 'fas fa-money-bill', 'url_name' => 'pmb.biaya'],
             ['slug' => 'pmb-beasiswa', 'title' => 'Program Beasiswa',     'icon' => 'fas fa-award',      'url_name' => 'pmb.beasiswa'],
             ['slug' => 'pmb-jadwal',   'title' => 'Jadwal PMB',           'icon' => 'fas fa-calendar',   'url_name' => 'pmb.jadwal'],
