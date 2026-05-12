@@ -489,6 +489,21 @@
             <div class="nav-section">
                 <div class="nav-section-label">Profil Kampus</div>
             </div>
+            <a href="{{ route('admin.konten.edit', 'sejarah') }}"
+               class="nav-item {{ request()->is('admin/konten/sejarah') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-landmark"></i></span>
+                Sejarah Kampus
+            </a>
+            <a href="{{ route('admin.konten.edit', 'visi-misi') }}"
+               class="nav-item {{ request()->is('admin/konten/visi-misi') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-bullseye"></i></span>
+                Visi, Misi & Tujuan
+            </a>
+            <a href="{{ route('admin.konten.edit', 'struktur-organisasi') }}"
+               class="nav-item {{ request()->is('admin/konten/struktur-organisasi') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-sitemap"></i></span>
+                Struktur Organisasi
+            </a>
             <a href="{{ route('admin.staff.index') }}"
                class="nav-item {{ request()->routeIs('admin.staff.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-user-tie"></i></span>
