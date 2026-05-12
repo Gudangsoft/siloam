@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @php
-    $siteName    = $siteSettings->get('app_name', 'STT Siloam Medan');
-    $pageTitle   = trim(strip_tags(View::yieldContent('title')));
-    $metaTitle   = $pageTitle ? $pageTitle . ' | ' . $siteName : $siteName;
-    $metaDesc    = trim(strip_tags(View::yieldContent('meta_description',
-                       $siteSettings->get('meta_description',
-                       'Sekolah Tinggi Teologi Siloam Medan — Mencetak generasi hamba Tuhan yang berdedikasi dan berkualitas.'))));
-    $ogImage     = trim(View::yieldContent('og_image',
-                       $siteSettings->get('og_image')
-                           ? Storage::disk('public')->url($siteSettings->get('og_image'))
-                           : asset('images/og-default.jpg')));
-    $ogType      = trim(View::yieldContent('og_type', 'website'));
+    $siteName   = $siteSettings->get('app_name', 'STT Siloam Medan');
+    $_defDesc   = $siteSettings->get('meta_description', 'Sekolah Tinggi Teologi Siloam Medan - Mencetak generasi hamba Tuhan yang berdedikasi dan berkualitas.');
+    $_defOgImg  = $siteSettings->get('og_image')
+                    ? Storage::disk('public')->url($siteSettings->get('og_image'))
+                    : asset('images/og-default.jpg');
+    $_rawTitle  = trim(strip_tags($__env->yieldContent('title', '')));
+    $metaTitle  = $_rawTitle ? $_rawTitle . ' | ' . $siteName : $siteName;
+    $metaDesc   = trim(strip_tags($__env->yieldContent('meta_description', $_defDesc)));
+    $ogImage    = trim($__env->yieldContent('og_image', $_defOgImg));
+    $ogType     = trim($__env->yieldContent('og_type', 'website'));
     @endphp
 
     <title>{{ $metaTitle }}</title>
