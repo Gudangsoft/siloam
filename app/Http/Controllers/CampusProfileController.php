@@ -23,8 +23,10 @@ class CampusProfileController extends Controller
     public function structure()
     {
         $page    = Page::findBySlug('struktur-organisasi');
-        $leaders = Staff::active()->byCategory('pimpinan')->get()->keyBy(fn($s) => strtolower($s->position));
-        return view('frontend.profile.structure', compact('page', 'leaders'));
+        $leaders = Staff::active()->byCategory('pimpinan')->get();
+        $dosen   = Staff::active()->byCategory('dosen')->get();
+        $tendik  = Staff::active()->byCategory('tendik')->get();
+        return view('frontend.profile.structure', compact('page', 'leaders', 'dosen', 'tendik'));
     }
 
     public function leadership()

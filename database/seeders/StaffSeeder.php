@@ -10,6 +10,8 @@ class StaffSeeder extends Seeder
     public function run(): void
     {
         $staffs = [
+
+            // ── PIMPINAN ───────────────────────────────────────────
             [
                 'name'        => 'MERLIN SANTINUS, M.Pd.K',
                 'position'    => 'Ketua',
@@ -24,7 +26,7 @@ class StaffSeeder extends Seeder
             ],
             [
                 'name'        => 'RINTO FRANCIUS SIRAIT, S.Pd., M.Th.',
-                'position'    => 'Wakil Ketua Bidang Akademik',
+                'position'    => 'Wakil Ketua I Bidang Akademik',
                 'category'    => 'pimpinan',
                 'birth_place' => 'N. Lama',
                 'birth_date'  => '1981-04-30',
@@ -35,20 +37,19 @@ class StaffSeeder extends Seeder
                 'is_active'   => true,
             ],
             [
-                'name'        => 'SANTIANA PASARIBU, M.Pd',
-                'position'    => 'Wakil Ketua Bidang Keuangan',
+                'name'        => 'SANTIANA PASARIBU, M.Pd.',
+                'position'    => 'Wakil Ketua II Bidang Keuangan',
                 'category'    => 'pimpinan',
                 'birth_place' => 'Tanjung Harapan',
                 'birth_date'  => '1985-11-10',
                 'church'      => 'GGP Filadelfia',
                 'nuptk'       => '6442763664230353',
-                'courses'     => null,
                 'order'       => 3,
                 'is_active'   => true,
             ],
             [
                 'name'        => 'ASAL PARLINDUNGAN TAMBUNAN, M.Th.',
-                'position'    => 'Wakil Ketua Bidang Kemahasiswaan',
+                'position'    => 'Wakil Ketua III Bidang Kemahasiswaan',
                 'category'    => 'pimpinan',
                 'birth_place' => 'Medan',
                 'birth_date'  => '1960-04-15',
@@ -58,6 +59,8 @@ class StaffSeeder extends Seeder
                 'order'       => 4,
                 'is_active'   => true,
             ],
+
+            // ── DOSEN ──────────────────────────────────────────────
             [
                 'name'        => 'TRI MARTHA SINAGA, M.Pd.K',
                 'position'    => 'Kaprodi PAK',
@@ -95,6 +98,20 @@ class StaffSeeder extends Seeder
                 'is_active'   => true,
             ],
             [
+                'name'        => 'VENA ROY MARVA NAPITUPULU, M.Th.',
+                'position'    => 'Dosen Tetap',
+                'category'    => 'dosen',
+                'order'       => 8,
+                'is_active'   => true,
+            ],
+            [
+                'name'        => 'SABAR MANIK, MA., M.Th.',
+                'position'    => 'Dosen Tetap',
+                'category'    => 'dosen',
+                'order'       => 9,
+                'is_active'   => true,
+            ],
+            [
                 'name'        => 'MARIANI PASARIBU, M.Pd.',
                 'position'    => 'Dosen',
                 'category'    => 'dosen',
@@ -103,13 +120,43 @@ class StaffSeeder extends Seeder
                 'church'      => 'HKBP',
                 'nuptk'       => '6063767668230243',
                 'courses'     => 'Bahasa Indonesia, Statistika, Sosiologi',
-                'order'       => 8,
+                'order'       => 10,
+                'is_active'   => true,
+            ],
+            [
+                'name'        => 'MONA PUTRI SEMBIRING, M.Th.',
+                'position'    => 'Dosen Tetap',
+                'category'    => 'dosen',
+                'order'       => 11,
+                'is_active'   => true,
+            ],
+            [
+                'name'        => 'REINHARD ANDREW PANGARIBUAN, M.Pd.',
+                'position'    => 'Dosen Tetap',
+                'category'    => 'dosen',
+                'order'       => 12,
+                'is_active'   => true,
+            ],
+
+            // ── TENAGA KEPENDIDIKAN ────────────────────────────────
+            [
+                'name'        => 'IVENNY PASARIBU, BA',
+                'position'    => 'Administrasi Keuangan',
+                'category'    => 'tendik',
+                'order'       => 13,
+                'is_active'   => true,
+            ],
+            [
+                'name'        => 'PENI WIDYOWATI, S.Th.',
+                'position'    => 'Kepala Perpustakaan',
+                'category'    => 'tendik',
+                'order'       => 14,
                 'is_active'   => true,
             ],
         ];
 
         foreach ($staffs as $data) {
-            Staff::firstOrCreate(['name' => $data['name']], $data);
+            Staff::updateOrCreate(['name' => $data['name']], $data);
         }
     }
 }
