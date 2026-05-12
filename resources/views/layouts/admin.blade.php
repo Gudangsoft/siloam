@@ -484,13 +484,13 @@
             <div class="nav-section">
                 <div class="nav-section-label">Profil Kampus</div>
             </div>
-            <a href="{{ route('admin.konten.edit', 'sejarah') }}"
-               class="nav-item {{ (request()->routeIs('admin.konten.edit') && request()->segment(4) === 'sejarah') || (request()->routeIs('admin.pages.edit') && (request()->route('page')?->slug ?? '') === 'sejarah') ? 'active' : '' }}">
+            <a href="{{ route('admin.profil.sejarah.edit') }}"
+               class="nav-item {{ request()->routeIs('admin.profil.sejarah.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-landmark"></i></span>
                 Sejarah Kampus
             </a>
-            <a href="{{ route('admin.konten.edit', 'visi-misi') }}"
-               class="nav-item {{ (request()->routeIs('admin.konten.edit') && request()->segment(4) === 'visi-misi') || (request()->routeIs('admin.pages.edit') && (request()->route('page')?->slug ?? '') === 'visi-misi') ? 'active' : '' }}">
+            <a href="{{ route('admin.profil.visi-misi.edit') }}"
+               class="nav-item {{ request()->routeIs('admin.profil.visi-misi.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-bullseye"></i></span>
                 Visi &amp; Misi
             </a>

@@ -120,6 +120,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PmbInfoController;
 use App\Http\Controllers\Admin\KontenController;
+use App\Http\Controllers\Admin\ProfilKontenController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
@@ -156,6 +157,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // Info PMB (edit halaman info: syarat, biaya, beasiswa, jadwal)
     Route::get('konten',           [KontenController::class, 'index'])->name('konten.index');
     Route::get('konten/{slug}',    [KontenController::class, 'edit'])->name('konten.edit');
+
+    // Profil Kampus — edit khusus
+    Route::get('profil/visi-misi',    [ProfilKontenController::class, 'editVisiMisi'])->name('profil.visi-misi.edit');
+    Route::put('profil/visi-misi',    [ProfilKontenController::class, 'updateVisiMisi'])->name('profil.visi-misi.update');
+    Route::get('profil/sejarah',      [ProfilKontenController::class, 'editSejarah'])->name('profil.sejarah.edit');
+    Route::put('profil/sejarah',      [ProfilKontenController::class, 'updateSejarah'])->name('profil.sejarah.update');
 
     Route::prefix('pmb-info')->name('pmb-info.')->group(function () {
         Route::get('/',           [PmbInfoController::class, 'index'])->name('index');

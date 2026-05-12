@@ -141,10 +141,7 @@
                     <div class="flex-1" data-aos="fade-left" data-aos-delay="250">
                         <h2 class="text-yellow-400 text-xs font-black tracking-[0.3em] uppercase mb-4">Visi</h2>
                         <p class="text-2xl md:text-3xl font-bold leading-relaxed text-white mb-0">
-                            "Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga
-                            <span class="text-yellow-300">Guru Agama Kristen yang profesional</span>
-                            dan hamba Tuhan yang mampu
-                            <span class="text-yellow-300">menggembalakan jemaat</span>."
+                            "{{ $visiText }}"
                         </p>
                     </div>
                 </div>
@@ -168,36 +165,33 @@
             </div>
 
             @php
-            $misi = [
-                [
-                    'no'    => '01',
-                    'title' => 'Pendidikan & Pengajaran',
-                    'icon'  => 'fas fa-graduation-cap',
-                    'color' => ['from' => '#1e40af', 'to' => '#3b82f6', 'light' => '#eff6ff', 'border' => '#bfdbfe', 'badge' => '#dbeafe', 'badge_text' => '#1e40af'],
-                    'text'  => 'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.',
-                ],
-                [
-                    'no'    => '02',
-                    'title' => 'Penelitian Teologi',
-                    'icon'  => 'fas fa-microscope',
-                    'color' => ['from' => '#4338ca', 'to' => '#6366f1', 'light' => '#eef2ff', 'border' => '#c7d2fe', 'badge' => '#e0e7ff', 'badge_text' => '#4338ca'],
-                    'text'  => 'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.',
-                ],
-                [
-                    'no'    => '03',
-                    'title' => 'Pengabdian Masyarakat',
-                    'icon'  => 'fas fa-hands-helping',
-                    'color' => ['from' => '#6d28d9', 'to' => '#8b5cf6', 'light' => '#f5f3ff', 'border' => '#ddd6fe', 'badge' => '#ede9fe', 'badge_text' => '#6d28d9'],
-                    'text'  => 'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.',
-                ],
-                [
-                    'no'    => '04',
-                    'title' => 'Semangat Oikumenis',
-                    'icon'  => 'fas fa-globe-asia',
-                    'color' => ['from' => '#7c3aed', 'to' => '#a855f7', 'light' => '#faf5ff', 'border' => '#e9d5ff', 'badge' => '#f3e8ff', 'badge_text' => '#7c3aed'],
-                    'text'  => 'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.',
-                ],
+            $misiDefault = [
+                ['title' => 'Pendidikan & Pengajaran', 'text' => 'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.'],
+                ['title' => 'Penelitian Teologi',       'text' => 'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.'],
+                ['title' => 'Pengabdian Masyarakat',    'text' => 'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.'],
+                ['title' => 'Semangat Oikumenis',       'text' => 'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.'],
             ];
+            $misiTitles = ['Pendidikan & Pengajaran','Penelitian Teologi','Pengabdian Masyarakat','Semangat Oikumenis'];
+
+            // Ambil dari database jika ada
+            $savedMisi = (isset($page) && $page->content) ? json_decode($page->content, true) : null;
+            $misi = [];
+            $template = [
+                ['no'=>'01','icon'=>'fas fa-graduation-cap','color'=>['from'=>'#1e40af','to'=>'#3b82f6','light'=>'#eff6ff','border'=>'#bfdbfe','badge'=>'#dbeafe','badge_text'=>'#1e40af']],
+                ['no'=>'02','icon'=>'fas fa-microscope',    'color'=>['from'=>'#4338ca','to'=>'#6366f1','light'=>'#eef2ff','border'=>'#c7d2fe','badge'=>'#e0e7ff','badge_text'=>'#4338ca']],
+                ['no'=>'03','icon'=>'fas fa-hands-helping', 'color'=>['from'=>'#6d28d9','to'=>'#8b5cf6','light'=>'#f5f3ff','border'=>'#ddd6fe','badge'=>'#ede9fe','badge_text'=>'#6d28d9']],
+                ['no'=>'04','icon'=>'fas fa-globe-asia',    'color'=>['from'=>'#7c3aed','to'=>'#a855f7','light'=>'#faf5ff','border'=>'#e9d5ff','badge'=>'#f3e8ff','badge_text'=>'#7c3aed']],
+            ];
+            foreach ($template as $i => $t) {
+                $text  = (is_array($savedMisi) && !empty($savedMisi[$i])) ? $savedMisi[$i] : $misiDefault[$i]['text'];
+                $title = $misiTitles[$i];
+                $misi[] = array_merge($t, ['title' => $title, 'text' => $text]);
+            }
+
+            // Visi dari database atau default
+            $visiText = (isset($page) && $page->meta_title)
+                ? $page->meta_title
+                : 'Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga Guru Agama Kristen yang profesional dan hamba Tuhan yang mampu menggembalakan jemaat.';
             @endphp
 
             <div class="relative">
@@ -286,17 +280,6 @@
         </div>
     </div>
 </section>
-
-{{-- ===== ADMIN CONTENT (jika ada) ===== --}}
-@if(isset($page) && $page?->content)
-<section class="bg-white py-14" data-aos="fade-up">
-    <div class="container mx-auto px-4 max-w-4xl">
-        <div class="bg-blue-50 border border-blue-100 rounded-3xl p-10 prose prose-blue max-w-none text-gray-700">
-            {!! clean($page->content) !!}
-        </div>
-    </div>
-</section>
-@endif
 
 {{-- ===== CTA ===== --}}
 <section class="relative py-20 overflow-hidden" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#1e1b4b 100%)">
