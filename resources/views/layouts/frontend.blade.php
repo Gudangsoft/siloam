@@ -17,7 +17,7 @@
     $ogType     = trim($__env->yieldContent('og_type', 'website'));
     @endphp
 
-    <title>{{ $metaTitle }}</title>
+    <title>{!! $metaTitle !!}</title>
     <meta name="description" content="{{ $metaDesc }}">
     <link rel="canonical" href="{{ url()->current() }}">
 

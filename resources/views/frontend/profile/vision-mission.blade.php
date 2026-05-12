@@ -270,34 +270,53 @@ foreach ($tujuanSource as $i => $text) {
 </section>
 
 {{-- ===== TUJUAN ===== --}}
-<section class="py-20" style="background:linear-gradient(180deg,#f0fdf4 0%,#ecfdf5 100%)">
+<section class="py-20 bg-white">
     <div class="container mx-auto px-4">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-4xl mx-auto">
 
-            <div class="text-center mb-14" data-aos="fade-up">
-                <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 text-xs font-bold px-4 py-2 rounded-full tracking-widest uppercase mb-4">
-                    <i class="fas fa-flag-checkered"></i> Tujuan Kami
-                </span>
-                <h2 class="text-4xl md:text-5xl font-black text-green-900">Tujuan</h2>
-                <p class="text-gray-400 mt-3 text-base max-w-md mx-auto">Sasaran yang ingin dicapai STT Siloam Medan dalam penyelenggaraan pendidikan</p>
+            {{-- Header --}}
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-14" data-aos="fade-up">
+                <div class="flex-shrink-0 w-20 h-20 rounded-3xl flex items-center justify-center shadow-xl"
+                     style="background:linear-gradient(135deg,#065f46,#059669);transform:rotate(-4deg)">
+                    <i class="fas fa-flag-checkered text-white text-3xl"></i>
+                </div>
+                <div>
+                    <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full tracking-widest uppercase mb-2">
+                        <i class="fas fa-flag-checkered text-xs"></i> Tujuan Kami
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-black text-green-900 leading-tight">Tujuan</h2>
+                    <p class="text-gray-400 mt-1 text-sm">Sasaran yang ingin dicapai STT Siloam Medan dalam penyelenggaraan pendidikan</p>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {{-- List --}}
+            <div class="space-y-4">
                 @foreach($tujuan as $i => $t)
-                <div class="bg-white rounded-2xl p-6 border-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                     style="border-color:{{ $t['color']['border'] }}"
-                     data-aos="fade-up" data-aos-delay="{{ $i * 70 }}">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0"
-                             style="background:linear-gradient(135deg,{{ $t['color']['from'] }},{{ $t['color']['to'] }})">
-                            <i class="{{ $t['icon'] }} text-white text-lg"></i>
-                        </div>
-                        <span class="text-xs font-black px-3 py-1 rounded-full"
-                              style="background:{{ $t['color']['badge'] }};color:{{ $t['color']['bt'] }}">
-                            TUJUAN {{ $t['no'] }}
-                        </span>
+                <div class="group flex items-start gap-5 bg-white border-2 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-x-1"
+                     style="border-color:{{ $t['color']['border'] }};background:{{ $t['color']['light'] }}"
+                     data-aos="fade-right" data-aos-delay="{{ $i * 60 }}">
+
+                    {{-- Number --}}
+                    <div class="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center shadow-md text-white font-black text-xl"
+                         style="background:linear-gradient(135deg,{{ $t['color']['from'] }},{{ $t['color']['to'] }})">
+                        {{ $i + 1 }}
                     </div>
-                    <p class="text-gray-700 text-sm leading-relaxed">{{ $t['text'] }}</p>
+
+                    {{-- Content --}}
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="text-xs font-black tracking-widest uppercase"
+                                  style="color:{{ $t['color']['bt'] }}">
+                                Tujuan {{ str_pad($i+1, 2, '0', STR_PAD_LEFT) }}
+                            </span>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">{{ $t['text'] }}</p>
+                    </div>
+
+                    {{-- Icon accent --}}
+                    <div class="flex-shrink-0 opacity-30 group-hover:opacity-60 transition-opacity hidden sm:block">
+                        <i class="{{ $t['icon'] }} text-2xl" style="color:{{ $t['color']['from'] }}"></i>
+                    </div>
                 </div>
                 @endforeach
             </div>
