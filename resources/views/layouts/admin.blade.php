@@ -470,7 +470,7 @@
                 Video
             </a>
             <a href="{{ route('admin.pages.index') }}"
-               class="nav-item {{ request()->routeIs('admin.pages.*') || request()->routeIs('admin.konten.*') ? 'active' : '' }}">
+               class="nav-item {{ (request()->routeIs('admin.pages.*') && !in_array(request()->route('page')?->slug ?? '', ['sejarah','visi-misi'])) || (request()->routeIs('admin.konten.*') && !in_array(request()->segment(4) ?? '', ['sejarah','visi-misi'])) ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-file-alt"></i></span>
                 Halaman Statis
             </a>
@@ -485,12 +485,12 @@
                 <div class="nav-section-label">Profil Kampus</div>
             </div>
             <a href="{{ route('admin.konten.edit', 'sejarah') }}"
-               class="nav-item {{ request()->routeIs('admin.konten.edit') && request()->segment(4) === 'sejarah' ? 'active' : '' }}">
+               class="nav-item {{ (request()->routeIs('admin.konten.edit') && request()->segment(4) === 'sejarah') || (request()->routeIs('admin.pages.edit') && (request()->route('page')?->slug ?? '') === 'sejarah') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-landmark"></i></span>
                 Sejarah Kampus
             </a>
             <a href="{{ route('admin.konten.edit', 'visi-misi') }}"
-               class="nav-item {{ request()->routeIs('admin.konten.edit') && request()->segment(4) === 'visi-misi' ? 'active' : '' }}">
+               class="nav-item {{ (request()->routeIs('admin.konten.edit') && request()->segment(4) === 'visi-misi') || (request()->routeIs('admin.pages.edit') && (request()->route('page')?->slug ?? '') === 'visi-misi') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-bullseye"></i></span>
                 Visi &amp; Misi
             </a>
