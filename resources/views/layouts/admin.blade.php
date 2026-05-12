@@ -509,8 +509,13 @@
             <div class="nav-section">
                 <div class="nav-section-label">PMB & Mahasiswa</div>
             </div>
+            <a href="{{ route('admin.pmb-info.index') }}"
+               class="nav-item {{ request()->routeIs('admin.pmb-info.*') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-info-circle"></i></span>
+                Info PMB
+            </a>
             <a href="{{ route('admin.pmb.index') }}"
-               class="nav-item {{ request()->routeIs('admin.pmb.*') ? 'active' : '' }}">
+               class="nav-item {{ request()->routeIs('admin.pmb.*') && !request()->routeIs('admin.pmb-info.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-user-plus"></i></span>
                 Pendaftaran PMB
                 @php $pendingPmb = \App\Models\PmbRegistration::where('status','pending')->count(); @endphp

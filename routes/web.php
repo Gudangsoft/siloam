@@ -118,6 +118,7 @@ use App\Http\Controllers\Admin\StudentAchievementController;
 use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\PmbInfoController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
@@ -149,6 +150,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::get('/{pmb}',            [AdminPmbController::class, 'show'])->name('show');
         Route::post('/{pmb}/status',    [AdminPmbController::class, 'updateStatus'])->name('update-status');
         Route::delete('/{pmb}',         [AdminPmbController::class, 'destroy'])->name('destroy');
+    });
+
+    // Info PMB (edit halaman info: syarat, biaya, beasiswa, jadwal)
+    Route::prefix('pmb-info')->name('pmb-info.')->group(function () {
+        Route::get('/',           [PmbInfoController::class, 'index'])->name('index');
+        Route::get('/{slug}/edit',[PmbInfoController::class, 'edit'])->name('edit');
+        Route::put('/{slug}',     [PmbInfoController::class, 'update'])->name('update');
     });
 
     // Pesan/Kontak

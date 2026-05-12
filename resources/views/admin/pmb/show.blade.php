@@ -20,9 +20,16 @@
                     <dt class="col-sm-4">Jenis Kelamin</dt><dd class="col-sm-8">{{ $pmb->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</dd>
                     <dt class="col-sm-4">Tempat, Tgl Lahir</dt><dd class="col-sm-8">{{ $pmb->birth_place }}, {{ $pmb->birth_date->format('d/m/Y') }}</dd>
                     <dt class="col-sm-4">Alamat</dt><dd class="col-sm-8">{{ $pmb->address }}, {{ $pmb->city }}, {{ $pmb->province }}</dd>
-                    <dt class="col-sm-4">Asal Sekolah</dt><dd class="col-sm-8">{{ $pmb->high_school_name }} ({{ $pmb->graduation_year }})</dd>
+                    <dt class="col-sm-4">Kewarganegaraan</dt><dd class="col-sm-8">{{ $pmb->citizenship ?? 'WNI' }}</dd>
+                    <dt class="col-sm-4">Asal Sekolah</dt><dd class="col-sm-8">{{ $pmb->high_school_name }}{{ $pmb->major ? ' — Jurusan ' . $pmb->major : '' }} ({{ $pmb->graduation_year }})</dd>
                     <dt class="col-sm-4">Program Studi</dt><dd class="col-sm-8"><strong>{{ $pmb->study_program }}</strong></dd>
                     <dt class="col-sm-4">Jalur Pendaftaran</dt><dd class="col-sm-8">{{ $pmb->registration_path ?? '-' }}</dd>
+                    @if($pmb->reason)
+                    <dt class="col-sm-4">Alasan Memilih</dt><dd class="col-sm-8" style="white-space:pre-wrap">{{ $pmb->reason }}</dd>
+                    @endif
+                    @if($pmb->service_experience)
+                    <dt class="col-sm-4">Pengalaman Pelayanan</dt><dd class="col-sm-8" style="white-space:pre-wrap">{{ $pmb->service_experience }}</dd>
+                    @endif
                     <dt class="col-sm-4">Nama Orang Tua</dt><dd class="col-sm-8">{{ $pmb->parent_name }}</dd>
                     <dt class="col-sm-4">Telp Orang Tua</dt><dd class="col-sm-8">{{ $pmb->parent_phone }}</dd>
                 </dl>

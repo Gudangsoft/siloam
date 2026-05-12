@@ -63,31 +63,6 @@
     @endif
 </section>
 
-{{-- Stats Section --}}
-@if(isset($stats))
-<section class="bg-blue-900 text-white py-10" data-aos="fade-up">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div class="p-4">
-                <div class="text-4xl font-bold text-yellow-400">{{ $stats['students'] ?? '500' }}+</div>
-                <div class="text-gray-300 mt-1">Mahasiswa Aktif</div>
-            </div>
-            <div class="p-4">
-                <div class="text-4xl font-bold text-yellow-400">{{ $stats['alumni'] ?? '1000' }}+</div>
-                <div class="text-gray-300 mt-1">Alumni</div>
-            </div>
-            <div class="p-4">
-                <div class="text-4xl font-bold text-yellow-400">{{ $stats['lecturers'] ?? '30' }}+</div>
-                <div class="text-gray-300 mt-1">Dosen</div>
-            </div>
-            <div class="p-4">
-                <div class="text-4xl font-bold text-yellow-400">{{ $stats['programs'] ?? '4' }}</div>
-                <div class="text-gray-300 mt-1">Program Studi</div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
 
 {{-- Program Studi Section --}}
 @if(isset($programs) && $programs->count() > 0)

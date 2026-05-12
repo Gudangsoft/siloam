@@ -8,7 +8,6 @@ use App\Models\News;
 use App\Models\Event;
 use App\Models\StudyProgram;
 use App\Models\Staff;
-use App\Models\Setting;
 
 class HomeController extends Controller
 {
@@ -22,15 +21,8 @@ class HomeController extends Controller
         $gallery       = Gallery::published()->take(8)->get();
         $leaders       = Staff::active()->byCategory('pimpinan')->take(3)->get();
 
-        $stats = [
-            'students'  => Setting::get('total_students', '500+'),
-            'alumni'    => Setting::get('total_alumni', '1000+'),
-            'lecturers' => Setting::get('total_lecturers', '50+'),
-            'programs'  => StudyProgram::active()->count(),
-        ];
-
         return view('frontend.home', compact(
-            'banners', 'featured_news', 'latest_news', 'events', 'programs', 'gallery', 'leaders', 'stats'
+            'banners', 'featured_news', 'latest_news', 'events', 'programs', 'gallery', 'leaders'
         ));
     }
 }

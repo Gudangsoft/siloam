@@ -8,8 +8,9 @@ class PmbRegistration extends Model
 {
     protected $fillable = [
         'registration_number', 'full_name', 'email', 'phone', 'gender',
-        'birth_date', 'birth_place', 'address', 'city', 'province',
-        'high_school_name', 'graduation_year', 'study_program', 'registration_path',
+        'birth_date', 'birth_place', 'citizenship', 'address', 'city', 'province',
+        'high_school_name', 'major', 'graduation_year',
+        'study_program', 'reason', 'service_experience', 'registration_path',
         'parent_name', 'parent_phone', 'photo', 'ijazah_document', 'status', 'notes',
     ];
 

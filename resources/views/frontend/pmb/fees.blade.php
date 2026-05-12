@@ -75,7 +75,12 @@
                 <li>Untuk informasi lebih lanjut, hubungi bagian keuangan</li>
             </ul>
         </div>
-        <div class="text-center">
+        @if(isset($page) && $page?->content)
+        <div class="bg-white rounded-xl shadow-md p-8 mt-6 prose prose-blue max-w-none text-gray-700" data-aos="fade-up">
+            {!! $page->content !!}
+        </div>
+        @endif
+        <div class="text-center mt-6">
             <a href="{{ route('pmb.beasiswa') }}" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full transition mr-4 inline-block">Info Beasiswa</a>
             <a href="{{ route('kontak.index') }}" class="border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-3 px-8 rounded-full transition inline-block">Hubungi Kami</a>
         </div>

@@ -68,6 +68,13 @@
         @endforeach
     </div>
     @endif
+    @if(isset($page) && $page?->content)
+    <div class="max-w-3xl mx-auto mt-8">
+        <div class="bg-white rounded-xl shadow-md p-8 prose prose-blue max-w-none text-gray-700" data-aos="fade-up">
+            {!! $page->content !!}
+        </div>
+    </div>
+    @endif
     <div class="text-center mt-10">
         <a href="{{ route('pmb.daftar') }}" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-10 rounded-full transition shadow-lg inline-block">Daftar & Lamar Beasiswa</a>
     </div>
