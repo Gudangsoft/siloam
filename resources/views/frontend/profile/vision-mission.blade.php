@@ -165,33 +165,49 @@
             </div>
 
             @php
-            $misiDefault = [
-                ['title' => 'Pendidikan & Pengajaran', 'text' => 'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.'],
-                ['title' => 'Penelitian Teologi',       'text' => 'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.'],
-                ['title' => 'Pengabdian Masyarakat',    'text' => 'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.'],
-                ['title' => 'Semangat Oikumenis',       'text' => 'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.'],
-            ];
-            $misiTitles = ['Pendidikan & Pengajaran','Penelitian Teologi','Pengabdian Masyarakat','Semangat Oikumenis'];
+            // ── parse DB content ──────────────────────────────────────────
+            $raw     = (isset($page) && $page->content) ? json_decode($page->content, true) : null;
+            // format lama: plain array (hanya misi), format baru: {misi:[],tujuan:[]}
+            $savedMisi   = is_array($raw) ? ($raw['misi']   ?? (isset($raw[0]) ? $raw : [])) : [];
+            $savedTujuan = is_array($raw) ? ($raw['tujuan'] ?? []) : [];
 
-            // Ambil dari database jika ada
-            $savedMisi = (isset($page) && $page->content) ? json_decode($page->content, true) : null;
-            $misi = [];
-            $template = [
+            $visiText = (isset($page) && $page->meta_title)
+                ? $page->meta_title
+                : 'Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga Guru Agama Kristen yang profesional dan hamba Tuhan yang mampu menggembalakan jemaat.';
+
+            // ── Misi ──────────────────────────────────────────────────────
+            $misiDefault = [
+                ['title'=>'Pendidikan & Pengajaran','text'=>'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.'],
+                ['title'=>'Penelitian Teologi',      'text'=>'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.'],
+                ['title'=>'Pengabdian Masyarakat',   'text'=>'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.'],
+                ['title'=>'Semangat Oikumenis',      'text'=>'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.'],
+            ];
+            $misiTemplate = [
                 ['no'=>'01','icon'=>'fas fa-graduation-cap','color'=>['from'=>'#1e40af','to'=>'#3b82f6','light'=>'#eff6ff','border'=>'#bfdbfe','badge'=>'#dbeafe','badge_text'=>'#1e40af']],
                 ['no'=>'02','icon'=>'fas fa-microscope',    'color'=>['from'=>'#4338ca','to'=>'#6366f1','light'=>'#eef2ff','border'=>'#c7d2fe','badge'=>'#e0e7ff','badge_text'=>'#4338ca']],
                 ['no'=>'03','icon'=>'fas fa-hands-helping', 'color'=>['from'=>'#6d28d9','to'=>'#8b5cf6','light'=>'#f5f3ff','border'=>'#ddd6fe','badge'=>'#ede9fe','badge_text'=>'#6d28d9']],
                 ['no'=>'04','icon'=>'fas fa-globe-asia',    'color'=>['from'=>'#7c3aed','to'=>'#a855f7','light'=>'#faf5ff','border'=>'#e9d5ff','badge'=>'#f3e8ff','badge_text'=>'#7c3aed']],
             ];
-            foreach ($template as $i => $t) {
-                $text  = (is_array($savedMisi) && !empty($savedMisi[$i])) ? $savedMisi[$i] : $misiDefault[$i]['text'];
-                $title = $misiTitles[$i];
-                $misi[] = array_merge($t, ['title' => $title, 'text' => $text]);
+            $misi = [];
+            foreach ($misiTemplate as $i => $t) {
+                $misi[] = array_merge($t, [
+                    'title' => $misiDefault[$i]['title'],
+                    'text'  => !empty($savedMisi[$i]) ? $savedMisi[$i] : $misiDefault[$i]['text'],
+                ]);
             }
 
-            // Visi dari database atau default
-            $visiText = (isset($page) && $page->meta_title)
-                ? $page->meta_title
-                : 'Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga Guru Agama Kristen yang profesional dan hamba Tuhan yang mampu menggembalakan jemaat.';
+            // ── Tujuan ────────────────────────────────────────────────────
+            $tujuanDefault = [
+                'Menghasilkan lulusan Guru Agama Kristen yang profesional dan kompeten di bidangnya.',
+                'Menghasilkan hamba Tuhan yang mampu memimpin dan menggembalakan jemaat secara efektif.',
+                'Menghasilkan peneliti di bidang teologi dan pendidikan agama Kristen yang berkontribusi bagi pengembangan gereja.',
+                'Menghasilkan tenaga pengabdi masyarakat yang handal dalam pelayanan gereja, sekolah, dan komunitas.',
+                'Membentuk karakter Kristen yang kuat sebagai fondasi pelayanan di gereja dan masyarakat.',
+            ];
+            $tujuan = [];
+            for ($i = 0; $i < 5; $i++) {
+                $tujuan[] = !empty($savedTujuan[$i]) ? $savedTujuan[$i] : $tujuanDefault[$i];
+            }
             @endphp
 
             <div class="relative">
@@ -239,6 +255,55 @@
                     </div>
                     @endforeach
                 </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{-- ===== TUJUAN ===== --}}
+<section class="py-20" style="background:linear-gradient(180deg,#f0fdf4 0%,#ecfdf5 100%)">
+    <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 text-xs font-bold px-4 py-2 rounded-full tracking-widest uppercase mb-4">
+                    <i class="fas fa-flag-checkered"></i> Tujuan Kami
+                </span>
+                <h2 class="text-4xl md:text-5xl font-black text-green-900">Tujuan</h2>
+                <p class="text-gray-400 mt-3 text-base max-w-md mx-auto">Sasaran yang ingin dicapai STT Siloam Medan dalam penyelenggaraan pendidikan</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                @php
+                $tujuanIcons  = ['fas fa-user-graduate','fas fa-church','fas fa-flask','fas fa-hands-helping','fas fa-heart'];
+                $tujuanShades = [
+                    ['from'=>'#065f46','to'=>'#059669','light'=>'#ecfdf5','border'=>'#a7f3d0','badge'=>'#d1fae5','bt'=>'#065f46'],
+                    ['from'=>'#047857','to'=>'#10b981','light'=>'#f0fdf4','border'=>'#bbf7d0','badge'=>'#dcfce7','bt'=>'#166534'],
+                    ['from'=>'#059669','to'=>'#34d399','light'=>'#ecfdf5','border'=>'#6ee7b7','badge'=>'#d1fae5','bt'=>'#065f46'],
+                    ['from'=>'#0d9488','to'=>'#2dd4bf','light'=>'#f0fdfa','border'=>'#99f6e4','badge'=>'#ccfbf1','bt'=>'#134e4a'],
+                    ['from'=>'#0891b2','to'=>'#22d3ee','light'=>'#ecfeff','border'=>'#a5f3fc','badge'=>'#cffafe','bt'=>'#164e63'],
+                ];
+                @endphp
+
+                @foreach($tujuan as $i => $item)
+                @php $s = $tujuanShades[$i]; @endphp
+                <div class="bg-white rounded-2xl p-6 border-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                     style="border-color:{{ $s['border'] }}"
+                     data-aos="fade-up" data-aos-delay="{{ $i * 70 }}">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0"
+                             style="background:linear-gradient(135deg,{{ $s['from'] }},{{ $s['to'] }})">
+                            <i class="{{ $tujuanIcons[$i] }} text-white text-lg"></i>
+                        </div>
+                        <span class="text-xs font-black px-3 py-1 rounded-full"
+                              style="background:{{ $s['badge'] }};color:{{ $s['bt'] }}">
+                            TUJUAN {{ str_pad($i+1, 2, '0', STR_PAD_LEFT) }}
+                        </span>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed">{{ $item }}</p>
+                </div>
+                @endforeach
             </div>
 
         </div>

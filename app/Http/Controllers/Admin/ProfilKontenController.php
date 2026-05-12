@@ -8,49 +8,76 @@ use Illuminate\Http\Request;
 
 class ProfilKontenController extends Controller
 {
+    private array $misiDefault = [
+        'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.',
+        'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.',
+        'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.',
+        'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.',
+    ];
+
+    private array $tujuanDefault = [
+        'Menghasilkan lulusan Guru Agama Kristen yang profesional dan kompeten di bidangnya.',
+        'Menghasilkan hamba Tuhan yang mampu memimpin dan menggembalakan jemaat secara efektif.',
+        'Menghasilkan peneliti di bidang teologi dan pendidikan agama Kristen yang berkontribusi bagi pengembangan gereja.',
+        'Menghasilkan tenaga pengabdi masyarakat yang handal dalam pelayanan gereja, sekolah, dan komunitas.',
+        'Membentuk karakter Kristen yang kuat sebagai fondasi pelayanan di gereja dan masyarakat.',
+    ];
+
+    private function decodeContent(?string $content): array
+    {
+        if (!$content) return ['misi' => [], 'tujuan' => []];
+
+        $decoded = json_decode($content, true);
+        if (!is_array($decoded)) return ['misi' => [], 'tujuan' => []];
+
+        // Format lama: plain array (hanya misi)
+        if (isset($decoded[0])) {
+            return ['misi' => $decoded, 'tujuan' => []];
+        }
+
+        return [
+            'misi'   => $decoded['misi']   ?? [],
+            'tujuan' => $decoded['tujuan'] ?? [],
+        ];
+    }
+
     public function editVisiMisi()
     {
         $page = Page::findOrCreateBySlug('visi-misi', 'Visi & Misi');
-
         $visi = $page->meta_title ?: '';
 
-        $misiDefault = [
-            'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.',
-            'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.',
-            'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.',
-            'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.',
-        ];
+        $data   = $this->decodeContent($page->content);
+        $misi   = array_pad($data['misi'],   4, '');
+        $tujuan = array_pad($data['tujuan'], 5, '');
 
-        $misi = $misiDefault;
-        if ($page->content) {
-            $decoded = json_decode($page->content, true);
-            if (is_array($decoded)) {
-                $misi = array_pad($decoded, 4, '');
-            }
-        }
-
-        return view('admin.profil.visi-misi', compact('page', 'visi', 'misi'));
+        return view('admin.profil.visi-misi', compact('page', 'visi', 'misi', 'tujuan'));
     }
 
     public function updateVisiMisi(Request $request)
     {
         $request->validate([
-            'visi'     => 'required|string|max:500',
-            'misi'     => 'required|array|size:4',
-            'misi.*'   => 'required|string|max:500',
+            'visi'      => 'required|string|max:500',
+            'misi'      => 'required|array|size:4',
+            'misi.*'    => 'required|string|max:500',
+            'tujuan'    => 'required|array|size:5',
+            'tujuan.*'  => 'required|string|max:500',
         ], [
-            'visi.required'  => 'Teks Visi wajib diisi.',
-            'misi.*.required'=> 'Semua item Misi wajib diisi.',
+            'visi.required'    => 'Teks Visi wajib diisi.',
+            'misi.*.required'  => 'Semua item Misi wajib diisi.',
+            'tujuan.*.required'=> 'Semua item Tujuan wajib diisi.',
         ]);
 
         $page = Page::findOrCreateBySlug('visi-misi', 'Visi & Misi');
         $page->update([
             'meta_title' => $request->visi,
-            'content'    => json_encode(array_values($request->misi), JSON_UNESCAPED_UNICODE),
+            'content'    => json_encode([
+                'misi'   => array_values($request->misi),
+                'tujuan' => array_values($request->tujuan),
+            ], JSON_UNESCAPED_UNICODE),
         ]);
 
         return redirect()->route('admin.profil.visi-misi.edit')
-            ->with('success', 'Visi & Misi berhasil disimpan!');
+            ->with('success', 'Visi, Misi & Tujuan berhasil disimpan!');
     }
 
     public function editSejarah()
@@ -67,4 +94,7 @@ class ProfilKontenController extends Controller
         return redirect()->route('admin.profil.sejarah.edit')
             ->with('success', 'Konten Sejarah berhasil disimpan!');
     }
+
+    public function getMisiDefault(): array   { return $this->misiDefault; }
+    public function getTujuanDefault(): array { return $this->tujuanDefault; }
 }
