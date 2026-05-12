@@ -260,6 +260,27 @@
     <i class="fab fa-whatsapp text-white text-2xl"></i>
 </a>
 @endif
+{{-- Scroll to Top Button --}}
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    class="fixed z-50 w-12 h-12 bg-blue-900 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none"
+    style="bottom:{{ $siteSettings->get('whatsapp') ? '5.5rem' : '1.5rem' }};right:1.5rem"
+    aria-label="Kembali ke atas">
+    <i class="fas fa-chevron-up text-sm"></i>
+</button>
+<script>
+(function(){
+    var btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function(){
+        if (window.scrollY > 300) {
+            btn.classList.remove('opacity-0','pointer-events-none');
+            btn.classList.add('opacity-100');
+        } else {
+            btn.classList.add('opacity-0','pointer-events-none');
+            btn.classList.remove('opacity-100');
+        }
+    }, {passive:true});
+})();
+</script>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init({duration:600,once:true});</script>
