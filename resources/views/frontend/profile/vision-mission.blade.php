@@ -72,6 +72,49 @@
 
 @section('content')
 
+@php
+// ── parse DB content ──────────────────────────────────────────────────────────
+$raw         = (isset($page) && $page->content) ? json_decode($page->content, true) : null;
+$savedMisi   = is_array($raw) ? ($raw['misi']   ?? (isset($raw[0]) ? $raw : [])) : [];
+$savedTujuan = is_array($raw) ? ($raw['tujuan'] ?? []) : [];
+
+$visiText = (isset($page) && $page->meta_title)
+    ? $page->meta_title
+    : 'Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga Guru Agama Kristen yang profesional dan hamba Tuhan yang mampu menggembalakan jemaat.';
+
+$misiDefault = [
+    ['title'=>'Pendidikan & Pengajaran','text'=>'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.'],
+    ['title'=>'Penelitian Teologi',     'text'=>'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.'],
+    ['title'=>'Pengabdian Masyarakat',  'text'=>'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.'],
+    ['title'=>'Semangat Oikumenis',     'text'=>'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.'],
+];
+$misiTemplate = [
+    ['no'=>'01','icon'=>'fas fa-graduation-cap','color'=>['from'=>'#1e40af','to'=>'#3b82f6','light'=>'#eff6ff','border'=>'#bfdbfe','badge'=>'#dbeafe','badge_text'=>'#1e40af']],
+    ['no'=>'02','icon'=>'fas fa-microscope',    'color'=>['from'=>'#4338ca','to'=>'#6366f1','light'=>'#eef2ff','border'=>'#c7d2fe','badge'=>'#e0e7ff','badge_text'=>'#4338ca']],
+    ['no'=>'03','icon'=>'fas fa-hands-helping', 'color'=>['from'=>'#6d28d9','to'=>'#8b5cf6','light'=>'#f5f3ff','border'=>'#ddd6fe','badge'=>'#ede9fe','badge_text'=>'#6d28d9']],
+    ['no'=>'04','icon'=>'fas fa-globe-asia',    'color'=>['from'=>'#7c3aed','to'=>'#a855f7','light'=>'#faf5ff','border'=>'#e9d5ff','badge'=>'#f3e8ff','badge_text'=>'#7c3aed']],
+];
+$misi = [];
+foreach ($misiTemplate as $i => $t) {
+    $misi[] = array_merge($t, [
+        'title' => $misiDefault[$i]['title'],
+        'text'  => !empty($savedMisi[$i]) ? $savedMisi[$i] : $misiDefault[$i]['text'],
+    ]);
+}
+
+$tujuanDefault = [
+    'Menghasilkan lulusan Guru Agama Kristen yang profesional dan kompeten di bidangnya.',
+    'Menghasilkan hamba Tuhan yang mampu memimpin dan menggembalakan jemaat secara efektif.',
+    'Menghasilkan peneliti di bidang teologi dan pendidikan agama Kristen yang berkontribusi bagi pengembangan gereja.',
+    'Menghasilkan tenaga pengabdi masyarakat yang handal dalam pelayanan gereja, sekolah, dan komunitas.',
+    'Membentuk karakter Kristen yang kuat sebagai fondasi pelayanan di gereja dan masyarakat.',
+];
+$tujuan = [];
+for ($i = 0; $i < 5; $i++) {
+    $tujuan[] = !empty($savedTujuan[$i]) ? $savedTujuan[$i] : $tujuanDefault[$i];
+}
+@endphp
+
 {{-- ===== HERO ===== --}}
 <section class="vm-hero min-h-[420px] flex items-center text-white">
     {{-- Orbs --}}
@@ -163,52 +206,6 @@
                 <h2 class="text-4xl md:text-5xl font-black gradient-text">Empat Pilar Misi</h2>
                 <p class="text-gray-400 mt-3 text-base max-w-md mx-auto">Landasan gerak dan arah pelayanan STT Siloam Medan</p>
             </div>
-
-            @php
-            // ── parse DB content ──────────────────────────────────────────
-            $raw     = (isset($page) && $page->content) ? json_decode($page->content, true) : null;
-            // format lama: plain array (hanya misi), format baru: {misi:[],tujuan:[]}
-            $savedMisi   = is_array($raw) ? ($raw['misi']   ?? (isset($raw[0]) ? $raw : [])) : [];
-            $savedTujuan = is_array($raw) ? ($raw['tujuan'] ?? []) : [];
-
-            $visiText = (isset($page) && $page->meta_title)
-                ? $page->meta_title
-                : 'Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga Guru Agama Kristen yang profesional dan hamba Tuhan yang mampu menggembalakan jemaat.';
-
-            // ── Misi ──────────────────────────────────────────────────────
-            $misiDefault = [
-                ['title'=>'Pendidikan & Pengajaran','text'=>'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.'],
-                ['title'=>'Penelitian Teologi',      'text'=>'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.'],
-                ['title'=>'Pengabdian Masyarakat',   'text'=>'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.'],
-                ['title'=>'Semangat Oikumenis',      'text'=>'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.'],
-            ];
-            $misiTemplate = [
-                ['no'=>'01','icon'=>'fas fa-graduation-cap','color'=>['from'=>'#1e40af','to'=>'#3b82f6','light'=>'#eff6ff','border'=>'#bfdbfe','badge'=>'#dbeafe','badge_text'=>'#1e40af']],
-                ['no'=>'02','icon'=>'fas fa-microscope',    'color'=>['from'=>'#4338ca','to'=>'#6366f1','light'=>'#eef2ff','border'=>'#c7d2fe','badge'=>'#e0e7ff','badge_text'=>'#4338ca']],
-                ['no'=>'03','icon'=>'fas fa-hands-helping', 'color'=>['from'=>'#6d28d9','to'=>'#8b5cf6','light'=>'#f5f3ff','border'=>'#ddd6fe','badge'=>'#ede9fe','badge_text'=>'#6d28d9']],
-                ['no'=>'04','icon'=>'fas fa-globe-asia',    'color'=>['from'=>'#7c3aed','to'=>'#a855f7','light'=>'#faf5ff','border'=>'#e9d5ff','badge'=>'#f3e8ff','badge_text'=>'#7c3aed']],
-            ];
-            $misi = [];
-            foreach ($misiTemplate as $i => $t) {
-                $misi[] = array_merge($t, [
-                    'title' => $misiDefault[$i]['title'],
-                    'text'  => !empty($savedMisi[$i]) ? $savedMisi[$i] : $misiDefault[$i]['text'],
-                ]);
-            }
-
-            // ── Tujuan ────────────────────────────────────────────────────
-            $tujuanDefault = [
-                'Menghasilkan lulusan Guru Agama Kristen yang profesional dan kompeten di bidangnya.',
-                'Menghasilkan hamba Tuhan yang mampu memimpin dan menggembalakan jemaat secara efektif.',
-                'Menghasilkan peneliti di bidang teologi dan pendidikan agama Kristen yang berkontribusi bagi pengembangan gereja.',
-                'Menghasilkan tenaga pengabdi masyarakat yang handal dalam pelayanan gereja, sekolah, dan komunitas.',
-                'Membentuk karakter Kristen yang kuat sebagai fondasi pelayanan di gereja dan masyarakat.',
-            ];
-            $tujuan = [];
-            for ($i = 0; $i < 5; $i++) {
-                $tujuan[] = !empty($savedTujuan[$i]) ? $savedTujuan[$i] : $tujuanDefault[$i];
-            }
-            @endphp
 
             <div class="relative">
                 {{-- Vertical connector line (desktop) --}}
