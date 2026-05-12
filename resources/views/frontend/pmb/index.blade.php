@@ -139,7 +139,7 @@
 <section class="py-12" data-aos="fade-up">
     <div class="container mx-auto px-4 max-w-3xl">
         <div class="bg-white rounded-xl shadow-md p-8 prose prose-blue max-w-none text-gray-700">
-            {!! clean($page->content) !!}
+            {!! $page->content !!}
         </div>
     </div>
 </section>

@@ -57,7 +57,7 @@
         {{-- Konten tambahan dari admin --}}
         @if(isset($page) && $page?->content)
         <div class="bg-white rounded-xl shadow-md p-8 mb-6 prose prose-blue max-w-none text-gray-700" data-aos="fade-up">
-            {!! clean($page->content) !!}
+            {!! $page->content !!}
         </div>
         @endif
 

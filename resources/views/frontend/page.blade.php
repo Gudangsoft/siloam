@@ -15,7 +15,7 @@
 <div class="container mx-auto px-4 py-12 max-w-4xl">
     <div class="bg-white rounded-2xl shadow-sm p-8 md:p-12">
         <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-            {!! clean($page->content) !!}
+            {!! $page->content !!}
         </div>
     </div>
 </div>

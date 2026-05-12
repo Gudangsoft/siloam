@@ -60,7 +60,7 @@
             </div>
             @endif
             <div class="prose prose-lg prose-blue max-w-none text-gray-700 leading-relaxed" data-aos="fade-up">
-                {!! clean($page->content) !!}
+                {!! $page->content !!}
             </div>
         </div>
     </div>
