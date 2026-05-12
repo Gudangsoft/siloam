@@ -23,18 +23,23 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'position'  => 'required|string|max:255',
-            'category'  => 'required|in:pimpinan,dosen,tendik',
-            'nidn'      => 'nullable|string|max:20',
-            'email'     => 'nullable|email|max:100',
-            'phone'     => 'nullable|string|max:20',
-            'education' => 'nullable|string|max:255',
-            'expertise' => 'nullable|string|max:255',
-            'bio'       => 'nullable|string',
-            'photo'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            'order'     => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
+            'name'        => 'required|string|max:255',
+            'position'    => 'required|string|max:255',
+            'category'    => 'required|in:pimpinan,dosen,tendik',
+            'nidn'        => 'nullable|string|max:20',
+            'nuptk'       => 'nullable|string|max:20',
+            'birth_place' => 'nullable|string|max:100',
+            'birth_date'  => 'nullable|date',
+            'church'      => 'nullable|string|max:255',
+            'email'       => 'nullable|email|max:100',
+            'phone'       => 'nullable|string|max:20',
+            'education'   => 'nullable|string|max:255',
+            'expertise'   => 'nullable|string|max:255',
+            'courses'     => 'nullable|string',
+            'bio'         => 'nullable|string',
+            'photo'       => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'order'       => 'nullable|integer',
+            'is_active'   => 'nullable|boolean',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -55,18 +60,23 @@ class StaffController extends Controller
     public function update(Request $request, Staff $staff)
     {
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'position'  => 'required|string|max:255',
-            'category'  => 'required|in:pimpinan,dosen,tendik',
-            'nidn'      => 'nullable|string|max:20',
-            'email'     => 'nullable|email|max:100',
-            'phone'     => 'nullable|string|max:20',
-            'education' => 'nullable|string|max:255',
-            'expertise' => 'nullable|string|max:255',
-            'bio'       => 'nullable|string',
-            'photo'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            'order'     => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
+            'name'        => 'required|string|max:255',
+            'position'    => 'required|string|max:255',
+            'category'    => 'required|in:pimpinan,dosen,tendik',
+            'nidn'        => 'nullable|string|max:20',
+            'nuptk'       => 'nullable|string|max:20',
+            'birth_place' => 'nullable|string|max:100',
+            'birth_date'  => 'nullable|date',
+            'church'      => 'nullable|string|max:255',
+            'email'       => 'nullable|email|max:100',
+            'phone'       => 'nullable|string|max:20',
+            'education'   => 'nullable|string|max:255',
+            'expertise'   => 'nullable|string|max:255',
+            'courses'     => 'nullable|string',
+            'bio'         => 'nullable|string',
+            'photo'       => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'order'       => 'nullable|integer',
+            'is_active'   => 'nullable|boolean',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');

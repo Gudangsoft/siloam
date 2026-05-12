@@ -10,12 +10,18 @@ class Staff extends Model
     protected $table = 'staff';
 
     protected $fillable = [
-        'name', 'position', 'category', 'nidn', 'email', 'phone',
-        'photo', 'bio', 'education', 'expertise', 'social_media', 'order', 'is_active',
+        'name', 'position', 'category',
+        'nidn', 'nuptk',
+        'birth_place', 'birth_date', 'church',
+        'email', 'phone',
+        'photo', 'bio',
+        'education', 'expertise', 'courses',
+        'social_media', 'order', 'is_active',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
+        'is_active'  => 'boolean',
+        'birth_date' => 'date',
         'social_media' => 'array',
     ];
 
