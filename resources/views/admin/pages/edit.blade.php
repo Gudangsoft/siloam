@@ -72,14 +72,16 @@
                     <i class="fas fa-save me-1"></i> Simpan Perubahan
                 </button>
                 <a href="{{ route('admin.pages.index') }}" class="btn btn-secondary btn-lg">Batal</a>
-                <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" class="ms-auto"
-                      onsubmit="return confirm('Hapus halaman ini? Semua link menu yang mengarah ke halaman ini akan rusak.')">
-                    @csrf @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-lg">
-                        <i class="fas fa-trash me-1"></i> Hapus Halaman
-                    </button>
-                </form>
+                <button type="button" class="btn btn-danger btn-lg ms-auto"
+                        onclick="if(confirm('Hapus halaman ini? Semua link menu yang mengarah ke halaman ini akan rusak.')) document.getElementById('deletePageForm').submit()">
+                    <i class="fas fa-trash me-1"></i> Hapus Halaman
+                </button>
             </div>
+        </form>
+
+        {{-- Form hapus di LUAR form utama --}}
+        <form id="deletePageForm" action="{{ route('admin.pages.destroy', $page) }}" method="POST" class="d-none">
+            @csrf @method('DELETE')
         </form>
     </div>
 </div>
