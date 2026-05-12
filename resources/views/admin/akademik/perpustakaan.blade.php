@@ -24,7 +24,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="form-label">Isi Halaman Perpustakaan</label>
-                    <textarea id="editor" name="content" class="form-control" rows="20">{{ old('content', $page->content) }}</textarea>
+                    <textarea id="editor" name="content" class="form-control" rows="20">{{ old('content', $defaultContent) }}</textarea>
                     <p class="form-hint">Tambahkan informasi koleksi, jam layanan, link katalog, atau konten lainnya.</p>
                 </div>
             </div>

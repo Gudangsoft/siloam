@@ -100,7 +100,10 @@ class ProfilKontenController extends Controller
     public function editElearning()
     {
         $page = Page::findOrCreateBySlug('elearning', 'E-Learning');
-        return view('admin.akademik.elearning', compact('page'));
+        $defaultContent = $page->content ?: '<h2>Portal E-Learning STT Siloam Medan</h2>
+<p>Akses materi kuliah, tugas, dan berbagai sumber belajar digital melalui portal e-learning kami.</p>
+<p><a href="#">Akses E-Learning</a></p>';
+        return view('admin.akademik.elearning', compact('page', 'defaultContent'));
     }
 
     public function updateElearning(Request $request)
@@ -115,7 +118,16 @@ class ProfilKontenController extends Controller
     public function editPerpustakaan()
     {
         $page = Page::findOrCreateBySlug('perpustakaan', 'Perpustakaan Digital');
-        return view('admin.akademik.perpustakaan', compact('page'));
+        $defaultContent = $page->content ?: '<h2>Perpustakaan Digital STT Siloam Medan</h2>
+<h3>Koleksi Buku</h3>
+<p>Ribuan judul buku teologi, alkitab, dan referensi akademik tersedia untuk mahasiswa.</p>
+<h3>Digital Library</h3>
+<p>Akses jurnal ilmiah, e-book, dan sumber digital lainnya secara online kapanpun dan dimanapun.</p>
+<h3>Jam Layanan</h3>
+<p>Senin - Jumat: 08.00 - 16.00 WIB<br>Sabtu: 08.00 - 12.00 WIB</p>
+<h3>Ruang Baca</h3>
+<p>Ruang baca yang nyaman dan kondusif untuk mendukung kegiatan belajar mandiri mahasiswa.</p>';
+        return view('admin.akademik.perpustakaan', compact('page', 'defaultContent'));
     }
 
     public function updatePerpustakaan(Request $request)

@@ -24,7 +24,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="form-label">Isi Halaman E-Learning</label>
-                    <textarea id="editor" name="content" class="form-control" rows="20">{{ old('content', $page->content) }}</textarea>
+                    <textarea id="editor" name="content" class="form-control" rows="20">{{ old('content', $defaultContent) }}</textarea>
                     <p class="form-hint">Tambahkan informasi, link akses, panduan, atau konten lainnya.</p>
                 </div>
             </div>
