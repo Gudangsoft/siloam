@@ -469,6 +469,11 @@
                 <span class="icon"><i class="fab fa-youtube"></i></span>
                 Video
             </a>
+            <a href="{{ route('admin.konten.index') }}"
+               class="nav-item {{ request()->routeIs('admin.konten.*') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+                Konten Halaman
+            </a>
             <a href="{{ route('admin.pages.index') }}"
                class="nav-item {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-file-alt"></i></span>

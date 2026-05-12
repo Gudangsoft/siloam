@@ -10,19 +10,19 @@ class CampusProfileController extends Controller
 {
     public function history()
     {
-        $page = Page::findBySlug('sejarah');
+        $page = Page::firstOrCreate(['slug' => 'sejarah'], ['title' => 'Sejarah STT Siloam', 'content' => '']);
         return view('frontend.profile.history', compact('page'));
     }
 
     public function visionMission()
     {
-        $page = Page::findBySlug('visi-misi');
+        $page = Page::firstOrCreate(['slug' => 'visi-misi'], ['title' => 'Visi & Misi', 'content' => '']);
         return view('frontend.profile.vision-mission', compact('page'));
     }
 
     public function structure()
     {
-        $page    = Page::findBySlug('struktur-organisasi');
+        $page    = Page::firstOrCreate(['slug' => 'struktur-organisasi'], ['title' => 'Struktur Organisasi', 'content' => '']);
         $leaders = Staff::active()->byCategory('pimpinan')->get();
         $dosen   = Staff::active()->byCategory('dosen')->get();
         $tendik  = Staff::active()->byCategory('tendik')->get();
@@ -50,7 +50,7 @@ class CampusProfileController extends Controller
 
     public function accreditation()
     {
-        $page = Page::findBySlug('akreditasi');
+        $page = Page::firstOrCreate(['slug' => 'akreditasi'], ['title' => 'Akreditasi', 'content' => '']);
         return view('frontend.profile.accreditation', compact('page'));
     }
 

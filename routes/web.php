@@ -119,6 +119,7 @@ use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PmbInfoController;
+use App\Http\Controllers\Admin\KontenController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
 
@@ -153,6 +154,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     });
 
     // Info PMB (edit halaman info: syarat, biaya, beasiswa, jadwal)
+    Route::get('konten',           [KontenController::class, 'index'])->name('konten.index');
+    Route::get('konten/{slug}',    [KontenController::class, 'edit'])->name('konten.edit');
+
     Route::prefix('pmb-info')->name('pmb-info.')->group(function () {
         Route::get('/',           [PmbInfoController::class, 'index'])->name('index');
         Route::get('/{slug}/edit',[PmbInfoController::class, 'edit'])->name('edit');
