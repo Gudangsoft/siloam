@@ -7,17 +7,18 @@
 @section('og_image', Storage::disk('public')->url($news->image))
 @endif
 @push('jsonld')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": "{{ $news->title }}",
-    "datePublished": "{{ $news->created_at->toIso8601String() }}",
-    "dateModified": "{{ $news->updated_at->toIso8601String() }}",
-    "description": "{{ Str::limit(strip_tags($news->content), 160) }}",
-    "publisher": { "@type": "Organization", "name": "STT Siloam Medan" }
-}
-</script>
+@php
+$_newsJsonLd = json_encode([
+    '@context'      => 'https://schema.org',
+    '@type'         => 'NewsArticle',
+    'headline'      => $news->title,
+    'datePublished' => $news->created_at->toIso8601String(),
+    'dateModified'  => $news->updated_at->toIso8601String(),
+    'description'   => Str::limit(strip_tags($news->content), 160),
+    'publisher'     => ['@type' => 'Organization', 'name' => 'STT Siloam Medan'],
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+@endphp
+<script type="application/ld+json">{!! $_newsJsonLd !!}</script>
 @endpush
 @endisset
 @section('content')

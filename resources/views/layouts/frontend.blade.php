@@ -57,24 +57,25 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>body{font-family:"Inter",sans-serif;}.nav-link{color:#374151;font-weight:500;transition:color 0.2s;padding:0.5rem 0.75rem;border-radius:0.375rem;font-size:0.875rem;display:inline-block;}.nav-link:hover{color:#1e3a8a;}.dropdown-menu{position:absolute;top:100%;left:0;margin-top:4px;width:14rem;background:white;box-shadow:0 10px 25px rgba(0,0,0,0.15);border-radius:0.5rem;border:1px solid #f3f4f6;opacity:0;visibility:hidden;transition:all 0.2s;z-index:50;}.group:hover .dropdown-menu{opacity:1;visibility:visible;}</style>
     {{-- JSON-LD structured data (Organization default) --}}
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "CollegeOrUniversity",
-        "name": "{{ $siteName }}",
-        "url": "{{ config('app.url') }}",
-        "logo": "{{ $siteSettings->get('logo') ? Storage::disk('public')->url($siteSettings->get('logo')) : asset('images/logo.png') }}",
-        "description": "{{ $metaDesc }}",
-        "telephone": "{{ $siteSettings->get('phone','') }}",
-        "email": "{{ $siteSettings->get('email','') }}",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Medan",
-            "addressRegion": "Sumatera Utara",
-            "addressCountry": "ID"
-        }
-    }
-    </script>
+    @php
+    $_jsonLd = json_encode([
+        '@context'    => 'https://schema.org',
+        '@type'       => 'CollegeOrUniversity',
+        'name'        => $siteName,
+        'url'         => config('app.url'),
+        'logo'        => $siteSettings->get('logo') ? Storage::disk('public')->url($siteSettings->get('logo')) : asset('images/logo.png'),
+        'description' => $metaDesc,
+        'telephone'   => $siteSettings->get('phone', ''),
+        'email'       => $siteSettings->get('email', ''),
+        'address'     => [
+            '@type'           => 'PostalAddress',
+            'addressLocality' => 'Medan',
+            'addressRegion'   => 'Sumatera Utara',
+            'addressCountry'  => 'ID',
+        ],
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    @endphp
+    <script type="application/ld+json">{!! $_jsonLd !!}</script>
     @stack('jsonld')
     @stack("styles")
 </head>
