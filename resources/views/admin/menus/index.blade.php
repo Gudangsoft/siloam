@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('title', 'Menu Dinamis')
 @section('page-title', 'Menu Dinamis')
 @section('breadcrumb', 'Admin / Menu Dinamis')
@@ -83,7 +83,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('admin.menus.destroy', $menu) }}" method="POST"
-                                          onsubmit="return confirm('Hapus menu ini beserta semua sub-menunya?')">
+                                          onsubmit="return delConfirm(event, this, '{{ addslashes($menu->title) }}')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                             <i class="fas fa-trash"></i>
@@ -120,7 +120,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('admin.menus.destroy', $child) }}" method="POST"
-                                          onsubmit="return confirm('Hapus sub-menu ini?')">
+                                          onsubmit="return delConfirm(event, this, '{{ addslashes($child->title) }}')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
@@ -181,7 +181,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('admin.menus.destroy', $menu) }}" method="POST"
-                                          onsubmit="return confirm('Hapus menu ini?')">
+                                          onsubmit="return delConfirm(event, this, '{{ addslashes($menu->title) }}')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
@@ -214,7 +214,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('admin.menus.destroy', $child) }}" method="POST"
-                                          onsubmit="return confirm('Hapus sub-menu ini?')">
+                                          onsubmit="return delConfirm(event, this, '{{ addslashes($child->title) }}')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>

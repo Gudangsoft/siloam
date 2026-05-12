@@ -37,7 +37,7 @@
                     </td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.pmb.show', $pmb) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                        <form action="{{ route('admin.pmb.destroy', $pmb) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                        <form action="{{ route('admin.pmb.destroy', $pmb) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($pmb->full_name) }}')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>

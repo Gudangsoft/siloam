@@ -430,6 +430,10 @@
         </div>
 
         <nav class="sidebar-nav">
+            @php
+            $_filled = \App\Models\Page::whereIn('slug', ['sejarah','visi-misi','elearning','perpustakaan'])
+                ->whereNotNull('content')->where('content','!=','')->pluck('slug')->flip()->all();
+            @endphp
             <!-- Dashboard -->
             <div class="nav-section">
                 <div class="nav-section-label">Utama</div>
@@ -472,12 +476,12 @@
             <a href="{{ route('admin.pages.index') }}"
                class="nav-item {{ (request()->routeIs('admin.pages.*') && !in_array(request()->route('page')?->slug ?? '', ['sejarah','visi-misi'])) || (request()->routeIs('admin.konten.*') && !in_array(request()->segment(4) ?? '', ['sejarah','visi-misi'])) ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-file-alt"></i></span>
-                Halaman Statis
+                Halaman Lainnya
             </a>
             <a href="{{ route('admin.menus.index') }}"
                class="nav-item {{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-bars"></i></span>
-                Menu Dinamis
+                Navigasi Website
             </a>
 
             <!-- Profil Kampus -->
@@ -488,11 +492,13 @@
                class="nav-item {{ request()->routeIs('admin.profil.sejarah.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-landmark"></i></span>
                 Sejarah Kampus
+                <span style="margin-left:auto;width:7px;height:7px;border-radius:50%;flex-shrink:0;background:{{ isset($_filled['sejarah']) ? '#10b981' : '#f59e0b' }}"></span>
             </a>
             <a href="{{ route('admin.profil.visi-misi.edit') }}"
                class="nav-item {{ request()->routeIs('admin.profil.visi-misi.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-bullseye"></i></span>
                 Visi &amp; Misi
+                <span style="margin-left:auto;width:7px;height:7px;border-radius:50%;flex-shrink:0;background:{{ isset($_filled['visi-misi']) ? '#10b981' : '#f59e0b' }}"></span>
             </a>
             <a href="{{ route('admin.staff.index') }}"
                class="nav-item {{ request()->routeIs('admin.staff.*') ? 'active' : '' }}">
@@ -523,11 +529,13 @@
                class="nav-item {{ request()->routeIs('admin.akademik.elearning.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-laptop"></i></span>
                 E-Learning
+                <span style="margin-left:auto;width:7px;height:7px;border-radius:50%;flex-shrink:0;background:{{ isset($_filled['elearning']) ? '#10b981' : '#f59e0b' }}"></span>
             </a>
             <a href="{{ route('admin.akademik.perpustakaan.edit') }}"
                class="nav-item {{ request()->routeIs('admin.akademik.perpustakaan.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-book"></i></span>
                 Perpustakaan Digital
+                <span style="margin-left:auto;width:7px;height:7px;border-radius:50%;flex-shrink:0;background:{{ isset($_filled['perpustakaan']) ? '#10b981' : '#f59e0b' }}"></span>
             </a>
 
             <!-- PMB & Mahasiswa -->
@@ -569,20 +577,26 @@
                 Data Alumni
             </a>
 
-            <!-- Penelitian & Kerjasama -->
-            <div class="nav-section">
-                <div class="nav-section-label">Penelitian & Kerjasama</div>
-            </div>
-            <a href="{{ route('admin.research.index') }}"
-               class="nav-item {{ request()->routeIs('admin.research.*') ? 'active' : '' }}">
-                <span class="icon"><i class="fas fa-flask"></i></span>
-                Penelitian & Pengabdian
-            </a>
-            <a href="{{ route('admin.partnerships.index') }}"
-               class="nav-item {{ request()->routeIs('admin.partnerships.*') ? 'active' : '' }}">
-                <span class="icon"><i class="fas fa-handshake"></i></span>
-                Kerjasama
-            </a>
+            <!-- Penelitian & Kerjasama (collapsible) -->
+            <details class="nav-group" {{ request()->routeIs('admin.research.*') || request()->routeIs('admin.partnerships.*') ? 'open' : '' }}>
+                <summary>
+                    <span class="icon"><i class="fas fa-flask"></i></span>
+                    Penelitian & Kerjasama
+                    <i class="fas fa-chevron-down chevron"></i>
+                </summary>
+                <div class="nav-sub">
+                    <a href="{{ route('admin.research.index') }}"
+                       class="nav-item {{ request()->routeIs('admin.research.*') ? 'active' : '' }}">
+                        <i class="fas fa-microscope" style="width:14px;text-align:center"></i>
+                        Penelitian & Pengabdian
+                    </a>
+                    <a href="{{ route('admin.partnerships.index') }}"
+                       class="nav-item {{ request()->routeIs('admin.partnerships.*') ? 'active' : '' }}">
+                        <i class="fas fa-handshake" style="width:14px;text-align:center"></i>
+                        Kerjasama
+                    </a>
+                </div>
+            </details>
 
             <!-- Lainnya -->
             <div class="nav-section">
@@ -705,5 +719,53 @@
         });
     </script>
     @stack('scripts')
+
+    <!-- ===== GLOBAL DELETE CONFIRMATION MODAL ===== -->
+    <div class="modal fade" id="_deleteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:420px">
+            <div class="modal-content" style="border-radius:16px;border:none;overflow:hidden">
+                <div class="modal-body" style="padding:32px 28px 20px;text-align:center">
+                    <div style="width:64px;height:64px;background:#fef2f2;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+                        <i class="fas fa-trash" style="color:#ef4444;font-size:26px"></i>
+                    </div>
+                    <h5 style="font-weight:700;color:#0f172a;margin-bottom:8px;font-size:18px">Hapus data ini?</h5>
+                    <p style="color:#64748b;font-size:14px;margin:0;line-height:1.6">
+                        Anda akan menghapus <strong id="_deleteItemName" style="color:#ef4444"></strong>.<br>
+                        Tindakan ini <strong>tidak dapat dibatalkan</strong>.
+                    </p>
+                </div>
+                <div class="modal-footer" style="border:none;padding:0 28px 28px;gap:10px;justify-content:center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="min-width:120px">
+                        <i class="fas fa-times me-1"></i> Batal
+                    </button>
+                    <button type="button" class="btn btn-danger" id="_confirmDeleteBtn" style="min-width:120px">
+                        <i class="fas fa-trash me-1"></i> Ya, Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ===== GLOBAL DELETE CONFIRMATION =====
+    let _pendingDeleteForm = null;
+    function delConfirm(event, form, name) {
+        if (event) event.preventDefault();
+        _pendingDeleteForm = form;
+        document.getElementById('_deleteItemName').textContent = name;
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('_deleteModal')).show();
+        return false;
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('_confirmDeleteBtn').addEventListener('click', function () {
+            bootstrap.Modal.getInstance(document.getElementById('_deleteModal')).hide();
+            if (_pendingDeleteForm) {
+                const saved = _pendingDeleteForm.onsubmit;
+                _pendingDeleteForm.onsubmit = null;
+                _pendingDeleteForm.submit();
+            }
+        });
+    });
+    </script>
 </body>
 </html>

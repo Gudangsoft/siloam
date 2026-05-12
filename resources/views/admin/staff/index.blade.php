@@ -24,7 +24,7 @@
                     <td>@if($item->is_active)<span class="badge-status badge-success">Aktif</span>@else<span class="badge-status badge-secondary">Nonaktif</span>@endif</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.staff.edit', $item) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('admin.staff.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                        <form action="{{ route('admin.staff.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($item->name) }}')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>

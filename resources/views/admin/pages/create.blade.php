@@ -54,13 +54,13 @@
 
             <div class="row g-3 mt-1">
                 <div class="col-md-6">
-                    <label class="form-label">Meta Title <span style="color:#94a3b8;font-size:12px">(SEO)</span></label>
+                    <label class="form-label">Judul di Google <span style="color:#94a3b8;font-size:12px">(SEO — opsional)</span></label>
                     <input type="text" name="meta_title" class="form-control"
                            value="{{ old('meta_title') }}"
                            placeholder="Judul yang muncul di Google...">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Meta Description <span style="color:#94a3b8;font-size:12px">(SEO)</span></label>
+                    <label class="form-label">Deskripsi di Google <span style="color:#94a3b8;font-size:12px">(SEO — opsional)</span></label>
                     <textarea name="meta_description" class="form-control" rows="2"
                               placeholder="Deskripsi singkat untuk mesin pencari...">{{ old('meta_description') }}</textarea>
                 </div>

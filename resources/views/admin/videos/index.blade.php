@@ -22,7 +22,7 @@
                     <td>@if($v->is_published)<span class="badge-status badge-success">Aktif</span>@else<span class="badge-status badge-secondary">Draft</span>@endif</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.videos.edit', $v) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('admin.videos.destroy', $v) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">@csrf @method('DELETE')<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
+                        <form action="{{ route('admin.videos.destroy', $v) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($v->title) }}')">@csrf @method('DELETE')<button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
                     </td>
                 </tr>
                 @empty<tr><td colspan="6" class="text-center py-4">Belum ada video</td></tr>@endforelse

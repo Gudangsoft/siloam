@@ -24,7 +24,7 @@
                     <td>{{ $item->created_at->format('d/m/Y') }}</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.news.edit', $item) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('admin.news.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus berita ini?')">
+                        <form action="{{ route('admin.news.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($item->title) }}')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>

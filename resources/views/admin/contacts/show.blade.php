@@ -29,7 +29,7 @@
                 <a href="mailto:{{ $contact->email }}?subject=Re: {{ $contact->subject }}" class="btn btn-primary">
                     <i class="fas fa-reply me-1"></i> Balas via Email
                 </a>
-                <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" onsubmit="return confirm('Hapus pesan ini?')">
+                <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" onsubmit="return delConfirm(event, this, 'pesan dari {{ addslashes($contact->name) }}')">
                     @csrf @method('DELETE')
                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash me-1"></i> Hapus</button>
                 </form>

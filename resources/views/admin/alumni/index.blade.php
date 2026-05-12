@@ -24,7 +24,7 @@
                     <td>@if($a->is_published)<span class="badge-status badge-success">Aktif</span>@else<span class="badge-status badge-secondary">Nonaktif</span>@endif</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.alumni.edit', $a) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('admin.alumni.destroy', $a) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">@csrf @method('DELETE')<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
+                        <form action="{{ route('admin.alumni.destroy', $a) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($a->name) }}')">@csrf @method('DELETE')<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
                     </td>
                 </tr>
                 @empty<tr><td colspan="8" class="text-center py-4">Belum ada data alumni</td></tr>@endforelse

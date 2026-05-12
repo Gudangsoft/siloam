@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('title', 'Halaman Statis')
 @section('page-title', 'Kelola Halaman Statis')
 @section('breadcrumb', 'Konten Website')
@@ -52,7 +52,7 @@
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="{{ route('admin.pages.destroy', $p) }}" method="POST"
-                                  onsubmit="return confirm('Hapus halaman &quot;{{ $p->title }}&quot;? Tindakan ini tidak dapat dibatalkan.')">
+                                  onsubmit="return delConfirm(event, this, '{{ addslashes($p->title) }}')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                     <i class="fas fa-trash"></i>

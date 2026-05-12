@@ -19,7 +19,7 @@
                     <td>@if($item->is_read)<span class="badge-status badge-success">Dibaca</span>@else<span class="badge-status badge-warning">Belum Dibaca</span>@endif</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.contacts.show', $item) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                        <form action="{{ route('admin.contacts.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus pesan ini?')">
+                        <form action="{{ route('admin.contacts.destroy', $item) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, 'pesan dari {{ addslashes($item->name) }}')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>

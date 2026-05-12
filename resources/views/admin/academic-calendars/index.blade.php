@@ -24,7 +24,7 @@
                     <td>@if($c->is_published)<span class="badge-status badge-success">Tayang</span>@else<span class="badge-status badge-secondary">Draft</span>@endif</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.academic-calendars.edit', $c) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('admin.academic-calendars.destroy', $c) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">@csrf @method('DELETE')<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
+                        <form action="{{ route('admin.academic-calendars.destroy', $c) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($c->title) }}')">@csrf @method('DELETE')<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
                     </td>
                 </tr>
                 @empty<tr><td colspan="8" class="text-center py-4">Belum ada jadwal</td></tr>@endforelse

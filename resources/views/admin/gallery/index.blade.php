@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('title', 'Galeri Foto')
 @section('page-title', 'Galeri Foto')
 @section('breadcrumb', 'Konten Website')
@@ -165,7 +165,7 @@
                     <i class="fas fa-edit me-1"></i>Edit
                 </a>
                 <form action="{{ route('admin.gallery.destroy', $item) }}" method="POST"
-                      onsubmit="return confirm('Hapus foto &quot;{{ $item->title }}&quot;?')"
+                      onsubmit="return delConfirm(event, this, '{{ addslashes($item->title) }}')"
                       class="flex-fill">
                     @csrf @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger w-100">

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('title', 'Edit Halaman: ' . $page->title)
 @section('page-title', 'Edit Halaman')
 @section('breadcrumb', 'Halaman Statis')
@@ -55,13 +55,13 @@
 
             <div class="row g-3 mt-1">
                 <div class="col-md-6">
-                    <label class="form-label">Meta Title <span style="color:#94a3b8;font-size:12px">(SEO)</span></label>
+                    <label class="form-label">Judul di Google <span style="color:#94a3b8;font-size:12px">(SEO — opsional)</span></label>
                     <input type="text" name="meta_title" class="form-control"
                            value="{{ old('meta_title', $page->meta_title) }}"
                            placeholder="Judul yang muncul di Google...">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Meta Description <span style="color:#94a3b8;font-size:12px">(SEO)</span></label>
+                    <label class="form-label">Deskripsi di Google <span style="color:#94a3b8;font-size:12px">(SEO — opsional)</span></label>
                     <textarea name="meta_description" class="form-control" rows="2"
                               placeholder="Deskripsi singkat untuk mesin pencari...">{{ old('meta_description', $page->meta_description) }}</textarea>
                 </div>
@@ -73,7 +73,7 @@
                 </button>
                 <a href="{{ route('admin.pages.index') }}" class="btn btn-secondary btn-lg">Batal</a>
                 <button type="button" class="btn btn-danger btn-lg ms-auto"
-                        onclick="if(confirm('Hapus halaman ini? Semua link menu yang mengarah ke halaman ini akan rusak.')) document.getElementById('deletePageForm').submit()">
+                        onclick="delConfirm(null, document.getElementById('deletePageForm'), '{{ addslashes($page->title) }}')">
                     <i class="fas fa-trash me-1"></i> Hapus Halaman
                 </button>
             </div>

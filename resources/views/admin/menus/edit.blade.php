@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('title', 'Edit Menu: ' . $menu->title)
 @section('page-title', 'Edit Menu')
 @section('breadcrumb', 'Menu Dinamis')
@@ -380,7 +380,7 @@ else $initType = 'internal';
         </button>
         <a href="{{ route('admin.menus.index') }}" class="btn btn-secondary btn-lg">Batal</a>
         <form action="{{ route('admin.menus.destroy', $menu) }}" method="POST" class="ms-auto"
-              onsubmit="return confirm('Hapus menu {{ $menu->title }}? Sub-menu di bawahnya juga akan dihapus.')">
+              onsubmit="return delConfirm(event, this, '{{ addslashes($menu->title) }}')">
             @csrf @method('DELETE')
             <button type="submit" class="btn btn-danger">
                 <i class="fas fa-trash me-1"></i> Hapus Menu Ini

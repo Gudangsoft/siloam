@@ -24,7 +24,7 @@
                     <td>@if($p->is_active)<span class="badge-status badge-success">Aktif</span>@else<span class="badge-status badge-secondary">Nonaktif</span>@endif</td>
                     <td style="white-space:nowrap">
                         <a href="{{ route('admin.study-programs.edit', $p) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('admin.study-programs.destroy', $p) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus prodi?')">@csrf @method('DELETE')<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
+                        <form action="{{ route('admin.study-programs.destroy', $p) }}" method="POST" class="d-inline" onsubmit="return delConfirm(event, this, '{{ addslashes($p->name) }}')">@csrf @method('DELETE')<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form>
                     </td>
                 </tr>
                 @empty<tr><td colspan="8" class="text-center py-4">Belum ada program studi</td></tr>@endforelse

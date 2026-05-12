@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 @section('title', isset($staff) ? 'Edit Staf: '.$staff->name : 'Tambah Dosen/Staf')
 @section('page-title', isset($staff) ? 'Edit Dosen/Staf' : 'Tambah Dosen/Staf')
 @section('breadcrumb', 'Profil Kampus')
@@ -287,7 +287,7 @@
         <a href="{{ route('admin.staff.index') }}" class="btn btn-secondary btn-lg">Batal</a>
         @if(isset($staff))
         <form action="{{ route('admin.staff.destroy', $staff) }}" method="POST" class="ms-auto"
-              onsubmit="return confirm('Hapus data {{ $staff->name }}? Data tidak dapat dikembalikan.')">
+              onsubmit="return delConfirm(event, this, '{{ addslashes($staff->name) }}')">
             @csrf @method('DELETE')
             <button type="submit" class="btn btn-danger btn-lg">
                 <i class="fas fa-trash me-1"></i> Hapus

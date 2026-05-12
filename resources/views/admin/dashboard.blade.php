@@ -4,6 +4,52 @@
 @section('breadcrumb', 'Selamat datang, ' . auth()->user()->name)
 @section('content')
 
+{{-- ===== WELCOME BANNER ===== --}}
+<div style="background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%);border-radius:16px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="flex:1;min-width:180px">
+        <div style="color:rgba(255,255,255,.6);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px">Selamat datang kembali</div>
+        <div style="color:white;font-size:20px;font-weight:800;line-height:1.2">{{ auth()->user()->name }}</div>
+        <div style="color:rgba(255,255,255,.45);font-size:12px;margin-top:3px">{{ now()->locale('id')->translatedFormat('l, d F Y') }}</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        @php $btnBase = 'display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;color:white;text-decoration:none;font-size:13px;font-weight:600;transition:all .15s'; @endphp
+        <a href="{{ route('admin.news.create') }}"
+           style="{{ $btnBase }};background:rgba(255,255,255,.15)"
+           onmouseover="this.style.background='rgba(255,255,255,.25)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">
+            <i class="fas fa-plus-circle"></i> Tulis Berita
+        </a>
+        <a href="{{ route('admin.events.create') }}"
+           style="{{ $btnBase }};background:rgba(255,255,255,.15)"
+           onmouseover="this.style.background='rgba(255,255,255,.25)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">
+            <i class="fas fa-calendar-plus"></i> Buat Agenda
+        </a>
+        <a href="{{ route('admin.gallery.create') }}"
+           style="{{ $btnBase }};background:rgba(255,255,255,.15)"
+           onmouseover="this.style.background='rgba(255,255,255,.25)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">
+            <i class="fas fa-images"></i> Upload Foto
+        </a>
+        @if($stats['pmb_pending'] > 0)
+        <a href="{{ route('admin.pmb.index') }}"
+           style="{{ $btnBase }};background:rgba(239,68,68,.75)"
+           onmouseover="this.style.background='rgba(220,38,38,.9)'" onmouseout="this.style.background='rgba(239,68,68,.75)'">
+            <i class="fas fa-user-clock"></i> {{ $stats['pmb_pending'] }} Menunggu Review
+        </a>
+        @endif
+        @if($stats['contacts'] > 0)
+        <a href="{{ route('admin.contacts.index') }}"
+           style="{{ $btnBase }};background:rgba(245,158,11,.75)"
+           onmouseover="this.style.background='rgba(217,119,6,.9)'" onmouseout="this.style.background='rgba(245,158,11,.75)'">
+            <i class="fas fa-envelope"></i> {{ $stats['contacts'] }} Pesan Baru
+        </a>
+        @endif
+        <a href="{{ url('/') }}" target="_blank"
+           style="{{ $btnBase }};background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75)"
+           onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">
+            <i class="fas fa-external-link-alt"></i> Lihat Website
+        </a>
+    </div>
+</div>
+
 <div class="stat-grid">
     <div class="stat-card">
         <div class="stat-icon" style="background:#eff6ff;color:#2563eb;"><i class="fas fa-user-plus"></i></div>
