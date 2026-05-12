@@ -15,4 +15,20 @@ class Page extends Model
     {
         return static::where('slug', $slug)->first();
     }
+
+    public static function findOrCreateBySlug(string $slug, string $title = ''): self
+    {
+        $page = static::withTrashed()->where('slug', $slug)->first();
+        if (!$page) {
+            return static::create([
+                'slug'    => $slug,
+                'title'   => $title ?: ucwords(str_replace('-', ' ', $slug)),
+                'content' => '',
+            ]);
+        }
+        if ($page->trashed()) {
+            $page->restore();
+        }
+        return $page;
+    }
 }

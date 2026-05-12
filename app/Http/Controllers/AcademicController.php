@@ -43,13 +43,13 @@ class AcademicController extends Controller
 
     public function elearning()
     {
-        $page = Page::firstOrCreate(['slug' => 'elearning'], ['title' => 'E-Learning', 'content' => '']);
+        $page = Page::findOrCreateBySlug('elearning', 'E-Learning');
         return view('frontend.academic.elearning', compact('page'));
     }
 
     public function library()
     {
-        $page = Page::firstOrCreate(['slug' => 'perpustakaan'], ['title' => 'Perpustakaan Digital', 'content' => '']);
+        $page = Page::findOrCreateBySlug('perpustakaan', 'Perpustakaan Digital');
         return view('frontend.academic.library', compact('page'));
     }
 }

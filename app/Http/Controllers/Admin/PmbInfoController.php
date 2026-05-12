@@ -33,10 +33,7 @@ class PmbInfoController extends Controller
     {
         abort_unless(array_key_exists($slug, $this->pages), 404);
         $info = $this->pages[$slug];
-        $page = Page::firstOrCreate(
-            ['slug' => $slug],
-            ['title' => $info['title'], 'is_active' => true]
-        );
+        $page = Page::findOrCreateBySlug($slug, $info['title']);
         return view('admin.pmb-info.edit', compact('page', 'info', 'slug'));
     }
 
@@ -44,10 +41,7 @@ class PmbInfoController extends Controller
     {
         abort_unless(array_key_exists($slug, $this->pages), 404);
         $request->validate(['content' => 'nullable|string']);
-        $page = Page::firstOrCreate(
-            ['slug' => $slug],
-            ['title' => $this->pages[$slug]['title'], 'is_active' => true]
-        );
+        $page = Page::findOrCreateBySlug($slug, $this->pages[$slug]['title']);
         $page->update(['content' => $request->input('content')]);
         return redirect()->route('admin.pmb-info.index')
             ->with('success', 'Konten "' . $this->pages[$slug]['title'] . '" berhasil disimpan!');

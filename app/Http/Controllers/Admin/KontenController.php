@@ -58,10 +58,7 @@ class KontenController extends Controller
             }
         }
 
-        $page = Page::firstOrCreate(
-            ['slug' => $slug],
-            ['title' => $title, 'content' => '']
-        );
+        $page = Page::findOrCreateBySlug($slug, $title);
 
         return redirect()->route('admin.pages.edit', $page);
     }
