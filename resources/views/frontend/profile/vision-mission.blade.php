@@ -75,43 +75,55 @@
 @php
 // ── parse DB content ──────────────────────────────────────────────────────────
 $raw         = (isset($page) && $page->content) ? json_decode($page->content, true) : null;
-$savedMisi   = is_array($raw) ? ($raw['misi']   ?? (isset($raw[0]) ? $raw : [])) : [];
+$savedMisi   = is_array($raw) ? ($raw['misi']   ?? (isset($raw[0]) ? array_values($raw) : [])) : [];
 $savedTujuan = is_array($raw) ? ($raw['tujuan'] ?? []) : [];
 
 $visiText = (isset($page) && $page->meta_title)
     ? $page->meta_title
     : 'Menjadi Sekolah Tinggi Teologi yang handal dalam mendidik tenaga Guru Agama Kristen yang profesional dan hamba Tuhan yang mampu menggembalakan jemaat.';
 
-$misiDefault = [
-    ['title'=>'Pendidikan & Pengajaran','text'=>'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.'],
-    ['title'=>'Penelitian Teologi',     'text'=>'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.'],
-    ['title'=>'Pengabdian Masyarakat',  'text'=>'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.'],
-    ['title'=>'Semangat Oikumenis',     'text'=>'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.'],
+// Palet warna berulang untuk misi (berapapun jumlahnya)
+$misiColors = [
+    ['from'=>'#1e40af','to'=>'#3b82f6','light'=>'#eff6ff','border'=>'#bfdbfe','badge'=>'#dbeafe','bt'=>'#1e40af'],
+    ['from'=>'#4338ca','to'=>'#6366f1','light'=>'#eef2ff','border'=>'#c7d2fe','badge'=>'#e0e7ff','bt'=>'#4338ca'],
+    ['from'=>'#6d28d9','to'=>'#8b5cf6','light'=>'#f5f3ff','border'=>'#ddd6fe','badge'=>'#ede9fe','bt'=>'#6d28d9'],
+    ['from'=>'#7c3aed','to'=>'#a855f7','light'=>'#faf5ff','border'=>'#e9d5ff','badge'=>'#f3e8ff','bt'=>'#7c3aed'],
 ];
-$misiTemplate = [
-    ['no'=>'01','icon'=>'fas fa-graduation-cap','color'=>['from'=>'#1e40af','to'=>'#3b82f6','light'=>'#eff6ff','border'=>'#bfdbfe','badge'=>'#dbeafe','badge_text'=>'#1e40af']],
-    ['no'=>'02','icon'=>'fas fa-microscope',    'color'=>['from'=>'#4338ca','to'=>'#6366f1','light'=>'#eef2ff','border'=>'#c7d2fe','badge'=>'#e0e7ff','badge_text'=>'#4338ca']],
-    ['no'=>'03','icon'=>'fas fa-hands-helping', 'color'=>['from'=>'#6d28d9','to'=>'#8b5cf6','light'=>'#f5f3ff','border'=>'#ddd6fe','badge'=>'#ede9fe','badge_text'=>'#6d28d9']],
-    ['no'=>'04','icon'=>'fas fa-globe-asia',    'color'=>['from'=>'#7c3aed','to'=>'#a855f7','light'=>'#faf5ff','border'=>'#e9d5ff','badge'=>'#f3e8ff','badge_text'=>'#7c3aed']],
+$misiIcons  = ['fas fa-graduation-cap','fas fa-microscope','fas fa-hands-helping','fas fa-globe-asia','fas fa-book-open','fas fa-users'];
+$misiDefaultTexts = [
+    'Menyelenggarakan pendidikan dan pengajaran yang handal di bidang teologi dan pendidikan agama Kristen.',
+    'Menyelenggarakan penelitian teologi dan pendidikan agama Kristen yang handal dalam konteks Pendidikan Agama Kristen dan penggembalaan jemaat.',
+    'Menyelenggarakan pengabdian masyarakat yang handal dalam bidang pelayanan gereja dan sekolah.',
+    'Menyelenggarakan pendidikan agama Kristen dan penggembalaan jemaat dengan semangat oikumenis.',
 ];
+$misiSource = !empty($savedMisi) ? $savedMisi : $misiDefaultTexts;
 $misi = [];
-foreach ($misiTemplate as $i => $t) {
-    $misi[] = array_merge($t, [
-        'title' => $misiDefault[$i]['title'],
-        'text'  => !empty($savedMisi[$i]) ? $savedMisi[$i] : $misiDefault[$i]['text'],
-    ]);
+foreach ($misiSource as $i => $text) {
+    $c = $misiColors[$i % count($misiColors)];
+    $misi[] = ['no' => str_pad($i+1,2,'0',STR_PAD_LEFT), 'icon' => $misiIcons[$i % count($misiIcons)], 'color' => $c, 'text' => $text];
 }
 
-$tujuanDefault = [
+// Palet warna berulang untuk tujuan
+$tujuanColors = [
+    ['from'=>'#065f46','to'=>'#059669','light'=>'#ecfdf5','border'=>'#a7f3d0','badge'=>'#d1fae5','bt'=>'#065f46'],
+    ['from'=>'#047857','to'=>'#10b981','light'=>'#f0fdf4','border'=>'#bbf7d0','badge'=>'#dcfce7','bt'=>'#166534'],
+    ['from'=>'#0d9488','to'=>'#2dd4bf','light'=>'#f0fdfa','border'=>'#99f6e4','badge'=>'#ccfbf1','bt'=>'#134e4a'],
+    ['from'=>'#0891b2','to'=>'#22d3ee','light'=>'#ecfeff','border'=>'#a5f3fc','badge'=>'#cffafe','bt'=>'#164e63'],
+    ['from'=>'#0369a1','to'=>'#38bdf8','light'=>'#f0f9ff','border'=>'#bae6fd','badge'=>'#e0f2fe','bt'=>'#0c4a6e'],
+];
+$tujuanIcons  = ['fas fa-user-graduate','fas fa-church','fas fa-flask','fas fa-hands-helping','fas fa-heart','fas fa-globe'];
+$tujuanDefaultTexts = [
     'Menghasilkan lulusan Guru Agama Kristen yang profesional dan kompeten di bidangnya.',
     'Menghasilkan hamba Tuhan yang mampu memimpin dan menggembalakan jemaat secara efektif.',
     'Menghasilkan peneliti di bidang teologi dan pendidikan agama Kristen yang berkontribusi bagi pengembangan gereja.',
     'Menghasilkan tenaga pengabdi masyarakat yang handal dalam pelayanan gereja, sekolah, dan komunitas.',
     'Membentuk karakter Kristen yang kuat sebagai fondasi pelayanan di gereja dan masyarakat.',
 ];
+$tujuanSource = !empty($savedTujuan) ? $savedTujuan : $tujuanDefaultTexts;
 $tujuan = [];
-for ($i = 0; $i < 5; $i++) {
-    $tujuan[] = !empty($savedTujuan[$i]) ? $savedTujuan[$i] : $tujuanDefault[$i];
+foreach ($tujuanSource as $i => $text) {
+    $c = $tujuanColors[$i % count($tujuanColors)];
+    $tujuan[] = ['no' => str_pad($i+1,2,'0',STR_PAD_LEFT), 'icon' => $tujuanIcons[$i % count($tujuanIcons)], 'color' => $c, 'text' => $text];
 }
 @endphp
 
@@ -203,7 +215,7 @@ for ($i = 0; $i < 5; $i++) {
                 <span class="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 text-xs font-bold px-4 py-2 rounded-full tracking-widest uppercase mb-4">
                     <i class="fas fa-rocket"></i> Misi Kami
                 </span>
-                <h2 class="text-4xl md:text-5xl font-black gradient-text">Empat Pilar Misi</h2>
+                <h2 class="text-4xl md:text-5xl font-black gradient-text">Misi</h2>
                 <p class="text-gray-400 mt-3 text-base max-w-md mx-auto">Landasan gerak dan arah pelayanan STT Siloam Medan</p>
             </div>
 
@@ -228,12 +240,11 @@ for ($i = 0; $i < 5; $i++) {
                                         <i class="{{ $m['icon'] }} text-white text-xl"></i>
                                     </div>
                                     <div class="flex-1">
-                                        <div class="flex items-center gap-3 mb-2">
+                                        <div class="mb-2">
                                             <span class="text-xs font-black px-2.5 py-1 rounded-full"
-                                                  style="background:{{ $m['color']['badge'] }};color:{{ $m['color']['badge_text'] }}">
+                                                  style="background:{{ $m['color']['badge'] }};color:{{ $m['color']['bt'] }}">
                                                 MISI {{ $m['no'] }}
                                             </span>
-                                            <h3 class="font-bold text-base text-gray-800">{{ $m['title'] }}</h3>
                                         </div>
                                         <p class="text-gray-600 leading-relaxed text-sm md:text-base">{{ $m['text'] }}</p>
                                     </div>
@@ -272,33 +283,21 @@ for ($i = 0; $i < 5; $i++) {
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                @php
-                $tujuanIcons  = ['fas fa-user-graduate','fas fa-church','fas fa-flask','fas fa-hands-helping','fas fa-heart'];
-                $tujuanShades = [
-                    ['from'=>'#065f46','to'=>'#059669','light'=>'#ecfdf5','border'=>'#a7f3d0','badge'=>'#d1fae5','bt'=>'#065f46'],
-                    ['from'=>'#047857','to'=>'#10b981','light'=>'#f0fdf4','border'=>'#bbf7d0','badge'=>'#dcfce7','bt'=>'#166534'],
-                    ['from'=>'#059669','to'=>'#34d399','light'=>'#ecfdf5','border'=>'#6ee7b7','badge'=>'#d1fae5','bt'=>'#065f46'],
-                    ['from'=>'#0d9488','to'=>'#2dd4bf','light'=>'#f0fdfa','border'=>'#99f6e4','badge'=>'#ccfbf1','bt'=>'#134e4a'],
-                    ['from'=>'#0891b2','to'=>'#22d3ee','light'=>'#ecfeff','border'=>'#a5f3fc','badge'=>'#cffafe','bt'=>'#164e63'],
-                ];
-                @endphp
-
-                @foreach($tujuan as $i => $item)
-                @php $s = $tujuanShades[$i]; @endphp
+                @foreach($tujuan as $i => $t)
                 <div class="bg-white rounded-2xl p-6 border-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                     style="border-color:{{ $s['border'] }}"
+                     style="border-color:{{ $t['color']['border'] }}"
                      data-aos="fade-up" data-aos-delay="{{ $i * 70 }}">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0"
-                             style="background:linear-gradient(135deg,{{ $s['from'] }},{{ $s['to'] }})">
-                            <i class="{{ $tujuanIcons[$i] }} text-white text-lg"></i>
+                             style="background:linear-gradient(135deg,{{ $t['color']['from'] }},{{ $t['color']['to'] }})">
+                            <i class="{{ $t['icon'] }} text-white text-lg"></i>
                         </div>
                         <span class="text-xs font-black px-3 py-1 rounded-full"
-                              style="background:{{ $s['badge'] }};color:{{ $s['bt'] }}">
-                            TUJUAN {{ str_pad($i+1, 2, '0', STR_PAD_LEFT) }}
+                              style="background:{{ $t['color']['badge'] }};color:{{ $t['color']['bt'] }}">
+                            TUJUAN {{ $t['no'] }}
                         </span>
                     </div>
-                    <p class="text-gray-700 text-sm leading-relaxed">{{ $item }}</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">{{ $t['text'] }}</p>
                 </div>
                 @endforeach
             </div>

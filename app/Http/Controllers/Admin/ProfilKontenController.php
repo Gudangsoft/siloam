@@ -47,8 +47,8 @@ class ProfilKontenController extends Controller
         $visi = $page->meta_title ?: '';
 
         $data   = $this->decodeContent($page->content);
-        $misi   = array_pad($data['misi'],   4, '');
-        $tujuan = array_pad($data['tujuan'], 5, '');
+        $misi   = !empty($data['misi'])   ? $data['misi']   : $this->misiDefault;
+        $tujuan = !empty($data['tujuan']) ? $data['tujuan'] : $this->tujuanDefault;
 
         return view('admin.profil.visi-misi', compact('page', 'visi', 'misi', 'tujuan'));
     }
@@ -57,14 +57,16 @@ class ProfilKontenController extends Controller
     {
         $request->validate([
             'visi'      => 'required|string|max:500',
-            'misi'      => 'required|array|size:4',
+            'misi'      => 'required|array|min:1',
             'misi.*'    => 'required|string|max:500',
-            'tujuan'    => 'required|array|size:5',
+            'tujuan'    => 'required|array|min:1',
             'tujuan.*'  => 'required|string|max:500',
         ], [
             'visi.required'    => 'Teks Visi wajib diisi.',
-            'misi.*.required'  => 'Semua item Misi wajib diisi.',
-            'tujuan.*.required'=> 'Semua item Tujuan wajib diisi.',
+            'misi.required'    => 'Minimal 1 item Misi.',
+            'misi.*.required'  => 'Item Misi tidak boleh kosong.',
+            'tujuan.required'  => 'Minimal 1 item Tujuan.',
+            'tujuan.*.required'=> 'Item Tujuan tidak boleh kosong.',
         ]);
 
         $page = Page::findOrCreateBySlug('visi-misi', 'Visi & Misi');
