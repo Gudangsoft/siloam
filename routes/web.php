@@ -164,6 +164,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('profil/sejarah',      [ProfilKontenController::class, 'editSejarah'])->name('profil.sejarah.edit');
     Route::put('profil/sejarah',      [ProfilKontenController::class, 'updateSejarah'])->name('profil.sejarah.update');
 
+    Route::get('akademik/elearning',     [ProfilKontenController::class, 'editElearning'])->name('akademik.elearning.edit');
+    Route::put('akademik/elearning',     [ProfilKontenController::class, 'updateElearning'])->name('akademik.elearning.update');
+    Route::get('akademik/perpustakaan',  [ProfilKontenController::class, 'editPerpustakaan'])->name('akademik.perpustakaan.edit');
+    Route::put('akademik/perpustakaan',  [ProfilKontenController::class, 'updatePerpustakaan'])->name('akademik.perpustakaan.update');
+
     Route::prefix('pmb-info')->name('pmb-info.')->group(function () {
         Route::get('/',           [PmbInfoController::class, 'index'])->name('index');
         Route::get('/{slug}/edit',[PmbInfoController::class, 'edit'])->name('edit');

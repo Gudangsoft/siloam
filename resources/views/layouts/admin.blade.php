@@ -499,20 +499,35 @@
                 <span class="icon"><i class="fas fa-user-tie"></i></span>
                 Dosen & Staf
             </a>
-            <a href="{{ route('admin.study-programs.index') }}"
-               class="nav-item {{ request()->routeIs('admin.study-programs.*') ? 'active' : '' }}">
-                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
-                Program Studi
-            </a>
             <a href="{{ route('admin.facilities.index') }}"
                class="nav-item {{ request()->routeIs('admin.facilities.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-building"></i></span>
                 Fasilitas
             </a>
+
+            <!-- Akademik -->
+            <div class="nav-section">
+                <div class="nav-section-label">Akademik</div>
+            </div>
+            <a href="{{ route('admin.study-programs.index') }}"
+               class="nav-item {{ request()->routeIs('admin.study-programs.*') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                Program Studi
+            </a>
             <a href="{{ route('admin.academic-calendars.index') }}"
                class="nav-item {{ request()->routeIs('admin.academic-calendars.*') ? 'active' : '' }}">
                 <span class="icon"><i class="fas fa-calendar-check"></i></span>
                 Kalender Akademik
+            </a>
+            <a href="{{ route('admin.akademik.elearning.edit') }}"
+               class="nav-item {{ request()->routeIs('admin.akademik.elearning.*') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-laptop"></i></span>
+                E-Learning
+            </a>
+            <a href="{{ route('admin.akademik.perpustakaan.edit') }}"
+               class="nav-item {{ request()->routeIs('admin.akademik.perpustakaan.*') ? 'active' : '' }}">
+                <span class="icon"><i class="fas fa-book"></i></span>
+                Perpustakaan Digital
             </a>
 
             <!-- PMB & Mahasiswa -->

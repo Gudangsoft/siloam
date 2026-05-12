@@ -97,6 +97,33 @@ class ProfilKontenController extends Controller
             ->with('success', 'Konten Sejarah berhasil disimpan!');
     }
 
-    public function getMisiDefault(): array   { return $this->misiDefault; }
-    public function getTujuanDefault(): array { return $this->tujuanDefault; }
+    public function editElearning()
+    {
+        $page = Page::findOrCreateBySlug('elearning', 'E-Learning');
+        return view('admin.akademik.elearning', compact('page'));
+    }
+
+    public function updateElearning(Request $request)
+    {
+        $request->validate(['content' => 'nullable|string']);
+        $page = Page::findOrCreateBySlug('elearning', 'E-Learning');
+        $page->update(['content' => $request->content]);
+        return redirect()->route('admin.akademik.elearning.edit')
+            ->with('success', 'Konten E-Learning berhasil disimpan!');
+    }
+
+    public function editPerpustakaan()
+    {
+        $page = Page::findOrCreateBySlug('perpustakaan', 'Perpustakaan Digital');
+        return view('admin.akademik.perpustakaan', compact('page'));
+    }
+
+    public function updatePerpustakaan(Request $request)
+    {
+        $request->validate(['content' => 'nullable|string']);
+        $page = Page::findOrCreateBySlug('perpustakaan', 'Perpustakaan Digital');
+        $page->update(['content' => $request->content]);
+        return redirect()->route('admin.akademik.perpustakaan.edit')
+            ->with('success', 'Konten Perpustakaan Digital berhasil disimpan!');
+    }
 }
