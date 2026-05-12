@@ -3,15 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield("title", $siteSettings->get("app_name","STT Siloam Medan"))</title>
+
+    @php
+    $siteName    = $siteSettings->get('app_name', 'STT Siloam Medan');
+    $pageTitle   = trim(strip_tags(View::yieldContent('title')));
+    $metaTitle   = $pageTitle ? $pageTitle . ' | ' . $siteName : $siteName;
+    $metaDesc    = trim(strip_tags(View::yieldContent('meta_description',
+                       $siteSettings->get('meta_description',
+                       'Sekolah Tinggi Teologi Siloam Medan — Mencetak generasi hamba Tuhan yang berdedikasi dan berkualitas.'))));
+    $ogImage     = trim(View::yieldContent('og_image',
+                       $siteSettings->get('og_image')
+                           ? Storage::disk('public')->url($siteSettings->get('og_image'))
+                           : asset('images/og-default.jpg')));
+    $ogType      = trim(View::yieldContent('og_type', 'website'));
+    @endphp
+
+    <title>{{ $metaTitle }}</title>
+    <meta name="description" content="{{ $metaDesc }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Open Graph --}}
+    <meta property="og:type"        content="{{ $ogType }}">
+    <meta property="og:url"         content="{{ url()->current() }}">
+    <meta property="og:title"       content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDesc }}">
+    <meta property="og:image"       content="{{ $ogImage }}">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name"   content="{{ $siteName }}">
+    <meta property="og:locale"      content="id_ID">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDesc }}">
+    <meta name="twitter:image"       content="{{ $ogImage }}">
+
+    {{-- Security --}}
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
     @if($siteSettings->get("favicon"))
     <link rel="icon" href="{{ Storage::disk('public')->url($siteSettings->get('favicon')) }}">
     @endif
+
+    {{-- Preconnect hints --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>body{font-family:"Inter",sans-serif;}.nav-link{color:#374151;font-weight:500;transition:color 0.2s;padding:0.5rem 0.75rem;border-radius:0.375rem;font-size:0.875rem;display:inline-block;}.nav-link:hover{color:#1e3a8a;}.dropdown-menu{position:absolute;top:100%;left:0;margin-top:4px;width:14rem;background:white;box-shadow:0 10px 25px rgba(0,0,0,0.15);border-radius:0.5rem;border:1px solid #f3f4f6;opacity:0;visibility:hidden;transition:all 0.2s;z-index:50;}.group:hover .dropdown-menu{opacity:1;visibility:visible;}</style>
+    {{-- JSON-LD structured data (Organization default) --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollegeOrUniversity",
+        "name": "{{ $siteName }}",
+        "url": "{{ config('app.url') }}",
+        "logo": "{{ $siteSettings->get('logo') ? Storage::disk('public')->url($siteSettings->get('logo')) : asset('images/logo.png') }}",
+        "description": "{{ $metaDesc }}",
+        "telephone": "{{ $siteSettings->get('phone','') }}",
+        "email": "{{ $siteSettings->get('email','') }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Medan",
+            "addressRegion": "Sumatera Utara",
+            "addressCountry": "ID"
+        }
+    }
+    </script>
+    @stack('jsonld')
     @stack("styles")
 </head>
 <body class="bg-gray-50">

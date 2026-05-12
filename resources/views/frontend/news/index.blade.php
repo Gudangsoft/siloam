@@ -64,7 +64,7 @@
                 <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
                     <a href="{{ route('berita.show', $item->slug) }}">
                         @if($item->image)
-                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-48 object-cover hover:opacity-90 transition">
+                        <img loading="lazy" decoding="async" src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-48 object-cover hover:opacity-90 transition">
                         @else
                         <div class="w-full h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
                             <svg class="w-12 h-12 text-white opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
@@ -112,7 +112,7 @@
                     @foreach($featured->take(5) as $item)
                     <div class="flex gap-3">
                         @if($item->image)
-                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-20 h-16 object-cover rounded-lg flex-shrink-0">
+                        <img loading="lazy" decoding="async" src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-20 h-16 object-cover rounded-lg flex-shrink-0">
                         @else
                         <div class="w-20 h-16 bg-blue-100 rounded-lg flex-shrink-0 flex items-center justify-center">
                             <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>

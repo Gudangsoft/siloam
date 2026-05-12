@@ -18,7 +18,7 @@
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-aos="fade-up">
             @if($org->logo)
             <div class="bg-blue-50 p-6 flex items-center justify-center h-40">
-                <img src="{{ $org->logo_url }}" alt="{{ $org->name }}" class="max-h-28 object-contain">
+                <img loading="lazy" decoding="async" src="{{ $org->logo_url }}" alt="{{ $org->name }}" class="max-h-28 object-contain">
             </div>
             @else
             <div class="bg-gradient-to-br from-blue-700 to-blue-900 h-32 flex items-center justify-center">

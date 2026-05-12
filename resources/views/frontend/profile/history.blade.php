@@ -18,10 +18,10 @@
         @if(isset($page))
         <div class="bg-white rounded-xl shadow-md p-8" data-aos="fade-up">
             @if($page->image)
-            <img src="{{ $page->image_url }}" alt="Sejarah STT Siloam Medan" class="w-full max-h-80 object-cover rounded-lg mb-6">
+            <img loading="lazy" decoding="async" src="{{ $page->image_url }}" alt="Sejarah STT Siloam Medan" class="w-full max-h-80 object-cover rounded-lg mb-6">
             @endif
             <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                {!! $page->content !!}
+                {!! clean($page->content) !!}
             </div>
         </div>
         @else

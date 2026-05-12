@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 @section('title', 'Beranda | STT Siloam Medan')
+@section('meta_description', 'STT Siloam Medan — Sekolah Tinggi Teologi terpercaya di Medan, mencetak hamba Tuhan yang berdedikasi melalui pendidikan teologi berkualitas.')
 @section('content')
 
 {{-- Hero Slider Section --}}
@@ -111,7 +112,7 @@ $cardStyles = [
 
                     {{-- Image or Icon --}}
                     @if($program->image)
-                    <img src="{{ $program->image_url }}" alt="{{ $program->name }}"
+                    <img loading="lazy" decoding="async" src="{{ $program->image_url }}" alt="{{ $program->name }}"
                          class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500">
                     @endif
                     <div class="relative z-10 text-center">
@@ -222,7 +223,7 @@ $cardStyles = [
                         {{-- Photo frame --}}
                         <div class="absolute inset-0 rounded-2xl overflow-hidden border-4 border-white shadow-2xl bg-blue-800">
                             @if($siteSettings->get('rector_photo'))
-                            <img src="{{ Storage::disk('public')->url($siteSettings->get('rector_photo')) }}"
+                            <img loading="lazy" decoding="async" src="{{ Storage::disk('public')->url($siteSettings->get('rector_photo')) }}"
                                  alt="{{ $siteSettings->get('rector_name','Ketua STT') }}"
                                  class="w-full h-full object-cover object-top">
                             @else
@@ -314,7 +315,7 @@ $cardStyles = [
             <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300" data-aos="fade-up">
                 <a href="{{ route('berita.show', $news->slug) }}">
                     @if($news->image)
-                    <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-48 object-cover hover:opacity-90 transition">
+                    <img loading="lazy" decoding="async" src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full h-48 object-cover hover:opacity-90 transition">
                     @else
                     <div class="w-full h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
                         <svg class="w-12 h-12 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
@@ -400,7 +401,7 @@ $cardStyles = [
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($gallery->take(8) as $item)
             <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
-                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-48 object-cover">
+                <img loading="lazy" decoding="async" src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-48 object-cover">
             </div>
             @endforeach
         </div>

@@ -17,7 +17,7 @@
         @foreach($programs as $program)
         <div class="w-full bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition" data-aos="fade-up">
             @if($program->image)
-            <img src="{{ $program->image_url }}" alt="{{ $program->name }}" class="w-full h-52 object-cover">
+            <img loading="lazy" decoding="async" src="{{ $program->image_url }}" alt="{{ $program->name }}" class="w-full h-52 object-cover">
             @else
             <div class="w-full h-52 bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
                 <svg class="w-20 h-20 text-white opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>

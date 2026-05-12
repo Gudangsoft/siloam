@@ -17,7 +17,7 @@
         @foreach($alumni as $person)
         <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition text-center" data-aos="fade-up">
             @if($person->photo)
-            <img src="{{ $person->photo_url }}" alt="{{ $person->name }}" class="w-20 h-20 rounded-full object-cover mx-auto mb-3 border-2 border-blue-200">
+            <img loading="lazy" decoding="async" src="{{ $person->photo_url }}" alt="{{ $person->name }}" class="w-20 h-20 rounded-full object-cover mx-auto mb-3 border-2 border-blue-200">
             @else
             <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-3">
                 <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>

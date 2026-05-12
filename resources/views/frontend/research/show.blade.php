@@ -18,7 +18,7 @@
         @if(isset($research))
         <div class="bg-white rounded-xl shadow-md p-8" data-aos="fade-up">
             @if($research->image)
-            <img src="{{ $research->image_url }}" alt="{{ $research->title }}" class="w-full max-h-80 object-cover rounded-lg mb-6">
+            <img loading="lazy" decoding="async" src="{{ $research->image_url }}" alt="{{ $research->title }}" class="w-full max-h-80 object-cover rounded-lg mb-6">
             @endif
             <div class="flex flex-wrap gap-3 mb-4">
                 @if($research->type)
@@ -36,7 +36,7 @@
             <p class="text-gray-600 mb-4"><span class="font-semibold">Lembaga:</span> {{ $research->institution }}</p>
             @endif
             <div class="border-t border-gray-200 pt-6 prose prose-lg max-w-none text-gray-700">
-                {!! $research->content ?? $research->abstract !!}
+                {!! clean($research->content ?? $research->abstract) !!}
             </div>
         </div>
         @endif

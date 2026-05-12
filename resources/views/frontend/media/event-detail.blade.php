@@ -18,7 +18,7 @@
         @if(isset($event))
         <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
             @if($event->image)
-            <img src="{{ $event->image_url }}" alt="{{ $event->title }}" class="w-full max-h-80 object-cover">
+            <img loading="lazy" decoding="async" src="{{ $event->image_url }}" alt="{{ $event->title }}" class="w-full max-h-80 object-cover">
             @endif
             <div class="p-8">
                 <h1 class="text-2xl font-bold text-blue-900 mb-4">{{ $event->title }}</h1>
@@ -37,7 +37,7 @@
                     @endif
                 </div>
                 <div class="prose prose-lg max-w-none text-gray-700">
-                    {!! $event->description !!}
+                    {!! clean($event->description) !!}
                 </div>
             </div>
         </div>

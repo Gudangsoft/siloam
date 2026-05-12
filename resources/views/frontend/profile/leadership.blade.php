@@ -18,7 +18,7 @@
         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition text-center" data-aos="fade-up">
             <div class="bg-gradient-to-b from-blue-800 to-blue-900 pt-8 pb-4">
                 @if($leader->photo)
-                <img src="{{ $leader->photo_url }}" alt="{{ $leader->name }}" class="w-32 h-32 rounded-full object-cover mx-auto border-4 border-white shadow-lg">
+                <img loading="lazy" decoding="async" src="{{ $leader->photo_url }}" alt="{{ $leader->name }}" class="w-32 h-32 rounded-full object-cover mx-auto border-4 border-white shadow-lg">
                 @else
                 <div class="w-32 h-32 rounded-full bg-blue-600 flex items-center justify-center mx-auto border-4 border-white shadow-lg">
                     <svg class="w-16 h-16 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>

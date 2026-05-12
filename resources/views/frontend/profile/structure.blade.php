@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+﻿@extends('layouts.frontend')
 @section('title', 'Struktur Organisasi | STT Siloam Medan')
 
 @push('styles')
@@ -370,7 +370,7 @@ $subs = [
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 max-w-4xl">
         <div class="bg-white rounded-2xl shadow-sm p-8 prose prose-lg max-w-none text-gray-700">
-            {!! $page->content !!}
+            {!! clean($page->content) !!}
         </div>
     </div>
 </section>

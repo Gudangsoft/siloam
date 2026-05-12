@@ -1,5 +1,25 @@
 ﻿@extends('layouts.frontend')
 @section('title', isset($news) ? $news->title . ' | STT Siloam Medan' : 'Berita | STT Siloam Medan')
+@isset($news)
+@section('meta_description', Str::limit(strip_tags($news->content), 160))
+@section('og_type', 'article')
+@if($news->image)
+@section('og_image', Storage::disk('public')->url($news->image))
+@endif
+@push('jsonld')
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "{{ $news->title }}",
+    "datePublished": "{{ $news->created_at->toIso8601String() }}",
+    "dateModified": "{{ $news->updated_at->toIso8601String() }}",
+    "description": "{{ Str::limit(strip_tags($news->content), 160) }}",
+    "publisher": { "@type": "Organization", "name": "STT Siloam Medan" }
+}
+</script>
+@endpush
+@endisset
 @section('content')
 
 {{-- Page Header --}}
@@ -23,7 +43,7 @@
             @if(isset($news))
             <article class="bg-white rounded-xl shadow-md overflow-hidden">
                 @if($news->image)
-                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full max-h-96 object-cover">
+                <img loading="lazy" decoding="async" src="{{ $news->image_url }}" alt="{{ $news->title }}" class="w-full max-h-96 object-cover">
                 @endif
                 <div class="p-6 md:p-8">
                     <div class="flex flex-wrap items-center gap-3 mb-4">
@@ -43,7 +63,7 @@
                     </div>
                     <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">{{ $news->title }}</h1>
                     <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                        {!! $news->content !!}
+                        {!! clean($news->content) !!}
                     </div>
 
                     {{-- Share Buttons --}}
@@ -75,7 +95,7 @@
                     @foreach($related as $item)
                     <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                         @if($item->image)
-                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-40 object-cover">
+                        <img loading="lazy" decoding="async" src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-full h-40 object-cover">
                         @else
                         <div class="w-full h-40 bg-gradient-to-br from-blue-600 to-blue-800"></div>
                         @endif

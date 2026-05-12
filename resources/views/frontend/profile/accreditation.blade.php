@@ -15,7 +15,7 @@
     <div class="max-w-4xl mx-auto">
         @if(isset($page))
         <div class="bg-white rounded-xl shadow-md p-8" data-aos="fade-up">
-            <div class="prose max-w-none">{!! $page->content !!}</div>
+            <div class="prose max-w-none">{!! clean($page->content) !!}</div>
         </div>
         @else
         <div class="bg-white rounded-xl shadow-md p-8 text-center" data-aos="fade-up">

@@ -17,7 +17,7 @@
         @foreach($gallery as $item)
         <div class="overflow-hidden rounded-xl shadow-md cursor-pointer hover:shadow-xl transition transform hover:scale-105"
              onclick="openLightbox('{{ $item->image_url }}', '{{ addslashes($item->title ?? '') }}')">
-            <img src="{{ $item->image_url }}" alt="{{ $item->title ?? 'Galeri' }}" class="w-full h-48 object-cover">
+            <img loading="lazy" decoding="async" src="{{ $item->image_url }}" alt="{{ $item->title ?? 'Galeri' }}" class="w-full h-48 object-cover">
             @if($item->title)
             <div class="p-2 text-center text-sm text-gray-700 bg-white">{{ Str::limit($item->title, 40) }}</div>
             @endif
