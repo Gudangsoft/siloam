@@ -13,10 +13,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <!-- DataTables -->
+    <!-- DataTables: hanya di halaman index (ada tabel) -->
+    @if(request()->routeIs('admin.*.index'))
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <!-- Summernote -->
+    @endif
+    <!-- Summernote: hanya di halaman dengan rich-text editor -->
+    @hasSection('use_summernote')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
+    @endif
     <!-- Favicon -->
     @if($siteSettings->get('favicon'))
     <link rel="icon" href="{{ Storage::disk('public')->url($siteSettings->get('favicon')) }}">
@@ -685,25 +689,21 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @if(request()->routeIs('admin.*.index'))
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    @endif
+    @hasSection('use_summernote')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    @endif
 
+    @if(request()->routeIs('admin.*.index'))
     <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('sidebarOverlay').classList.toggle('open');
-        }
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('open');
-        }
-        // DataTables default init
+        // DataTables default init untuk halaman index
         document.addEventListener('DOMContentLoaded', function() {
-            if (document.querySelector('.datatable')) {
-                $('.datatable').DataTable({
+            if (typeof $.fn.DataTable !== 'undefined' && document.querySelector('.datatable')) {
+                $('.datatable').not('.dt-initialized').DataTable({
                     language: {
-                        url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
                         emptyTable: 'Tidak ada data tersedia',
                         zeroRecords: 'Data tidak ditemukan',
                         info: 'Menampilkan _START_-_END_ dari _TOTAL_ data',
@@ -717,6 +717,17 @@
                 });
             }
         });
+    </script>
+    @endif
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('open');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('open');
+        }
     </script>
     @stack('scripts')
 

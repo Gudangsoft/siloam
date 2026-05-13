@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('use_summernote', '1')
 @section('title', 'Edit E-Learning')
 @section('page-title', 'E-Learning')
 @section('breadcrumb', 'Akademik › E-Learning')

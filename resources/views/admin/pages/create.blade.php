@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('use_summernote', '1')
 @section('title', 'Tambah Halaman Statis')
 @section('page-title', 'Tambah Halaman Statis')
 @section('breadcrumb', 'Halaman Statis')

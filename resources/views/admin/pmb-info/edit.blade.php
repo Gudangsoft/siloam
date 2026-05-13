@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('use_summernote', '1')
 @section('title', 'Edit Info PMB: ' . $info['title'])
 @section('page-title', 'Edit: ' . $info['title'])
 @section('breadcrumb', 'PMB & Mahasiswa')

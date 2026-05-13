@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('use_summernote', '1')
 @section('title', 'Edit Sejarah Kampus')
 @section('page-title', 'Sejarah Kampus')
 @section('breadcrumb', 'Profil Kampus › Sejarah')

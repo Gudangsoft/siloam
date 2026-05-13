@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('use_summernote', '1')
 @section('title', 'Edit Perpustakaan Digital')
 @section('page-title', 'Perpustakaan Digital')
 @section('breadcrumb', 'Akademik › Perpustakaan Digital')

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('use_summernote', '1')
 @section('title', isset($news) ? 'Edit Berita' : 'Tambah Berita')
 @section('page-title', isset($news) ? 'Edit Berita' : 'Tambah Berita Baru')
 @section('breadcrumb', 'Berita & Artikel')
