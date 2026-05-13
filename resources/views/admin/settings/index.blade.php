@@ -199,6 +199,165 @@
         </div>
     </div>
 
+    {{-- ── Tampilan & Tema ── --}}
+    <div class="card mb-4">
+        <div class="card-header"><h4><i class="fas fa-palette me-2" style="color:#7c3aed"></i>Tampilan & Tema</h4></div>
+        <div class="card-body">
+            <div class="row g-4">
+
+                {{-- Warna Utama --}}
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Warna Utama (Primary)</label>
+                    <div class="input-group">
+                        <input type="color" name="primary_color" id="primaryColorPicker"
+                               class="form-control form-control-color"
+                               value="{{ $settings['primary_color'] ?? '#1e3a8a' }}"
+                               style="width:52px;padding:3px;cursor:pointer"
+                               oninput="syncColor(this,'primaryColorHex')">
+                        <input type="text" id="primaryColorHex" class="form-control form-control-sm font-monospace"
+                               value="{{ $settings['primary_color'] ?? '#1e3a8a' }}"
+                               maxlength="7" placeholder="#1e3a8a"
+                               oninput="syncHex(this,'primaryColorPicker')" style="max-width:110px">
+                    </div>
+                    <div class="form-hint">Warna utama: navbar admin, tombol, judul. Default: #1e3a8a</div>
+                </div>
+
+                {{-- Warna Aksen --}}
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Warna Aksen / CTA</label>
+                    <div class="input-group">
+                        <input type="color" name="accent_color" id="accentColorPicker"
+                               class="form-control form-control-color"
+                               value="{{ $settings['accent_color'] ?? '#f59e0b' }}"
+                               style="width:52px;padding:3px;cursor:pointer"
+                               oninput="syncColor(this,'accentColorHex')">
+                        <input type="text" id="accentColorHex" class="form-control form-control-sm font-monospace"
+                               value="{{ $settings['accent_color'] ?? '#f59e0b' }}"
+                               maxlength="7" placeholder="#f59e0b"
+                               oninput="syncHex(this,'accentColorPicker')" style="max-width:110px">
+                    </div>
+                    <div class="form-hint">Warna tombol CTA, badge, highlight. Default: #f59e0b</div>
+                </div>
+
+                {{-- Warna Light --}}
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Warna Hover / Tautan</label>
+                    <div class="input-group">
+                        <input type="color" name="primary_light" id="primaryLightPicker"
+                               class="form-control form-control-color"
+                               value="{{ $settings['primary_light'] ?? '#2563eb' }}"
+                               style="width:52px;padding:3px;cursor:pointer"
+                               oninput="syncColor(this,'primaryLightHex')">
+                        <input type="text" id="primaryLightHex" class="form-control form-control-sm font-monospace"
+                               value="{{ $settings['primary_light'] ?? '#2563eb' }}"
+                               maxlength="7" placeholder="#2563eb"
+                               oninput="syncHex(this,'primaryLightPicker')" style="max-width:110px">
+                    </div>
+                    <div class="form-hint">Warna hover, link aktif, border fokus. Default: #2563eb</div>
+                </div>
+
+                {{-- Warna Sidebar Admin --}}
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Warna Sidebar Admin</label>
+                    <div class="input-group">
+                        <input type="color" name="sidebar_color" id="sidebarColorPicker"
+                               class="form-control form-control-color"
+                               value="{{ $settings['sidebar_color'] ?? '#0f172a' }}"
+                               style="width:52px;padding:3px;cursor:pointer"
+                               oninput="syncColor(this,'sidebarColorHex');updateSidebarPreview(this.value)">
+                        <input type="text" id="sidebarColorHex" class="form-control form-control-sm font-monospace"
+                               value="{{ $settings['sidebar_color'] ?? '#0f172a' }}"
+                               maxlength="7" placeholder="#0f172a"
+                               oninput="syncHex(this,'sidebarColorPicker');updateSidebarPreview(this.value)" style="max-width:110px">
+                    </div>
+                    <div class="form-hint">Background sidebar navigasi admin. Default: #0f172a</div>
+                </div>
+
+                {{-- Font --}}
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Font Website</label>
+                    <select name="font_family" class="form-select" onchange="updateFontPreview(this.value)">
+                        @foreach(['Inter'=>'Inter (Default)','Poppins'=>'Poppins','Roboto'=>'Roboto','Nunito'=>'Nunito','Open Sans'=>'Open Sans'] as $val => $label)
+                        <option value="{{ $val }}" {{ ($settings['font_family'] ?? 'Inter') === $val ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    <div class="form-hint">Font yang digunakan di seluruh halaman website.</div>
+                </div>
+
+                {{-- Live Preview Tema --}}
+                <div class="col-12">
+                    <label class="form-label fw-bold">Preview Tema</label>
+                    <div id="themePreview" style="border:1px solid var(--border);border-radius:10px;overflow:hidden;font-family:sans-serif">
+                        {{-- Mini Header --}}
+                        <div id="previewHeader" style="background:{{ $settings['primary_color'] ?? '#1e3a8a' }};padding:10px 16px;display:flex;align-items:center;justify-content:space-between">
+                            <div style="color:white;font-weight:700;font-size:13px">Nama Kampus</div>
+                            <div style="display:flex;gap:8px">
+                                <span id="previewBtn" style="background:{{ $settings['accent_color'] ?? '#f59e0b' }};color:#1e293b;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Daftar</span>
+                            </div>
+                        </div>
+                        {{-- Mini Sidebar --}}
+                        <div style="display:flex">
+                            <div id="previewSidebar" style="background:{{ $settings['sidebar_color'] ?? '#0f172a' }};width:120px;padding:10px;min-height:60px">
+                                <div style="color:rgba(255,255,255,.5);font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Menu</div>
+                                <div id="previewSidebarItem" style="background:{{ $settings['primary_color'] ?? '#1e3a8a' }};color:white;font-size:10px;padding:4px 8px;border-radius:4px;margin-bottom:4px">Dashboard</div>
+                                <div style="color:rgba(255,255,255,.5);font-size:10px;padding:4px 8px">Konten</div>
+                                <div style="color:rgba(255,255,255,.5);font-size:10px;padding:4px 8px">Pengaturan</div>
+                            </div>
+                            <div style="flex:1;padding:12px;background:#f8fafc">
+                                <div style="font-size:11px;color:#64748b;margin-bottom:8px" id="previewFontSample">Aa — <span id="previewFontName">{{ $settings['font_family'] ?? 'Inter' }}</span></div>
+                                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                                    <span id="previewBadge" style="background:{{ $settings['primary_color'] ?? '#1e3a8a' }};color:white;padding:3px 10px;border-radius:20px;font-size:10px">Tombol Utama</span>
+                                    <span id="previewAccentBadge" style="background:{{ $settings['accent_color'] ?? '#f59e0b' }};color:#1e293b;padding:3px 10px;border-radius:20px;font-size:10px">Aksen</span>
+                                    <span id="previewLinkSample" style="color:{{ $settings['primary_light'] ?? '#2563eb' }};font-size:10px;text-decoration:underline;cursor:pointer">Tautan aktif</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-hint mt-1">Preview berubah otomatis saat Anda memilih warna.</div>
+                </div>
+
+                {{-- Preset Tema --}}
+                <div class="col-12">
+                    <label class="form-label fw-bold">Preset Tema Cepat</label>
+                    <div class="d-flex flex-wrap gap-2">
+                        @php
+                        $presets = [
+                            ['label'=>'Biru Tua (Default)', 'primary'=>'#1e3a8a','light'=>'#2563eb','accent'=>'#f59e0b','sidebar'=>'#0f172a'],
+                            ['label'=>'Hijau Kampus',       'primary'=>'#065f46','light'=>'#059669','accent'=>'#fbbf24','sidebar'=>'#022c22'],
+                            ['label'=>'Merah Maroon',       'primary'=>'#7f1d1d','light'=>'#dc2626','accent'=>'#fbbf24','sidebar'=>'#1c0a0a'],
+                            ['label'=>'Ungu Royal',         'primary'=>'#4c1d95','light'=>'#7c3aed','accent'=>'#f59e0b','sidebar'=>'#1e0a3c'],
+                            ['label'=>'Biru Langit',        'primary'=>'#0369a1','light'=>'#0ea5e9','accent'=>'#f97316','sidebar'=>'#082f49'],
+                            ['label'=>'Abu-abu Modern',     'primary'=>'#334155','light'=>'#64748b','accent'=>'#3b82f6','sidebar'=>'#0f172a'],
+                        ];
+                        @endphp
+                        @foreach($presets as $preset)
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                onclick="applyPreset('{{ $preset['primary'] }}','{{ $preset['light'] }}','{{ $preset['accent'] }}','{{ $preset['sidebar'] }}')"
+                                style="display:flex;align-items:center;gap:6px">
+                            <span style="display:inline-flex;gap:2px">
+                                <span style="width:12px;height:12px;border-radius:50%;background:{{ $preset['primary'] }}"></span>
+                                <span style="width:12px;height:12px;border-radius:50%;background:{{ $preset['accent'] }}"></span>
+                            </span>
+                            {{ $preset['label'] }}
+                        </button>
+                        @endforeach
+                    </div>
+                    <div class="form-hint mt-1">Klik preset untuk mengisi warna secara otomatis, lalu simpan.</div>
+                </div>
+
+                {{-- Custom CSS --}}
+                <div class="col-12">
+                    <label class="form-label fw-bold">CSS Kustom <span style="color:#94a3b8;font-size:12px">(untuk pengguna mahir)</span></label>
+                    <textarea name="custom_css" class="form-control font-monospace" rows="8"
+                              style="font-size:12px;line-height:1.6"
+                              placeholder="/* Contoh: ubah warna hero section */&#10;.hero-section { background: linear-gradient(135deg, var(--brand-primary), var(--brand-light)) !important; }&#10;&#10;/* Variabel yang tersedia: */&#10;/* --brand-primary, --brand-light, --brand-accent */">{{ $settings['custom_css'] ?? '' }}</textarea>
+                    <div class="form-hint">CSS ini ditambahkan ke semua halaman website. Gunakan variabel <code>--brand-primary</code>, <code>--brand-light</code>, <code>--brand-accent</code> untuk warna tema.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div style="position:sticky;bottom:0;background:white;padding:16px 0;border-top:1px solid var(--border);margin-top:8px">
         <button type="submit" class="btn btn-primary btn-lg">
             <i class="fas fa-save me-2"></i>Simpan Semua Pengaturan
@@ -239,5 +398,66 @@ document.querySelector('[name="tagline"]').addEventListener('input', function() 
     var el = document.getElementById('headerTaglinePreview');
     if (el) el.textContent = this.value || 'Sekolah Tinggi Teologi';
 });
+
+// ─── Theme Preview ────────────────────────────────────────────────
+function syncColor(picker, hexId) {
+    var hex = document.getElementById(hexId);
+    if (hex) hex.value = picker.value;
+    updateThemePreview();
+}
+function syncHex(input, pickerId) {
+    var val = input.value.trim();
+    if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+        var picker = document.getElementById(pickerId);
+        if (picker) picker.value = val;
+        updateThemePreview();
+    }
+}
+function updateSidebarPreview(color) {
+    var sidebar = document.getElementById('previewSidebar');
+    if (sidebar) sidebar.style.background = color;
+}
+function updateFontPreview(font) {
+    var el = document.getElementById('previewFontName');
+    if (el) el.textContent = font;
+}
+function updateThemePreview() {
+    var primary = document.getElementById('primaryColorPicker').value;
+    var accent  = document.getElementById('accentColorPicker').value;
+    var light   = document.getElementById('primaryLightPicker').value;
+    var sidebar = document.getElementById('sidebarColorPicker').value;
+
+    var ids = {
+        'previewHeader':      { prop: 'background', val: primary },
+        'previewBtn':         { prop: 'background', val: accent },
+        'previewSidebar':     { prop: 'background', val: sidebar },
+        'previewSidebarItem': { prop: 'background', val: primary },
+        'previewBadge':       { prop: 'background', val: primary },
+        'previewAccentBadge': { prop: 'background', val: accent },
+        'previewLinkSample':  { prop: 'color',      val: light },
+    };
+    for (var id in ids) {
+        var el = document.getElementById(id);
+        if (el) el.style[ids[id].prop] = ids[id].val;
+    }
+    // Also update the header preview at the top
+    var headerPreview = document.getElementById('themePreviewHeader');
+    if (headerPreview) headerPreview.style.background = primary;
+}
+function applyPreset(primary, light, accent, sidebar) {
+    var fields = [
+        ['primaryColorPicker', 'primaryColorHex', primary],
+        ['primaryLightPicker', 'primaryLightHex', light],
+        ['accentColorPicker',  'accentColorHex',  accent],
+        ['sidebarColorPicker', 'sidebarColorHex', sidebar],
+    ];
+    fields.forEach(function(f) {
+        var picker = document.getElementById(f[0]);
+        var hex    = document.getElementById(f[1]);
+        if (picker) picker.value = f[2];
+        if (hex)    hex.value    = f[2];
+    });
+    updateThemePreview();
+}
 </script>
 @endpush

@@ -35,9 +35,16 @@ class SettingController extends Controller
             'meta_description'     => 'nullable|string|max:300',
             'footer_text'          => 'nullable|string|max:255',
             'admin_panel_subtitle' => 'nullable|string|max:255',
-            'total_students'       => 'nullable|integer',
+            'total_students'   => 'nullable|integer',
             'total_alumni'     => 'nullable|integer',
             'total_lecturers'  => 'nullable|integer',
+            // Tema & Tampilan
+            'primary_color'    => ['nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
+            'primary_light'    => ['nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
+            'accent_color'     => ['nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
+            'sidebar_color'    => ['nullable', 'regex:/^#[0-9a-fA-F]{6}$/'],
+            'font_family'      => 'nullable|string|in:Inter,Poppins,Roboto,Nunito,Open Sans',
+            'custom_css'       => 'nullable|string|max:20000',
             'logo'             => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
             'favicon'          => 'nullable|mimes:ico,png,jpg,jpeg,svg|max:512',
             'rector_photo'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -49,6 +56,8 @@ class SettingController extends Controller
             'welcome_message', 'rector_name', 'rector_title', 'rector_message',
             'meta_description', 'footer_text', 'admin_panel_subtitle',
             'total_students', 'total_alumni', 'total_lecturers',
+            'primary_color', 'primary_light', 'accent_color', 'sidebar_color',
+            'font_family', 'custom_css',
         ];
 
         foreach ($textKeys as $key) {

@@ -52,11 +52,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
+    {{-- Brand CSS Variables (dinamis dari pengaturan) --}}
+    <style>
+    :root {
+        --brand-primary: {{ $siteSettings->get('primary_color', '#1e3a8a') }};
+        --brand-light:   {{ $siteSettings->get('primary_light', '#2563eb') }};
+        --brand-accent:  {{ $siteSettings->get('accent_color',  '#f59e0b') }};
+    }
+    </style>
+    <script>
+    tailwind.config = { theme: { extend: { colors: {
+        'brand': {
+            DEFAULT: '{{ $siteSettings->get('primary_color', '#1e3a8a') }}',
+            light:   '{{ $siteSettings->get('primary_light', '#2563eb') }}',
+            accent:  '{{ $siteSettings->get('accent_color',  '#f59e0b') }}',
+        }
+    }}}}
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&display=swap" rel="stylesheet">
+    @php $_font = $siteSettings->get('font_family', 'Inter'); @endphp
+    @if($_font !== 'Inter')
+    <link href="https://fonts.googleapis.com/css2?family={{ urlencode($_font) }}:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    @else
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @endif
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>body{font-family:"Inter",sans-serif;}.nav-link{color:#374151;font-weight:500;transition:color 0.2s;padding:0.5rem 0.75rem;border-radius:0.375rem;font-size:0.875rem;display:inline-block;}.nav-link:hover{color:#1e3a8a;}.dropdown-menu{position:absolute;top:100%;left:0;margin-top:4px;width:14rem;background:white;box-shadow:0 10px 25px rgba(0,0,0,0.15);border-radius:0.5rem;border:1px solid #f3f4f6;opacity:0;visibility:hidden;transition:all 0.2s;z-index:50;}.group:hover .dropdown-menu{opacity:1;visibility:visible;}</style>
+    <style>body{font-family:"{{ $_font }}",sans-serif;}.nav-link{color:#374151;font-weight:500;transition:color 0.2s;padding:0.5rem 0.75rem;border-radius:0.375rem;font-size:0.875rem;display:inline-block;}.nav-link:hover{color:var(--brand-primary);}.dropdown-menu{position:absolute;top:100%;left:0;margin-top:4px;width:14rem;background:white;box-shadow:0 10px 25px rgba(0,0,0,0.15);border-radius:0.5rem;border:1px solid #f3f4f6;opacity:0;visibility:hidden;transition:all 0.2s;z-index:50;}.group:hover .dropdown-menu{opacity:1;visibility:visible;}</style>
     {{-- JSON-LD structured data (Organization default) --}}
     @php
     $_jsonLd = json_encode([
@@ -79,6 +101,9 @@
     <script type="application/ld+json">{!! $_jsonLd !!}</script>
     @stack('jsonld')
     @stack("styles")
+    @if($siteSettings->get('custom_css'))
+    <style id="custom-css">{!! $siteSettings->get('custom_css') !!}</style>
+    @endif
 </head>
 <body class="bg-gray-50">
 <!-- Top Bar -->
@@ -179,7 +204,9 @@
                         </form>
                     </div>
                 </div>
-                <a href="{{ route('pmb.daftar') }}" class="bg-blue-900 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 text-sm">
+                <a href="{{ route('pmb.daftar') }}"
+                   class="text-white px-4 py-2 rounded-lg font-semibold text-sm transition hover:opacity-90"
+                   style="background:var(--brand-primary)">
                     <i class="fas fa-user-plus mr-1"></i>Daftar Sekarang
                 </a>
             </div>
@@ -215,7 +242,9 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
-                    <a href="{{ route('pmb.daftar') }}" class="block text-center bg-blue-900 text-white py-2 rounded-lg font-semibold text-sm">
+                    <a href="{{ route('pmb.daftar') }}"
+                       class="block text-center text-white py-2 rounded-lg font-semibold text-sm"
+                       style="background:var(--brand-primary)">
                         Daftar Sekarang
                     </a>
                 </div>

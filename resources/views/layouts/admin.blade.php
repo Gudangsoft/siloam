@@ -28,12 +28,12 @@
 
     <style>
         :root {
-            --primary: #1e40af;
-            --primary-light: #3b82f6;
-            --primary-dark: #1e3a8a;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-active: #1e40af;
+            --primary: {{ $siteSettings->get('primary_color', '#1e40af') }};
+            --primary-light: {{ $siteSettings->get('primary_light', '#3b82f6') }};
+            --primary-dark: {{ $siteSettings->get('primary_color', '#1e3a8a') }};
+            --sidebar-bg: {{ $siteSettings->get('sidebar_color', '#0f172a') }};
+            --sidebar-hover: rgba(255,255,255,0.07);
+            --sidebar-active: {{ $siteSettings->get('primary_color', '#1e40af') }};
             --sidebar-width: 260px;
             --topbar-height: 64px;
             --text-muted: #94a3b8;
@@ -46,7 +46,10 @@
             --info: #06b6d4;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Inter',sans-serif; background:var(--bg-page); color:#1e293b; }
+        body { font-family:'{{ $siteSettings->get('font_family','Inter') }}',sans-serif; background:var(--bg-page); color:#1e293b; }
+        @if($siteSettings->get('sidebar_hover_color'))
+        .nav-item:hover { background: {{ $siteSettings->get('sidebar_hover_color') }} !important; }
+        @endif
 
         /* ===== SIDEBAR ===== */
         .sidebar {
