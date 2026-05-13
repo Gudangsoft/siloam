@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PmbRegistrationExport;
 use App\Http\Controllers\Controller;
 use App\Models\PmbRegistration;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PmbController extends Controller
 {
@@ -46,6 +48,15 @@ class PmbController extends Controller
         ]);
 
         return redirect()->route('admin.pmb.show', $pmb)->with('success', 'Status pendaftaran berhasil diperbarui!');
+    }
+
+    public function export(Request $request)
+    {
+        $filename = 'data-pmb-' . now()->format('Ymd-His') . '.xlsx';
+        return Excel::download(
+            new PmbRegistrationExport($request->status, $request->search),
+            $filename
+        );
     }
 
     public function destroy(PmbRegistration $pmb)

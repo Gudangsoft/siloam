@@ -20,6 +20,7 @@
     <title>{!! $metaTitle !!}</title>
     <meta name="description" content="{{ $metaDesc }}">
     <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ route('sitemap') }}">
 
     {{-- Open Graph --}}
     <meta property="og:type"        content="{{ $ogType }}">
@@ -152,7 +153,32 @@
                     @endif
                 @endforeach
             </div>
-            <div class="hidden lg:flex items-center">
+            <div class="hidden lg:flex items-center gap-2">
+                {{-- Search toggle --}}
+                <div class="relative" x-data="{searchOpen:false}">
+                    <button @click="searchOpen=!searchOpen;$nextTick(()=>{if(searchOpen)$refs.searchInput.focus()})"
+                            class="w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100 transition">
+                        <i class="fas fa-search text-sm"></i>
+                    </button>
+                    <div x-show="searchOpen" @click.outside="searchOpen=false"
+                         x-transition:enter="transition ease-out duration-150"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         class="absolute right-0 top-11 bg-white rounded-xl shadow-xl border border-gray-100 p-3"
+                         style="width:280px;z-index:60">
+                        <form action="{{ route('cari') }}" method="GET" class="flex gap-2">
+                            <input x-ref="searchInput" type="text" name="q"
+                                   value="{{ request('q') }}"
+                                   placeholder="Cari di website..."
+                                   class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   maxlength="100">
+                            <button type="submit"
+                                    class="px-3 py-2 bg-blue-900 text-white rounded-lg text-sm hover:bg-blue-800 transition">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
                 <a href="{{ route('pmb.daftar') }}" class="bg-blue-900 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 text-sm">
                     <i class="fas fa-user-plus mr-1"></i>Daftar Sekarang
                 </a>
@@ -180,7 +206,15 @@
                 </a>
                 @endforeach
                 @endforeach
-                <div class="px-4 pt-2">
+                <div class="px-4 pt-2 space-y-2">
+                    <form action="{{ route('cari') }}" method="GET" class="flex gap-2">
+                        <input type="text" name="q" placeholder="Cari di website..."
+                               class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               maxlength="100">
+                        <button type="submit" class="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
                     <a href="{{ route('pmb.daftar') }}" class="block text-center bg-blue-900 text-white py-2 rounded-lg font-semibold text-sm">
                         Daftar Sekarang
                     </a>

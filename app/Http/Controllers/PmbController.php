@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PmbNotification;
 use App\Models\PmbRegistration;
 use App\Models\StudyProgram;
 use App\Models\Scholarship;
 use App\Models\Page;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PmbController extends Controller
@@ -90,6 +93,15 @@ class PmbController extends Controller
         }
 
         $registration = PmbRegistration::create($validated);
+
+        $adminEmail = Setting::where('key', 'email')->value('value');
+        if ($adminEmail) {
+            try {
+                Mail::to($adminEmail)->send(new PmbNotification($registration));
+            } catch (\Exception $e) {
+                \Log::warning('PMB email gagal dikirim: ' . $e->getMessage());
+            }
+        }
 
         return redirect()->route('pmb.success', $registration->registration_number)
             ->with('success', 'Pendaftaran berhasil! Nomor registrasi Anda: ' . $registration->registration_number);

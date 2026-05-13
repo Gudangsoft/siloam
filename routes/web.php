@@ -12,10 +12,14 @@ use App\Http\Controllers\StudentAffairsController;
 use App\Http\Controllers\PartnershipController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SitemapController;
 
 // ─── FRONTEND ────────────────────────────────────────────────────────────────
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/cari', [SearchController::class, 'index'])->name('cari');
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Profil Kampus
 Route::prefix('profil')->name('profil.')->group(function () {
@@ -149,6 +153,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // PMB (tidak pakai resource karena ada updateStatus)
     Route::prefix('pmb')->name('pmb.')->group(function () {
         Route::get('/',                 [AdminPmbController::class, 'index'])->name('index');
+        Route::get('/export',           [AdminPmbController::class, 'export'])->name('export');
         Route::get('/{pmb}',            [AdminPmbController::class, 'show'])->name('show');
         Route::post('/{pmb}/status',    [AdminPmbController::class, 'updateStatus'])->name('update-status');
         Route::delete('/{pmb}',         [AdminPmbController::class, 'destroy'])->name('destroy');

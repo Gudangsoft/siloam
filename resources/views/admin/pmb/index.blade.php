@@ -4,7 +4,7 @@
 @section('breadcrumb', 'PMB & Mahasiswa')
 @section('content')
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-start flex-wrap gap-2">
         <form method="GET" class="d-flex gap-2 flex-wrap">
             <input type="text" name="search" class="form-control" style="max-width:220px" placeholder="Cari nama / nomor..." value="{{ request('search') }}">
             <select name="status" class="form-control" style="max-width:180px" onchange="this.form.submit()">
@@ -16,6 +16,10 @@
             </select>
             <button type="submit" class="btn btn-secondary"><i class="fas fa-search"></i></button>
         </form>
+        <a href="{{ route('admin.pmb.export', array_filter(['status' => request('status'), 'search' => request('search')])) }}"
+           class="btn btn-success">
+            <i class="fas fa-file-excel me-1"></i> Export Excel
+        </a>
     </div>
     <div class="card-body" style="padding:0">
         <div class="table-wrapper">
