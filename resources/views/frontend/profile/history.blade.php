@@ -114,16 +114,16 @@
             $milestones = [
                 ['year' => 'Awal', 'icon' => 'fas fa-seedling', 'color' => 'green',
                  'title' => 'Pendirian Kampus',
-                 'desc'  => '{{ $siteSettings->get('app_name') }} didirikan atas kerinduan para pemimpin gereja untuk memiliki lembaga pendidikan teologi yang handal di Sumatera Utara.'],
+                 'desc'  => $siteSettings->get('app_name') . ' didirikan atas kerinduan para pemimpin gereja untuk memiliki lembaga pendidikan teologi yang handal di Sumatera Utara.'],
                 ['year' => 'Tumbuh', 'icon' => 'fas fa-users', 'color' => 'blue',
                  'title' => 'Perkembangan Program Studi',
                  'desc'  => 'Kampus mulai mengembangkan program studi di bidang Pendidikan Agama Kristen dan penggembalaan jemaat, menarik mahasiswa dari berbagai daerah.'],
                 ['year' => 'Maju', 'icon' => 'fas fa-certificate', 'color' => 'indigo',
                  'title' => 'Akreditasi & Pengakuan',
-                 'desc'  => '{{ $siteSettings->get('app_name') }} meraih akreditasi resmi sebagai bentuk pengakuan atas kualitas pendidikan yang diselenggarakan.'],
+                 'desc'  => $siteSettings->get('app_name') . ' meraih akreditasi resmi sebagai bentuk pengakuan atas kualitas pendidikan yang diselenggarakan.'],
                 ['year' => 'Kini',  'icon' => 'fas fa-graduation-cap', 'color' => 'purple',
                  'title' => 'Menghasilkan Hamba Tuhan',
-                 'desc'  => 'Hingga kini {{ $siteSettings->get('app_name') }} telah meluluskan ratusan alumni yang tersebar melayani di berbagai gereja, sekolah, dan lembaga pelayanan di seluruh Indonesia.'],
+                 'desc'  => 'Hingga kini ' . $siteSettings->get('app_name') . ' telah meluluskan ratusan alumni yang tersebar melayani di berbagai gereja, sekolah, dan lembaga pelayanan di seluruh Indonesia.'],
             ];
             $tpalette = [
                 'green'  => ['dot' => 'bg-green-500',  'icon_bg' => 'bg-green-100',  'icon_txt' => 'text-green-700',  'year_bg' => 'bg-green-500',  'border' => 'border-green-200'],
