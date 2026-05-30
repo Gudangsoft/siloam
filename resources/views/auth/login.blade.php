@@ -275,6 +275,11 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            {{-- Honeypot: field ini harus selalu kosong; jika terisi = bot otomatis --}}
+            <div style="position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                <label for="_hp">Website</label>
+                <input type="text" id="_hp" name="_hp" value="" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <div class="input-wrap">
